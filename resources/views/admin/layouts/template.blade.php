@@ -132,14 +132,14 @@
                                             <span class="menu-header-text">Makanan</span>
                                         </li>
                                         <!-- Apps -->
-                                        <li class="menu-item {{ request()->is('admin/add-food*') ? 'active' : '' }}">
-                                            <a href="{{ route('addfoods') }}" class="menu-link">
+                                        <li class="menu-item {{ request()->is('admin/add-pond*') ? 'active' : '' }}">
+                                            <a href="{{ route('addponds') }}" class="menu-link">
                                                 <i class="menu-icon tf-icons bx bx-collection"></i>
                                                 <div data-i18n="Basic">Tambah Kolam</div>
                                             </a>
                                         </li>
-                                        <li class="menu-item {{ request()->is('admin/all-food*') ? 'active' : '' }}">
-                                            <a href="{{ route('allfoods') }}" class="menu-link">
+                                        <li class="menu-item {{ request()->is('admin/all-pond*') ? 'active' : '' }}">
+                                            <a href="{{ route('allponds') }}" class="menu-link">
                                                 <i class="menu-icon tf-icons bx bx-collection"></i>
                                                 <div data-i18n="Basic">Semua Kolam</div>
                                             </a>

@@ -7,11 +7,13 @@ use App\Http\Controllers\Api\V1\FoodsController;
 use App\Http\Controllers\Api\V1\FoodTypeController;
 // use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Api\V1\OrderController;
+use App\Http\Controllers\Api\V1\PondController;
 use App\Http\Controllers\Api\V1\ProductController;
 use App\Http\Controllers\Api\V1\SubCategoryController;
 use App\Http\Controllers\Api\V1\UserController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
+use App\Models\Pond;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -46,44 +48,57 @@ Route::get('/', function () {
 // });
 
 
-Route::middleware(['auth', 'role:admin'])->group(function(){
+Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::controller(DashboardController::class)->group(function () {
         Route::get('admin/dashboard', 'Index')->name('admindashboard');
         // Route::get('resources/admin/logout', 'AdminLogout')->name('adminlogout');
     });
 
-//     Route::controller(ProfileController::class)->group(function () {
-//         Route::get('logout', function ()
-// {
-//     auth()->logout();
-//     Session()->flush();
+    //     Route::controller(ProfileController::class)->group(function () {
+    //         Route::get('logout', function ()
+    // {
+    //     auth()->logout();
+    //     Session()->flush();
 
-//     return Redirect::to('/login');
-// })->name('logout');
-//         // Route::post('/admin/logout', 'AdminLogout')->name('adminlogout');
-//     });
-// Route::get('resources/admin/logout', 'App\Http\Controllers\Auth\AuthenticatedSessionController@logout');
+    //     return Redirect::to('/login');
+    // })->name('logout');
+    //         // Route::post('/admin/logout', 'AdminLogout')->name('adminlogout');
+    //     });
+    // Route::get('resources/admin/logout', 'App\Http\Controllers\Auth\AuthenticatedSessionController@logout');
 
-    Route::controller(FoodsController::class)->group(function () {
-        Route::get('/admin/all-food', 'Index')->name('allfoods');
-        Route::get('/admin/all-food/search', 'SearchFood')->name('searchfood');
-        Route::get('/admin/add-food', 'AddFood')->name('addfoods');
-        Route::post('/admin/store-food', 'StoreFood')->name('store-food');
-        Route::get('/admin/edit-food/{id}','EditFood')->name('editfood');
-        Route::get('/admin/edit-food-img/{id}', 'EditFoodImg')->name('editfoodimg');
-        Route::post('/admin/update-food-img', 'UpdateFoodImg')->name('updatefoodimg');
-        Route::post('/admin/update-food', 'UpdateFood')->name('updatefood');
-        Route::get('/admin/delete-food/{id}','DeleteFood')->name('deletefood');
+    Route::controller(PondController::class)->group(function () {
+        Route::get('/admin/all-pond', 'Index')->name('allponds');
+        Route::get('/admin/manage-pond', 'ManagePonds')->name('manageponds');
+        Route::get('/admin/all-pond/search', 'SearchPond')->name('searchpond');
+        Route::get('/admin/add-pond', 'AddPond')->name('addponds');
+        Route::post('/admin/store-pond', 'StorePond')->name('store-pond');
+        Route::get('/admin/edit-pond/{id}', 'EditPond')->name('editpond');
+        Route::get('/admin/edit-pond-img/{id}', 'EditPondImg')->name('editpondimg');
+        Route::post('/admin/update-pond-img', 'UpdatePondImg')->name('updatepondimg');
+        Route::post('/admin/update-pond', 'UpdatePond')->name('updatepond');
+        Route::get('/admin/delete-pond/{id}', 'DeletePond')->name('deletepond');
     });
+
+    // Route::controller(FoodsController::class)->group(function () {
+    //     Route::get('/admin/all-food', 'Index')->name('allfoods');
+    //     Route::get('/admin/all-food/search', 'SearchFood')->name('searchfood');
+    //     Route::get('/admin/add-food', 'AddFood')->name('addfoods');
+    //     Route::post('/admin/store-food', 'StoreFood')->name('store-food');
+    //     Route::get('/admin/edit-food/{id}','EditFood')->name('editfood');
+    //     Route::get('/admin/edit-food-img/{id}', 'EditFoodImg')->name('editfoodimg');
+    //     Route::post('/admin/update-food-img', 'UpdateFoodImg')->name('updatefoodimg');
+    //     Route::post('/admin/update-food', 'UpdateFood')->name('updatefood');
+    //     Route::get('/admin/delete-food/{id}','DeleteFood')->name('deletefood');
+    // });
 
     Route::controller(FoodTypeController::class)->group(function () {
         Route::get('/admin/all-food-type', 'Index')->name('allfoodtype');
         // Route::get('/admin/food-type/search', 'SearchFoodType')->name('searchfoodtype');
         Route::get('/admin/add-food-type', 'AddFoodType')->name('addfoodtype');
         Route::post('/admin/store-food-type', 'StoreFoodType')->name('storefoodtype');
-        Route::get('/admin/edit-food-type/{id}','EditFoodType')->name('editfoodtype');
-        Route::post('/admin/update-food-type','UpdateFoodType')->name('updatefoodtype');
-        Route::get('/admin/delete-food-type/{id}','DeleteFoodType')->name('deletefoodtype');
+        Route::get('/admin/edit-food-type/{id}', 'EditFoodType')->name('editfoodtype');
+        Route::post('/admin/update-food-type', 'UpdateFoodType')->name('updatefoodtype');
+        Route::get('/admin/delete-food-type/{id}', 'DeleteFoodType')->name('deletefoodtype');
     });
 
     Route::controller(UserController::class)->group(function () {
@@ -91,9 +106,9 @@ Route::middleware(['auth', 'role:admin'])->group(function(){
         Route::get('/admin/search-users/search', 'SearchUsers')->name('searchusers');
         Route::get('/admin/add-users', 'AddUsers')->name('add-users');
         Route::post('/admin/store-users', 'StoreUsers')->name('storeusers');
-        Route::get('/admin/edit-users/{id}','EditUsers')->name('editusers');
+        Route::get('/admin/edit-users/{id}', 'EditUsers')->name('editusers');
         Route::post('/admin/update-users', 'UpdateUsers')->name('update-users');
-        Route::get('/admin/delete-users/{id}','DeleteUsers')->name('deleteusers');
+        Route::get('/admin/delete-users/{id}', 'DeleteUsers')->name('deleteusers');
     });
 
     Route::controller(OrderController::class)->group(function () {
@@ -102,15 +117,15 @@ Route::middleware(['auth', 'role:admin'])->group(function(){
         Route::get('/admin/history-order', 'IndexHistory')->name('historyorder');
         Route::get('/admin/view-order/{id}', 'ViewOrder')->name('vieworder');
         Route::get('/admin/update-order/{id}', 'UpdateOrder')->name('updateorder');
-        Route::get('/admin/delete-order/{id}','DeleteOrder')->name('deleteorder');
+        Route::get('/admin/delete-order/{id}', 'DeleteOrder')->name('deleteorder');
     });
 
 
-    Route::get('/routes', function() {
+    Route::get('/routes', function () {
         $routeCollection = Route::getRoutes();
         foreach ($routeCollection as $value) {
-           echo $value->getActionName();
-           echo "<br/>";
+            echo $value->getActionName();
+            echo "<br/>";
         }
     });
 
@@ -160,7 +175,7 @@ Route::middleware(['auth', 'role:admin'])->group(function(){
 
 Route::get('/userprofile', [DashboardController::class, 'Index']);
 Route::middleware('auth')->group(function () {
-    Route::get('resources/admin/logout', [DashboardController::class,'AdminLogout'])->name('adminlogout');
+    Route::get('resources/admin/logout', [DashboardController::class, 'AdminLogout'])->name('adminlogout');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
