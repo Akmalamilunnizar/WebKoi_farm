@@ -31,7 +31,7 @@
                             </div>
                         </div>
 
-                        <div class="row mb-3">
+                        {{-- <div class="row mb-3">
                             <label class="col-sm-2 col-form-label" for="basic-default-name">Tipe Makanan</label>
                             <div class="col-sm-10">
                                 <select class="form-select" id="type_id" name="type_id"
@@ -42,58 +42,22 @@
                                     @endforeach
                                 </select>
                             </div>
-                        </div>
+                        </div> --}}
 
                         <div class="row mb-3">
-                            <label class="col-sm-2 col-form-label" for="basic-default-name">Harga Makanan</label>
+                            <label class="col-sm-2 col-form-label" for="basic-default-name">Volume Kolam</label>
                             <div class="col-sm-10">
-                                <input type="number" class="form-control" id="price" name="price"
+                                <input type="number" class="form-control" id="volume" name="volume"
                                     placeholder="12000" />
                             </div>
                         </div>
 
-                        <div class="row mb-3">
-                            <label class="col-sm-2 col-form-label" for="basic-default-name">Asal Makanan</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="location" name="location"
-                                    placeholder="Jawa Barat" />
-                            </div>
-                        </div>
 
-                        <div class="row mb-3">
-                            <label class="col-sm-2 col-form-label" for="basic-default-name">Bintang</label>
-                            <div class="col-sm-10">
-                                <input type="number" class="form-control" id="stars" name="stars" placeholder="" />
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            {{-- <label class="col-sm-2 col-form-label" for="basic-default-name">Orang</label> --}}
-                            <div class="col-sm-10">
-                                <input type="hidden" class="form-control" id="people" name="people" value="5"
-                                    placeholder="" />
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            {{-- <label class="col-sm-2 col-form-label" for="basic-default-name">Orang Terpilih</label> --}}
-                            <div class="col-sm-10">
-                                <input type="hidden" class="form-control" id="selected_people" name="selected_people"
-                                    value="4" placeholder="" />
-                            </div>
-                        </div>
 
                         <div class="row mb-3">
                             <label class="col-sm-2 col-form-label" for="basic-default-name">Upload Gambar</label>
                             <div class="col-sm-10">
                                 <input class="form-control" type="file" id="img" name="img" />
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <label class="col-sm-2 col-form-label" for="basic-default-name">Deskripsi</label>
-                            <div class="col-sm-10">
-                                <textarea class="form-control" name="description" id="description" cols="30" rows="10"></textarea>
                             </div>
                         </div>
 
