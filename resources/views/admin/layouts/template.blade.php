@@ -154,14 +154,14 @@
                                                 class="menu-item {{ request()->is('admin/pending-order*') ? 'active' : '' }}">
                                                 <a href="{{ route('pendingorder') }}" class="menu-link">
                                                     <i class="menu-icon tf-icons bx bx-collection"></i>
-                                                    <div data-i18n="Basic">Penerimaan Pesanan</div>
+                                                    <div data-i18n="Basic">Laporan Parameter</div>
                                                 </a>
                                             </li>
                                             <li
                                                 class="menu-item {{ request()->is('admin/history-order*') ? 'active' : '' }}">
                                                 <a href="{{ route('historyorder') }}" class="menu-link">
                                                     <i class="menu-icon tf-icons bx bx-collection"></i>
-                                                    <div data-i18n="Basic">Riwayat Pemesanan</div>
+                                                    <div data-i18n="Basic">Profil</div>
                                                 </a>
                                             </li>
                         </ul>
