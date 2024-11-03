@@ -1,106 +1,142 @@
-<x-guest-layout>
-    <head> @vite(['resources/css/app.css', 'resources/js/app.js']) </head>
-    <x-auth-card>
-        <!-- Session Status -->
-        <x-auth-session-status class="mb-4" :status="session('status')" />
+<!doctype html>
 
-        <!-- Validation Errors -->
-        <x-auth-validation-errors class="mb-4" :errors="$errors" />
+<html
+  lang="en"
+  class="light-style layout-wide customizer-hide"
+  dir="ltr"
+  data-theme="theme-default"
+  data-assets-path="../assets/"
+  data-template="vertical-menu-template-free"
+  data-style="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-        <form method="POST" action="{{ route('login') }}">
-            @csrf
+    <title>SANKE - Koi Login Page</title>
 
-            <div class="grid gap-6">
-                <!-- Email Address -->
-                <div class="space-y-2">
-                    <x-form.label
-                        for="email"
-                        :value="__('Email')"
-                    />
+    <meta name="description" content="" />
 
-                    <x-form.input-with-icon-wrapper>
-                        <x-slot name="icon">
-                            <x-heroicon-o-mail aria-hidden="true" class="w-5 h-5" />
-                        </x-slot>
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="../assets/images/logo/logo.png" />
+    <!-- <link rel="shortcut icon" href="{{ asset('assets/images/logo/logo.png') }}" type="image/png" /> -->
 
-                        <x-form.input
-                            withicon
-                            id="email"
-                            class="block w-full"
-                            type="email"
-                            name="email"
-                            :value="old('email')"
-                            placeholder="{{ __('Email') }}"
-                            required
-                            autofocus
-                        />
-                    </x-form.input-with-icon-wrapper>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
+      rel="stylesheet" />
+
+    <link rel="stylesheet" href="../assets/vendor/fonts/boxicons.css" />
+
+    <!-- Core CSS -->
+    <link rel="stylesheet" href="../assets/vendor/css/core.css" class="template-customizer-core-css" />
+    <link rel="stylesheet" href="../assets/vendor/css/theme-default.css" class="template-customizer-theme-css" />
+    <link rel="stylesheet" href="../css/demo.css" />
+
+    <!-- Vendors CSS -->
+    <link rel="stylesheet" href="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+
+    <!-- Page CSS -->
+    <!-- Page -->
+    <link rel="stylesheet" href="../assets/vendor/css/pages/page-auth.css" />
+
+    <!-- Helpers -->
+    <script src="../assets/vendor/js/helpers.js"></script>
+    <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
+    <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
+    <script src="../assets/js/config.js"></script>
+  </head>
+
+  <body>
+    <!-- Content -->
+
+
+<form action="login" method="POST">
+  @csrf
+<div class="container-xxl">
+      <div class="authentication-wrapper authentication-basic container-p-y">
+        <div class="authentication-inner">
+          <!-- Register -->
+          <div class="card px-sm-6 px-0">
+            <div class="card-body">
+              <form id="formAuthentication" class="mb-6" action="index.html">
+                <div class="mb-6">
+                  <label for="email" class="form-label">Email or Username</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="email"
+                    name="email"
+                    placeholder="Enter your email or username"
+                    autofocus />
                 </div>
-
-                <!-- Password -->
-                <div class="space-y-2">
-                    <x-form.label
-                        for="password"
-                        :value="__('Password')"
-                    />
-
-                    <x-form.input-with-icon-wrapper>
-                        <x-slot name="icon">
-                            <x-heroicon-o-lock-closed aria-hidden="true" class="w-5 h-5" />
-                        </x-slot>
-
-                        <x-form.input
-                            withicon
-                            id="password"
-                            class="block w-full"
-                            type="password"
-                            name="password"
-                            required
-                            autocomplete="current-password"
-                            placeholder="{{ __('Password') }}"
-                        />
-                    </x-form.input-with-icon-wrapper>
+                <div class="mb-6 form-password-toggle">
+                  <label class="form-label" for="password">Password</label>
+                  <div class="input-group input-group-merge">
+                    <input
+                      type="password"
+                      id="password"
+                      class="form-control"
+                      name="password"
+                      placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
+                      aria-describedby="password" />
+                    <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
+                  </div>
                 </div>
-
-                <!-- Remember Me -->
-                <div class="flex items-center justify-between">
-                    <label for="remember_me" class="inline-flex items-center">
-                        <input
-                            id="remember_me"
-                            type="checkbox"
-                            class="text-purple-500 border-gray-300 rounded focus:border-purple-300 focus:ring focus:ring-purple-500 dark:border-gray-600 dark:bg-dark-eval-1 dark:focus:ring-offset-dark-eval-1"
-                            name="remember"
-                        >
-
-                        <span class="ml-2 text-sm text-gray-600 dark:text-gray-400">
-                            {{ __('Remember me') }}
-                        </span>
-                    </label>
-
-                    @if (Route::has('password.request'))
-                        <a class="text-sm text-blue-500 hover:underline" href="{{ route('password.request') }}">
-                            {{ __('Forgot your password?') }}
-                        </a>
-                    @endif
+                <div class="mb-8">
+                  <div class="d-flex justify-content-between mt-8">
+                    <div class="form-check mb-0 ms-2">
+                      <input class="form-check-input" type="checkbox" id="remember-me" />
+                      <label class="form-check-label" for="remember-me"> Remember Me </label>
+                    </div>
+                    <a href="forgotpw">
+                      <span>Lupa Password?</span>
+                    </a>
+                  </div>
                 </div>
-
-                <div>
-                    <x-button class="justify-center w-full gap-2">
-                        <x-heroicon-o-login class="w-6 h-6" aria-hidden="true" />
-
-                        <span>{{ __('Log in') }}</span>
-                    </x-button>
+                <div class="mb-6">
+                  <button class="btn btn-primary d-grid w-100" type="submit">Login</button>
                 </div>
+              </form>
 
-                @if (Route::has('register'))
-                    <p class="text-sm text-gray-600 dark:text-gray-400">
-                        {{ __('Don’t have an account?') }}
-                        <a href="{{ route('register') }}" class="text-blue-500 hover:underline">
-                            {{ __('Register') }}
-                        </a>
-                    </p>
-                @endif
+              <p class="text-center">
+                <span>Tidak punya akun?</span>
+                <a href="register">
+                  <span>Register</span>
+                </a>
+              </p>
             </div>
-        </form>
-    </x-auth-card>
-</x-guest-layout>
+          </div>
+          <!-- /Register -->
+        </div>
+      </div>
+    </div>
+</form>
+
+
+    
+    <!-- Core JS -->
+    <!-- build:js assets/vendor/js/core.js -->
+
+    <script src="../assets/vendor/libs/jquery/jquery.js"></script>
+    <script src="../assets/vendor/libs/popper/popper.js"></script>
+    <script src="../assets/vendor/js/bootstrap.js"></script>
+    <script src="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+    <script src="../assets/vendor/js/menu.js"></script>
+
+    <!-- endbuild -->
+
+    <!-- Vendors JS -->
+
+    <!-- Main JS -->
+    <script src="../assets/vendor/js/main.js"></script>
+
+    <!-- Page JS -->
+
+    <!-- Place this tag before closing body tag for github widget button. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+  </body>
+</html>

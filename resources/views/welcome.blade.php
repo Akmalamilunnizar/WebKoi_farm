@@ -1,128 +1,971 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
 
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Mirrored from preview.uideck.com/items/basic/ by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 12 Oct 2024 14:53:48 GMT -->
+<head>
+<meta charset="utf-8" />
 
-        <title>Landing Page</title>
+<title>SANKE - Koi Landing Page</title>
+<meta name="description" content="A SaaS landing page template." />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 
-        <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+<!-- Favicon -->
+<link rel="shortcut icon" href="{{ asset('assets/images/logo/logo.png') }}" type="image/png" />
 
-        <!-- Scripts -->
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
-    </head>
-    <body class="antialiased">
-        <div class="relative sm:flex sm:justify-center sm:items-center min-h-screen bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white">
-            @if (Route::has('login'))
-                <livewire:welcome.navigation />
-            @endif
+  <!-- CSS Files -->
+  <link rel="stylesheet" href="{{ asset('css/animate.css') }}" />
+  <link rel="stylesheet" href="{{ asset('css/tiny-slider.css') }}" />
+  <link rel="stylesheet" href="{{ asset('css/glightbox.min.css') }}" />
+  <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}" />
+  <link rel="stylesheet" href="{{ asset('css/style.css') }}" />
+  <link rel="stylesheet" href="https://cdn.lineicons.com/3.0/lineicons.css">
 
-            <div class="max-w-7xl mx-auto p-6 lg:p-8">
-                <div class="flex justify-center">
-                    <svg viewBox="0 0 62 65" fill="none" xmlns="http://www.w3.org/2000/svg" class="h-16 w-auto bg-gray-100 dark:bg-gray-900">
-                        <path d="M61.8548 14.6253C61.8778 14.7102 61.8895 14.7978 61.8897 14.8858V28.5615C61.8898 28.737 61.8434 28.9095 61.7554 29.0614C61.6675 29.2132 61.5409 29.3392 61.3887 29.4265L49.9104 36.0351V49.1337C49.9104 49.4902 49.7209 49.8192 49.4118 49.9987L25.4519 63.7916C25.3971 63.8227 25.3372 63.8427 25.2774 63.8639C25.255 63.8714 25.2338 63.8851 25.2101 63.8913C25.0426 63.9354 24.8666 63.9354 24.6991 63.8913C24.6716 63.8838 24.6467 63.8689 24.6205 63.8589C24.5657 63.8389 24.5084 63.8215 24.456 63.7916L0.501061 49.9987C0.348882 49.9113 0.222437 49.7853 0.134469 49.6334C0.0465019 49.4816 0.000120578 49.3092 0 49.1337L0 8.10652C0 8.01678 0.0124642 7.92953 0.0348998 7.84477C0.0423783 7.8161 0.0598282 7.78993 0.0697995 7.76126C0.0884958 7.70891 0.105946 7.65531 0.133367 7.6067C0.152063 7.5743 0.179485 7.54812 0.20192 7.51821C0.230588 7.47832 0.256763 7.43719 0.290416 7.40229C0.319084 7.37362 0.356476 7.35243 0.388883 7.32751C0.425029 7.29759 0.457436 7.26518 0.498568 7.2415L12.4779 0.345059C12.6296 0.257786 12.8015 0.211853 12.9765 0.211853C13.1515 0.211853 13.3234 0.257786 13.475 0.345059L25.4531 7.2415H25.4556C25.4955 7.26643 25.5292 7.29759 25.5653 7.32626C25.5977 7.35119 25.6339 7.37362 25.6625 7.40104C25.6974 7.43719 25.7224 7.47832 25.7523 7.51821C25.7735 7.54812 25.8021 7.5743 25.8196 7.6067C25.8483 7.65656 25.8645 7.70891 25.8844 7.76126C25.8944 7.78993 25.9118 7.8161 25.9193 7.84602C25.9423 7.93096 25.954 8.01853 25.9542 8.10652V33.7317L35.9355 27.9844V14.8846C35.9355 14.7973 35.948 14.7088 35.9704 14.6253C35.9792 14.5954 35.9954 14.5692 36.0053 14.5405C36.0253 14.4882 36.0427 14.4346 36.0702 14.386C36.0888 14.3536 36.1163 14.3274 36.1375 14.2975C36.1674 14.2576 36.1923 14.2165 36.2272 14.1816C36.2559 14.1529 36.292 14.1317 36.3244 14.1068C36.3618 14.0769 36.3942 14.0445 36.4341 14.0208L48.4147 7.12434C48.5663 7.03694 48.7383 6.99094 48.9133 6.99094C49.0883 6.99094 49.2602 7.03694 49.4118 7.12434L61.3899 14.0208C61.4323 14.0457 61.4647 14.0769 61.5021 14.1055C61.5333 14.1305 61.5694 14.1529 61.5981 14.1803C61.633 14.2165 61.6579 14.2576 61.6878 14.2975C61.7103 14.3274 61.7377 14.3536 61.7551 14.386C61.7838 14.4346 61.8 14.4882 61.8199 14.5405C61.8312 14.5692 61.8474 14.5954 61.8548 14.6253ZM59.893 27.9844V16.6121L55.7013 19.0252L49.9104 22.3593V33.7317L59.8942 27.9844H59.893ZM47.9149 48.5566V37.1768L42.2187 40.4299L25.953 49.7133V61.2003L47.9149 48.5566ZM1.99677 9.83281V48.5566L23.9562 61.199V49.7145L12.4841 43.2219L12.4804 43.2194L12.4754 43.2169C12.4368 43.1945 12.4044 43.1621 12.3682 43.1347C12.3371 43.1097 12.3009 43.0898 12.2735 43.0624L12.271 43.0586C12.2386 43.0275 12.2162 42.9888 12.1887 42.9539C12.1638 42.9203 12.1339 42.8916 12.114 42.8567L12.1127 42.853C12.0903 42.8156 12.0766 42.7707 12.0604 42.7283C12.0442 42.6909 12.023 42.656 12.013 42.6161C12.0005 42.5688 11.998 42.5177 11.9931 42.4691C11.9881 42.4317 11.9781 42.3943 11.9781 42.3569V15.5801L6.18848 12.2446L1.99677 9.83281ZM12.9777 2.36177L2.99764 8.10652L12.9752 13.8513L22.9541 8.10527L12.9752 2.36177H12.9777ZM18.1678 38.2138L23.9574 34.8809V9.83281L19.7657 12.2459L13.9749 15.5801V40.6281L18.1678 38.2138ZM48.9133 9.14105L38.9344 14.8858L48.9133 20.6305L58.8909 14.8846L48.9133 9.14105ZM47.9149 22.3593L42.124 19.0252L37.9323 16.6121V27.9844L43.7219 31.3174L47.9149 33.7317V22.3593ZM24.9533 47.987L39.59 39.631L46.9065 35.4555L36.9352 29.7145L25.4544 36.3242L14.9907 42.3482L24.9533 47.987Z" fill="#FF2D20"/>
-                    </svg>
-                </div>
+  <!-- Link CSS Bootstrap -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
 
-                <div class="mt-16">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
-                        <a href="https://laravel.com/docs" class="scale-100 p-6 bg-white dark:bg-gray-800/50 dark:bg-gradient-to-bl from-gray-700/50 via-transparent dark:ring-1 dark:ring-inset dark:ring-white/5 rounded-lg shadow-2xl shadow-gray-500/20 dark:shadow-none flex motion-safe:hover:scale-[1.01] transition-all duration-250 focus:outline focus:outline-2 focus:outline-red-500">
-                            <div>
-                                <div class="h-16 w-16 bg-red-50 dark:bg-red-800/20 flex items-center justify-center rounded-full">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" class="w-7 h-7 stroke-red-500">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
-                                    </svg>
-                                </div>
+  <!-- Script JS Bootstrap -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 
-                                <h2 class="mt-6 text-xl font-semibold text-gray-900 dark:text-white">Documentation</h2>
 
-                                <p class="mt-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
-                                    Laravel has wonderful documentation covering every aspect of the framework. Whether you are a newcomer or have prior experience with Laravel, we recommend reading our documentation from beginning to end.
-                                </p>
-                            </div>
 
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" class="self-center shrink-0 stroke-red-500 w-6 h-6 mx-6">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75" />
-                            </svg>
-                        </a>
+  
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+<!--[if IE]>
+      <p class="browserupgrade">
+        You are using an <strong>outdated</strong> browser. Please
+        <a href="https://browsehappy.com/">upgrade your browser</a> to improve
+        your experience and security.
+      </p>
+    <![endif]-->
 
-                        <a href="https://laracasts.com" class="scale-100 p-6 bg-white dark:bg-gray-800/50 dark:bg-gradient-to-bl from-gray-700/50 via-transparent dark:ring-1 dark:ring-inset dark:ring-white/5 rounded-lg shadow-2xl shadow-gray-500/20 dark:shadow-none flex motion-safe:hover:scale-[1.01] transition-all duration-250 focus:outline focus:outline-2 focus:outline-red-500">
-                            <div>
-                                <div class="h-16 w-16 bg-red-50 dark:bg-red-800/20 flex items-center justify-center rounded-full">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" class="w-7 h-7 stroke-red-500">
-                                        <path stroke-linecap="round" d="M15.75 10.5l4.72-4.72a.75.75 0 011.28.53v11.38a.75.75 0 01-1.28.53l-4.72-4.72M4.5 18.75h9a2.25 2.25 0 002.25-2.25v-9a2.25 2.25 0 00-2.25-2.25h-9A2.25 2.25 0 002.25 7.5v9a2.25 2.25 0 002.25 2.25z" />
-                                    </svg>
-                                </div>
+<div class="preloader">
+<div class="loader">
+<div class="spinner">
+<div class="spinner-container">
+<div class="spinner-rotator">
+<div class="spinner-left">
+<div class="spinner-circle"></div>
+</div>
+<div class="spinner-right">
+<div class="spinner-circle"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
 
-                                <h2 class="mt-6 text-xl font-semibold text-gray-900 dark:text-white">Laracasts</h2>
 
-                                <p class="mt-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
-                                    Laracasts offers thousands of video tutorials on Laravel, PHP, and JavaScript development. Check them out, see for yourself, and massively level up your development skills in the process.
-                                </p>
-                            </div>
+<header class="header-area">
+<div class="navbar-area">
+<div class="container">
+<div class="row">
+<div class="col-lg-12">
+<nav class="navbar navbar-expand-lg">
+<a class="navbar-brand" href="{{ url('/') }}">
+    <img src="{{ asset('assets/images/logo/logo.png') }}" alt="Logo" />
+</a>
 
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" class="self-center shrink-0 stroke-red-500 w-6 h-6 mx-6">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75" />
-                            </svg>
-                        </a>
+</a>
+<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+<span class="toggler-icon"> </span>
+<span class="toggler-icon"> </span>
+<span class="toggler-icon"> </span>
+</button>
+<div class="collapse navbar-collapse sub-menu-bar" id="navbarSupportedContent">
+<ul id="nav" class="navbar-nav ms-auto">
+<li class="nav-item">
+<a class="page-scroll active" href="#home">Home</a>
+</li>
+<li class="nav-item">
+<a class="page-scroll" href="#features">Features</a>
+</li>
+<li class="nav-item">
+<a class="page-scroll" href="#about">About</a>
+</li>
+<li class="nav-item">
+<a class="page-scroll" href="#facts">Why</a>
+</li>
+<li class="nav-item">
+<a class="page-scroll" href="#team">Team</a>
+</li>
+<!-- <li class="nav-item">
+<a class="page-scroll" href="#blog">Blog</a>
+</li> -->
+</ul>
+</div>
 
-                        <a href="https://laravel-news.com" class="scale-100 p-6 bg-white dark:bg-gray-800/50 dark:bg-gradient-to-bl from-gray-700/50 via-transparent dark:ring-1 dark:ring-inset dark:ring-white/5 rounded-lg shadow-2xl shadow-gray-500/20 dark:shadow-none flex motion-safe:hover:scale-[1.01] transition-all duration-250 focus:outline focus:outline-2 focus:outline-red-500">
-                            <div>
-                                <div class="h-16 w-16 bg-red-50 dark:bg-red-800/20 flex items-center justify-center rounded-full">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" class="w-7 h-7 stroke-red-500">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3.375c.621 0 1.125.504 1.125 1.125V18a2.25 2.25 0 01-2.25 2.25M16.5 7.5V18a2.25 2.25 0 002.25 2.25M16.5 7.5V4.875c0-.621-.504-1.125-1.125-1.125H4.125C3.504 3.75 3 4.254 3 4.875V18a2.25 2.25 0 002.25 2.25h13.5M6 7.5h3v3H6v-3z" />
-                                    </svg>
-                                </div>
+<a href="{{ url('/login')}}" class="main-btn wow fadeInUp" data-wow-duration="1s" style="margin-right: 10px;">
+    Login
+</a>
+<div class="navbar-btn d-none d-sm-inline-block">
+    <a href="{{ url('/register')}}" class="main-btn wow fadeInUp" data-wow-duration="1s">
+        Register
+    </a>
+</div>
 
-                                <h2 class="mt-6 text-xl font-semibold text-gray-900 dark:text-white">Laravel News</h2>
+</nav>
 
-                                <p class="mt-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
-                                    Laravel News is a community driven portal and newsletter aggregating all of the latest and most important news in the Laravel ecosystem, including new package releases and tutorials.
-                                </p>
-                            </div>
+</div>
+</div>
 
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" class="self-center shrink-0 stroke-red-500 w-6 h-6 mx-6">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75" />
-                            </svg>
-                        </a>
+</div>
 
-                        <div class="scale-100 p-6 bg-white dark:bg-gray-800/50 dark:bg-gradient-to-bl from-gray-700/50 via-transparent dark:ring-1 dark:ring-inset dark:ring-white/5 rounded-lg shadow-2xl shadow-gray-500/20 dark:shadow-none flex motion-safe:hover:scale-[1.01] transition-all duration-250 focus:outline focus:outline-2 focus:outline-red-500">
-                            <div>
-                                <div class="h-16 w-16 bg-red-50 dark:bg-red-800/20 flex items-center justify-center rounded-full">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" class="w-7 h-7 stroke-red-500">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M6.115 5.19l.319 1.913A6 6 0 008.11 10.36L9.75 12l-.387.775c-.217.433-.132.956.21 1.298l1.348 1.348c.21.21.329.497.329.795v1.089c0 .426.24.815.622 1.006l.153.076c.433.217.956.132 1.298-.21l.723-.723a8.7 8.7 0 002.288-4.042 1.087 1.087 0 00-.358-1.099l-1.33-1.108c-.251-.21-.582-.299-.905-.245l-1.17.195a1.125 1.125 0 01-.98-.314l-.295-.295a1.125 1.125 0 010-1.591l.13-.132a1.125 1.125 0 011.3-.21l.603.302a.809.809 0 001.086-1.086L14.25 7.5l1.256-.837a4.5 4.5 0 001.528-1.732l.146-.292M6.115 5.19A9 9 0 1017.18 4.64M6.115 5.19A8.965 8.965 0 0112 3c1.929 0 3.716.607 5.18 1.64" />
-                                    </svg>
-                                </div>
+</div>
+<!-- 
+<div id="home" class="header-hero bg_cover" style="background-image: url('{{ asset('assets/images/header/banner-bg.svg') }}')"> -->
+<div id="home" class="header-hero bg_cover" style="background-image: url(assets/images/header/banner-bg.svg)">
+<div class="container">
+<div class="row justify-content-center">
+<div class="col-lg-10">
+<div class="header-hero-content text-center">
+<h2 class="header-title wow fadeInUp" data-wow-duration="1.3s" data-wow-delay="0.5s" style="font-size: 35px;">
+  Intellegence System
+  Kontrol Kualitas Air Pada
+  Kolam Ikan Koi Berbasis IoT
+</h2>
+<p class="text wow fadeInUp" data-wow-duration="1.3s" data-wow-delay="0.8s" style="font-size: 20px;">
+  Memanfaatkan teknologi Internet of Things (IoT) untuk Controlling dan Monitoring secara otomatis di kolam ikan koi.
+</p>
+<!-- <a href="javascript:void(0)" class="main-btn wow fadeInUp" data-wow-duration="1.3s" data-wow-delay="1.1s">
+Login
+</a> -->
+<!-- <a href="{{ url('/login')}}" class="main-btn wow fadeInUp" data-wow-duration="1.3s" data-wow-delay="1.1s">
+Login
+</a> -->
+</div>
 
-                                <h2 class="mt-6 text-xl font-semibold text-gray-900 dark:text-white">Vibrant Ecosystem</h2>
+</div>
+</div>
 
-                                <p class="mt-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
-                                    Laravel's robust library of first-party tools and libraries, such as <a href="https://forge.laravel.com" class="underline hover:text-gray-700 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Forge</a>, <a href="https://vapor.laravel.com" class="underline hover:text-gray-700 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Vapor</a>, <a href="https://nova.laravel.com" class="underline hover:text-gray-700 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Nova</a>, and <a href="https://envoyer.io" class="underline hover:text-gray-700 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Envoyer</a> help you take your projects to the next level. Pair them with powerful open source libraries like <a href="https://laravel.com/docs/billing" class="underline hover:text-gray-700 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Cashier</a>, <a href="https://laravel.com/docs/dusk" class="underline hover:text-gray-700 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Dusk</a>, <a href="https://laravel.com/docs/broadcasting" class="underline hover:text-gray-700 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Echo</a>, <a href="https://laravel.com/docs/horizon" class="underline hover:text-gray-700 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Horizon</a>, <a href="https://laravel.com/docs/sanctum" class="underline hover:text-gray-700 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Sanctum</a>, <a href="https://laravel.com/docs/telescope" class="underline hover:text-gray-700 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Telescope</a>, and more.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+<div class="row">
+<div class="col-lg-12">
+<div class="header-hero-image text-center wow fadeIn" data-wow-duration="1.3s" data-wow-delay="1.4s">
+<img src="{{ asset('assets/images/header/header-hero.png') }}" alt="hero" />
+</div>
 
-                <div class="flex justify-center mt-16 px-0 sm:items-center sm:justify-between">
-                    <div class="text-center text-sm text-gray-500 dark:text-gray-400 sm:text-start">
-                        <div class="flex items-center gap-4">
-                            <a href="https://github.com/sponsors/taylorotwell" class="group inline-flex items-center hover:text-gray-700 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" class="-mt-px me-1 w-5 h-5 stroke-gray-400 dark:stroke-gray-600 group-hover:stroke-gray-600 dark:group-hover:stroke-gray-400">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
-                                </svg>
-                                Sponsor
-                            </a>
-                        </div>
-                    </div>
+</div>
+</div>
 
-                    <div class="ms-4 text-center text-sm text-gray-500 dark:text-gray-400 sm:text-end sm:ms-0">
-                        Laravel v{{ Illuminate\Foundation\Application::VERSION }} (PHP v{{ PHP_VERSION }})
-                    </div>
-                </div>
-            </div>
+</div>
+
+<div id="particles-1" class="particles"></div>
+</div>
+
+</header>
+
+
+
+<section id="features" class="services-area pt-120">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-10">
+        <div class="section-title text-center pb-40">
+          <div class="line m-auto"></div>
+          <h3 class="title">
+            Keunggulan Utama <span> dari Sistem SANKE Koi</span>
+          </h3>
         </div>
-    </body>
+      </div>
+    </div>
+
+    <div class="row justify-content-center">
+      <!-- Pemantauan Real-time -->
+      <div class="col-lg-4 col-md-7 col-sm-8">
+        <div class="single-services text-center mt-30 wow fadeIn" data-wow-duration="1s" data-wow-delay="0.2s">
+          <div class="services-icon">
+            <img class="shape" src="{{ asset('assets/images/services/services-shape.svg') }}" alt="shape" />
+            <img class="shape-1" src="{{ asset('assets/images/services/services-shape-1.svg') }}" alt="shape" />
+            <i class="lni lni-timer"></i>
+          </div>
+          <div class="services-content mt-30">
+            <h4 class="services-title">Pemantauan Real-time</h4>
+            <p class="text">
+              Dengan real-time monitoring, pengguna dapat langsung melihat perubahan parameter 
+              penting seperti pH, suhu, amonia, TDS.
+            </p>
+            
+          </div>
+        </div>
+      </div>
+
+      <!-- Efisiensi Waktu dan Tenaga -->
+      <div class="col-lg-4 col-md-7 col-sm-8">
+        <div class="single-services text-center mt-30 wow fadeIn" data-wow-duration="1s" data-wow-delay="0.5s">
+          <div class="services-icon">
+            <img class="shape" src="{{ asset('assets/images/services/services-shape.svg') }}" alt="shape" />
+            <img class="shape-1" src="{{ asset('assets/images/services/services-shape-2.svg') }}" alt="shape" />
+            <i class="lni lni-reload"></i>
+          </div>
+          <div class="services-content mt-30">
+            <h4 class="services-title">Efisiensi Waktu dan Tenaga</h4>
+            <p class="text">
+              Sistem ini menghemat waktu dan tenaga pengguna dalam melakukan perawatan kolam 
+              karena sistem otomatis akan menangani pengukuran dan memberikan informasi dengan cepat.
+            </p>
+            
+          </div>
+        </div>
+      </div>
+
+      <!-- Pemberian Tindakan Otomatis -->
+      <div class="col-lg-4 col-md-7 col-sm-8">
+        <div class="single-services text-center mt-30 wow fadeIn" data-wow-duration="1s" data-wow-delay="0.8s">
+          <div class="services-icon">
+            <img class="shape" src="{{ asset('assets/images/services/services-shape.svg') }}" alt="shape" />
+            <img class="shape-1" src="{{ asset('assets/images/services/services-shape-3.svg') }}" alt="shape" />
+            <i class="lni lni-cogs"></i>
+          </div>
+          <div class="services-content mt-30">
+            <h4 class="services-title">Pemberian Tindakan Otomatis</h4>
+            <p class="text">
+              Fitur ini memungkinkan sistem untuk memberikan tindakan seperti mengaktifkan 
+              kran otomatis saat air tercemar atau terlalu kotor.
+            </p>
+           
+          </div>
+        </div>
+      </div>
+
+      <!-- Akses Jarak Jauh -->
+      <div class="col-lg-4 col-md-7 col-sm-8">
+        <div class="single-services text-center mt-30 wow fadeIn" data-wow-duration="1s" data-wow-delay="1.1s">
+          <div class="services-icon">
+            <img class="shape" src="{{ asset('assets/images/services/services-shape.svg') }}" alt="shape" />
+            <img class="shape-1" src="{{ asset('assets/images/services/services-shape-3.svg') }}" alt="shape" />
+            <i class="lni lni-mobile"></i>
+          </div>
+          <div class="services-content mt-30">
+            <h4 class="services-title">Akses Jarak Jauh</h4>
+            <p class="text">
+              Sistem ini memungkinkan pengguna untuk memantau dan mengendalikan kualitas 
+              air kolam ikan koi dari jarak jauh melalui perangkat mobile.
+            </p>
+           
+          </div>
+        </div>
+      </div>
+
+      <!-- Data Historis dan Analisis -->
+      <div class="col-lg-4 col-md-7 col-sm-8">
+        <div class="single-services text-center mt-30 wow fadeIn" data-wow-duration="1s" data-wow-delay="1.4s">
+          <div class="services-icon">
+            <img class="shape" src="{{ asset('assets/images/services/services-shape.svg') }}" alt="shape" />
+            <img class="shape-1" src="{{ asset('assets/images/services/services-shape-2.svg') }}" alt="shape" />
+            <i class="lni lni-bar-chart"></i>
+          </div>
+          <div class="services-content mt-30">
+            <h4 class="services-title">Data Historis dan Analisis</h4>
+            <p class="text">
+              Data yang dikumpulkan dari berbagai sensor disimpan dan dianalisis untuk 
+              membantu pengguna memahami tren dan pola dalam kualitas air serta kesehatan ikan.
+            </p>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section id="about">
+  <div class="about-area pt-70">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="about-content mt-50 wow fadeInLeftBig" data-wow-duration="1s" data-wow-delay="0.5s">
+            <div class="section-title">
+              <div class="line"></div>
+              <h3 class="title">
+                Mengenal Sistem Cerdas <span>Pengelolaan Air Kolam Ikan Koi Berbasis IoT</span>
+              </h3>
+            </div>
+            <p class="text">
+              Intellegence System Kontrol Kualitas Air Pada Kolam Ikan Koi Berbasis IoT adalah 
+              sistem yang memanfaatkan teknologi Internet of Things (IoT) untuk mengontrol serta memonitor dan 
+              mengendalikan kualitas air secara otomatis di kolam ikan koi.
+              Sistem ini dapat mengukur parameter seperti suhu, pH, kadar oksigen, dan tingkat kekeruhan air 
+              secara real-time, serta memberikan peringatan atau melakukan tindakan otomatis untuk menjaga kondisi 
+              ideal bagi ikan koi.
+            </p>
+            <!-- Tombol untuk membuka modal -->
+            <a href="#" class="main-btn" data-bs-toggle="modal" data-bs-target="#exampleModal">Selengkapnya</a>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="about-image text-center mt-50 wow fadeInRightBig" data-wow-duration="1s" data-wow-delay="0.5s">
+            <img src="{{ asset('assets/images/about/about1.svg') }}" alt="about" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Informasi Lengkap</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <!-- Tambahkan konten lengkap di sini -->
+          Intellegence System Kontrol Kualitas Air Pada Kolam Ikan Koi Berbasis IoT adalah sistem yang memanfaatkan teknologi Internet of Things (IoT) untuk mengontrol serta memonitor dan mengendalikan kualitas air secara otomatis di kolam ikan koi. Sistem ini dapat mengukur parameter seperti suhu, pH, kadar oksigen, dan tingkat kekeruhan air secara real-time, serta memberikan peringatan atau melakukan tindakan otomatis untuk menjaga kondisi ideal bagi ikan koi. Dengan fitur ini, pengguna dapat lebih mudah mengelola kualitas air dan kesehatan ikan koi mereka.
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<div class="about-shape-1">
+<img src="{{ asset('assets/images/about/about-shape-1.svg') }}" alt="shape" />
+</div>
+</div>
+
+
+<div class="about-area pt-70">
+<div class="about-shape-2">
+<img src="{{ asset('assets/images/about/about-shape-2.svg') }}" alt="shape" />
+</div>
+<div class="container">
+<div class="row align-items-center">
+<div class="col-lg-6 order-lg-last">
+<div class="about-content ms-lg-auto mt-50 wow fadeInLeftBig" data-wow-duration="1s" data-wow-delay="0.5s">
+<div class="section-title">
+<div class="line"></div>
+<h3 class="title">
+Lokasi Kami <span> - The Genks Koi 99 Farm (Sentral Ikan Koi)</span>
+</h3>
+</div>
+
+<p class="text">
+  The GenKs Koi 99 Farm terletak di lokasi  yang mudah diakses dan menjadi pusat budidaya 
+  serta penjualan ikan koi berkualitas unggul dengan berbagai jenis dan ukuran. Kami berfokus pada 
+  memberikan layanan terbaik bagi para penghobi koi, termasuk konsultasi mengenai perawatan ikan dan 
+  pengelolaan kolam. Dengan demikian, pelanggan dapat merasakan pengalaman optimal dalam merawat dan 
+  menikmati keindahan koi mereka
+  <br><br>
+  Gumuksari, Tegal Besar, Kaliwates, Jember Regency, East Java 68131, Indonesia 
+  Kabupaten Jember, Jawa Timur, 68131
+</p>
+<a href="javascript:void(0)" class="main-btn">Temukan Lokasi Kami</a>
+</div>
+
+</div>
+<div class="col-lg-6 order-lg-first">
+<div class="about-image text-center mt-50 wow fadeInRightBig" data-wow-duration="1s" data-wow-delay="0.5s">
+<img src="{{ asset('assets/images/about/genksKoi.svg') }}" alt="about" />
+</div>
+
+</div>
+</div>
+
+</div>
+
+</div>
+
+
+<div class="about-area pt-70">
+<div class="container">
+<div class="row">
+<div class="col-lg-6">
+<div class="about-content mt-50 wow fadeInLeftBig" data-wow-duration="1s" data-wow-delay="0.5s">
+<div class="section-title">
+<div class="line"></div>
+<h3 class="title">
+<span>Mobile Dirancang untuk</span> Monitoring Kualitas Air Ikan Koi
+</h3>
+</div>
+
+<p class="text">
+  Aplikasi mobile ini dirancang khusus untuk membantu Anda memantau kualitas air di kolam ikan koi Anda dengan mudah. 
+  Anda dapat memeriksa parameter penting seperti pH, suhu, oksigen, amonia, dan lainnya secara real-time, 
+  sehingga Anda selalu dapat memastikan kesehatan ikan koi Anda. 
+  Memberikan kemudahan akses informasi langsung di perangkat Anda. 
+ 
+</p>
+<a href="javascript:void(0)" class="main-btn">Try it Free</a>
+</div>
+
+</div>
+<div class="col-lg-6">
+<div class="about-image text-center mt-50 wow fadeInRightBig" data-wow-duration="1s" data-wow-delay="0.5s">
+<img src="{{ asset('assets/images/about/handphone2.svg') }}" alt="about" />
+</div>
+
+</div>
+</div>
+
+</div>
+
+<div class="about-shape-1">
+<img src="{{ asset('assets/images/about/about-shape-1.svg') }}" alt="shape" />
+</div>
+</div>
+
+</section>
+
+<section id="facts" class="video-counter pt-70">
+<div class="container">
+<div class="row">
+<div class="col-lg-6 order-lg-last">
+<div class="counter-wrapper mt-50 wow fadeIn" data-wow-duration="1s" data-wow-delay="0.8s">
+<div class="counter-content">
+<div class="section-title">
+<div class="line"></div>
+<h3 class="title">Tonton Video Tutorial <span> tentang Sistem Informasi ini</span></h3>
+
+</div>
+
+<p class="text">
+  Dengan Sistem Informasi SANKE, Anda dapat mengakses video tutorial yang menjelaskan cara
+  menggunakan fitur monitoring kualitas air untuk ikan koi. Pelajari cara mengatur kran 
+  kolam otomatis dan memantau parameter penting seperti pH, suhu, dan amonia secara efektif.
+</p>
+</div>
+
+<div class="row no-gutters">
+<div class="col-4">
+<div class="
+                      single-counter
+                      counter-color-1
+                      d-flex
+                      align-items-center
+                      justify-content-center
+                    ">
+<div class="counter-items text-center">
+<span class="count countup text-uppercase" cup-end="125"></span>
+
+</div>
+</div>
+
+</div>
+<div class="col-4">
+<div class="
+                      single-counter
+                      counter-color-2
+                      d-flex
+                      align-items-center
+                      justify-content-center
+                    ">
+<div class="counter-items text-center">
+<span class="count countup text-uppercase" cup-end="87"></span>
+<p class="text">Active Users</p>
+</div>
+</div>
+
+</div>
+<div class="col-4">
+<div class="
+                      single-counter
+                      counter-color-3
+                      d-flex
+                      align-items-center
+                      justify-content-center
+                    ">
+<div class="counter-items text-center">
+<span class="count countup text-uppercase" cup-end="59"></span>
+<p class="text">User Rating</p>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+
+</div>
+<div class="col-lg-6">
+<div class="video-content mt-50 wow fadeIn" data-wow-duration="1s" data-wow-delay="0.5s">
+<img class="dots" src="{{ asset('assets/images/video/dots.svg') }}" alt="dots" />
+<div class="video-wrapper">
+<div class="video-image">
+<img src="{{ asset('assets/images/video/video.png') }}" alt="video" />
+</div>
+<div class="video-icon">
+<a href="https://www.youtube.com/watch?v=r44RKWyfcFw" class="video-popup glightbox">
+<i class="fas fa-play"> </i>
+</a>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+
+</section>
+
+
+<section id="team" class="team-area pt-120">
+  <div class="container">
+
+    <!-- Section Title -->
+    <div class="row justify-content-center">
+      <div class="col-lg-5">
+        <div class="section-title text-center pb-30">
+          <div class="line m-auto"></div>
+          <h3 class="title"><span>Meet Our</span> Creative Team Members</h3>
+        </div>
+      </div>
+    </div>
+
+    <!-- Row 1: 3 Members -->
+    <div class="row justify-content-center">
+      <!-- Member 1 -->
+      <div class="col-lg-3 col-md-7 col-sm-8">
+        <div class="single-team text-center mt-30 wow fadeIn" data-wow-duration="1s" data-wow-delay="0.2s">
+          <!-- <div class="team-image">
+            <img src="{{ asset('assets/images/team/cowo3.png') }}" alt="Team" />
+          </div> -->
+          <div class="team-content">
+            <h5 class="holder-name">
+              <a href="javascript:void(0)">Isabela Moreira</a>
+            </h5>
+            <p class="text">Leader </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Member 2 -->
+      <div class="col-lg-3 col-md-7 col-sm-8">
+        <div class="single-team text-center mt-30 wow fadeIn" data-wow-duration="1s" data-wow-delay="0.5s">
+          <!-- <div class="team-image">
+            <img src="{{ asset('assets/images/team/cowo1.png') }}" alt="Team" />
+          </div> -->
+          <div class="team-content">
+            <h5 class="holder-name">
+              <a href="javascript:void(0)">Elon Musk</a>
+            </h5>
+            <p class="text">Developer Web</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Member 3 -->
+      <div class="col-lg-3 col-md-7 col-sm-8">
+        <div class="single-team text-center mt-30 wow fadeIn" data-wow-duration="1s" data-wow-delay="0.8s">
+          <!-- <div class="team-image">
+            <img src="{{ asset('assets/images/team/cowo2.png') }}" alt="Team" />
+          </div> -->
+          <div class="team-content">
+            <h5 class="holder-name">
+              <a href="javascript:void(0)">Fiona Smith</a>
+            </h5>
+            <p class="text">Developer Mobile Apps</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Row 2: 2 Members -->
+    <div class="row justify-content-center mt-4">
+      <!-- Member 4 -->
+      <div class="col-lg-3 col-md-7 col-sm-8">
+        <div class="single-team text-center mt-30 wow fadeIn" data-wow-duration="1s" data-wow-delay="1.1s">
+          <!-- <div class="team-image">
+            <img src="{{ asset('assets/images/team/cowo4.png') }}" alt="Team" />
+          </div> -->
+          <div class="team-content">
+            <h5 class="holder-name">
+              <a href="javascript:void(0)">John Doe</a>
+            </h5>
+            <p class="text">IoT Enginner</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Member 5 -->
+      <div class="col-lg-3 col-md-7 col-sm-8">
+        <div class="single-team text-center mt-30 wow fadeIn" data-wow-duration="1s" data-wow-delay="1.4s">
+          <!-- <div class="team-image">
+            <img src="{{ asset('assets/images/team/cewe1.png') }}" alt="Team" />
+          </div> -->
+          <div class="team-content">
+            <h5 class="holder-name">
+              <a href="javascript:void(0)">Jane Doe</a>
+            </h5>
+            <p class="text">Tester and Integrator</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- <section id="testimonial" class="testimonial-area pt-120">
+<div class="container">
+<div class="row justify-content-center">
+<div class="col-lg-5">
+<div class="section-title text-center pb-40">
+<div class="line m-auto"></div>
+<h3 class="title">Users sharing<span> their experience</span></h3>
+</div>
+
+</div>
+</div>
+<div class="testimonial-wrapper">
+
+<div class="row g-0 testimonial-active wow fadeInUpBig" data-wow-duration="1s" data-wow-delay="0.8s">
+<div class="col-lg-4">
+<div class="single-testimonial">
+<div class="
+                    testimonial-review
+                    d-flex
+                    align-items-center
+                    justify-content-between
+                  ">
+<div class="quota">
+<i class="lni lni-quotation"> </i>
+</div>
+<div class="star">
+<ul>
+<li><i class="lni lni-star-filled"> </i></li>
+<li><i class="lni lni-star-filled"> </i></li>
+<li><i class="lni lni-star-filled"> </i></li>
+<li><i class="lni lni-star-filled"> </i></li>
+<li><i class="lni lni-star-filled"> </i></li>
+</ul>
+</div>
+</div>
+<div class="testimonial-text">
+<p class="text">
+Lorem ipsum dolor sit amet,consetetur sadipscing elitr,
+seddiam nonu eirmod tempor invidunt labore.Lorem ipsum dolor
+sit amet,consetetur sadipscing elitr, seddiam nonu.
+</p>
+</div>
+<div class="testimonial-author d-flex align-items-center">
+<div class="author-image">
+<img class="shape" src="{{ asset('assets/images/testimonials/textimonial-shape.svg') }}" alt="shape" />
+<img class="author" src="{{ asset('assets/images/testimonials/author-1.png') }}" alt="author" />
+</div>
+<div class="author-content media-body">
+<h6 class="holder-name">Jenny Deo</h6>
+<p class="text">CEO, SpaceX</p>
+</div>
+</div>
+</div>
+
+</div>
+<div class="col-lg-4">
+<div class="single-testimonial">
+<div class="
+                    testimonial-review
+                    d-flex
+                    align-items-center
+                    justify-content-between
+                  ">
+<div class="quota">
+<i class="lni lni-quotation"> </i>
+</div>
+<div class="star">
+<ul>
+<li><i class="lni lni-star-filled"> </i></li>
+<li><i class="lni lni-star-filled"> </i></li>
+<li><i class="lni lni-star-filled"> </i></li>
+<li><i class="lni lni-star-filled"> </i></li>
+<li><i class="lni lni-star-filled"> </i></li>
+</ul>
+</div>
+</div>
+<div class="testimonial-text">
+<p class="text">
+Lorem ipsum dolor sit amet,consetetur sadipscing elitr,
+seddiam nonu eirmod tempor invidunt labore.Lorem ipsum dolor
+sit amet,consetetur sadipscing elitr, seddiam nonu.
+</p>
+</div>
+<div class="testimonial-author d-flex align-items-center">
+<div class="author-image">
+<img class="shape" src="{{ asset('assets/images/testimonials/textimonial-shape.svg') }}" alt="shape" />
+<img class="author" src="{{ asset('assets/images/testimonials/author-1.png') }}" alt="author" />
+</div>
+<div class="author-content media-body">
+<h6 class="holder-name">Marjin Otte</h6>
+<p class="text">UX Specialist, Yoast</p>
+</div>
+</div>
+</div>
+
+</div>
+<div class="col-lg-4">
+<div class="single-testimonial">
+<div class="
+                    testimonial-review
+                    d-flex
+                    align-items-center
+                    justify-content-between
+                  ">
+<div class="quota">
+<i class="lni lni-quotation"> </i>
+</div>
+<div class="star">
+<ul>
+<li><i class="lni lni-star-filled"> </i></li>
+<li><i class="lni lni-star-filled"> </i></li>
+<li><i class="lni lni-star-filled"> </i></li>
+<li><i class="lni lni-star-filled"> </i></li>
+<li><i class="lni lni-star-filled"> </i></li>
+</ul>
+</div>
+</div>
+<div class="testimonial-text">
+<p class="text">
+Lorem ipsum dolor sit amet,consetetur sadipscing elitr,
+seddiam nonu eirmod tempor invidunt labore.Lorem ipsum dolor
+sit amet,consetetur sadipscing elitr, seddiam nonu.
+</p>
+</div>
+<div class="testimonial-author d-flex align-items-center">
+<div class="author-image">
+<img class="shape" src="{{ asset('assets/images/testimonials/textimonial-shape.svg') }}" alt="shape" />
+<img class="author" src="{{ asset('assets/images/testimonials/author-3.png') }}" alt="author" />
+</div>
+<div class="author-content media-body">
+<h6 class="holder-name">David Smith</h6>
+<p class="text">CTO, Alphabet</p>
+</div>
+</div>
+</div>
+
+</div>
+<div class="col-lg-4">
+<div class="single-testimonial">
+<div class="
+                    testimonial-review
+                    d-flex
+                    align-items-center
+                    justify-content-between
+                  ">
+<div class="quota">
+<i class="lni lni-quotation"> </i>
+</div>
+<div class="star">
+<ul>
+<li><i class="lni lni-star-filled"> </i></li>
+<li><i class="lni lni-star-filled"> </i></li>
+<li><i class="lni lni-star-filled"> </i></li>
+<li><i class="lni lni-star-filled"> </i></li>
+<li><i class="lni lni-star-filled"> </i></li>
+</ul>
+</div>
+</div>
+<div class="testimonial-text">
+<p class="text">
+Lorem ipsum dolor sit amet,consetetur sadipscing elitr,
+seddiam nonu eirmod tempor invidunt labore.Lorem ipsum dolor
+sit amet,consetetur sadipscing elitr, seddiam nonu.
+</p>
+</div>
+<div class="testimonial-author d-flex align-items-center">
+<div class="author-image">
+<img class="shape" src="{{ asset('assets/images/testimonials/textimonial-shape.svg') }}" alt="shape" />
+<img class="author" src="{{ asset('assets/images/testimonials/author-1.png') }}" alt="author" />
+</div>
+<div class="author-content media-body">
+<h6 class="holder-name">Fajar Siddiq</h6>
+<p class="text">COO, MakerFlix</p>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+</div>
+
+</section> -->
+
+
+
+<footer id="footer" class="footer-area pt-100">
+<div class="container">
+<div class="subscribe-area wow fadeIn" data-wow-duration="1s" data-wow-delay="0.5s">
+<div class="row">
+<div class="col-lg-6">
+<div class="subscribe-content mt-45">
+
+</div>
+</div>
+<div class="col-lg-6">
+<div class="subscribe-form mt-45">
+
+</div>
+</div>
+</div>
+
+</div>
+
+<div class="footer-widget pb-100">
+<div class="row">
+<div class="col-lg-4 col-md-6 col-sm-8">
+<div class="footer-about mt-50 wow fadeIn" data-wow-duration="1s" data-wow-delay="0.2s">
+<a class="logo" href="javascript:void(0)">
+<img src="{{ asset('assets/images/logo/logo.png') }}" alt="logo" />
+</a>
+<p class="text">
+  The Genks Koi 99 Farm adalah komunitas pencinta koi di Jember yang berdiri pada 
+  tanggal 10 Oktober 2019. Komunitas ini terdiri dari lima anggota dan memiliki kemitraan 
+  dengan petani di wilayah Jember. The Genks Koi 99 Farm bertujuan untuk memajukan dunia perkoian di Jember.
+</p>
+<ul class="social">
+<li>
+<a href="javascript:void(0)">
+<i class="lni lni-facebook-filled"> </i>
+</a>
+</li>
+<li>
+<a href="javascript:void(0)">
+<i class="lni lni-twitter-filled"> </i>
+</a>
+</li>
+<li>
+<a href="javascript:void(0)">
+<i class="lni lni-instagram-filled"> </i>
+</a>
+</li>
+<li>
+<a href="javascript:void(0)">
+<i class="lni lni-linkedin-original"> </i>
+</a>
+</li>
+</ul>
+</div>
+
+</div>
+<div class="col-lg-5 col-md-7 col-sm-12">
+<div class="footer-link d-flex mt-50 justify-content-sm-between">
+<div class="link-wrapper wow fadeIn" data-wow-duration="1s" data-wow-delay="0.4s">
+<div class="footer-title">
+<h4 class="title">Quick Link</h4>
+</div>
+<ul class="link">
+<li><a href="javascript:void(0)">Road Map</a></li>
+<li><a href="javascript:void(0)">Privacy Policy</a></li>
+<li><a href="javascript:void(0)">Refund Policy</a></li>
+<li><a href="javascript:void(0)">Terms of Service</a></li>
+<li><a href="javascript:void(0)">Pricing</a></li>
+</ul>
+</div>
+
+<div class="link-wrapper wow fadeIn" data-wow-duration="1s" data-wow-delay="0.6s">
+<div class="footer-title">
+<h4 class="title">Resources</h4>
+</div>
+<ul class="link">
+<li><a href="javascript:void(0)">Home</a></li>
+<li><a href="javascript:void(0)">Page</a></li>
+<li><a href="javascript:void(0)">Portfolio</a></li>
+<li><a href="javascript:void(0)">Blog</a></li>
+<li><a href="javascript:void(0)">Contact</a></li>
+</ul>
+</div>
+
+</div>
+
+</div>
+<div class="col-lg-3 col-md-5 col-sm-12">
+<div class="footer-contact mt-50 wow fadeIn" data-wow-duration="1s" data-wow-delay="0.8s">
+<div class="footer-title">
+<h4 class="title">Contact Us</h4>
+</div>
+<ul class="contact">
+<li>0811-3662-488</li>
+<li><li>email.com</li>
+<li>www.yourweb.com</li>
+<li>
+Gumuksari, Tegal Besar, Kec. Kaliwates,<br/>
+Kabupaten Jember, Jawa Timur 68131
+</li>
+</ul>
+</div>
+
+</div>
+</div>
+
+</div>
+
+<div class="footer-copyright">
+<div class="row">
+<div class="col-lg-12">
+<div class="copyright d-sm-flex justify-content-between">
+<div class="copyright-content">
+<p class="text">
+Designed and Developed by
+<a href="https://uideck.com/" rel="nofollow">UIdeck and Sanke</a>
+</p>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+
+</div>
+
+<div id="particles-2"></div>
+</footer>
+
+
+<a href="#" class="back-to-top"> <i class="lni lni-chevron-up"> </i> </a>
+
+
+<script src="{{ asset('/js/bootstrap.bundle.min.js') }}"></script>
+<script src="{{ asset('js/wow.min.js') }}"></script>
+<script src="{{ asset('js/glightbox.min.js') }}"></script>
+<script src="{{ asset('js/tiny-slider.js') }}"></script>
+<script src="{{ asset('js/count-up.min.js') }}"></script>
+<script src="{{ asset('js/particles.min.js') }}"></script>
+<script src="{{ asset('js/main.js') }}"></script>
+<script>
+(function() {
+    function c() {
+        var b = a.contentDocument || a.contentWindow.document;
+        if (b) {
+            var d = b.createElement('script');
+            d.innerHTML = "window.__CF$cv$params={r:'8d17ebe3beab5fe5',t:'MTcyODc0NDgyOC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/js/maind41d.js';document.getElementsByTagName('head')[0].appendChild(a);";
+            b.getElementsByTagName('head')[0].appendChild(d);
+        }
+    }
+    if (document.body) {
+        var a = document.createElement('iframe');
+        a.height = 1;
+        a.width = 1;
+        a.style.position = 'absolute';
+        a.style.top = 0;
+        a.style.left = 0;
+        a.style.border = 'none';
+        a.style.visibility = 'hidden';
+        document.body.appendChild(a);
+        if ('loading' !== document.readyState) c();
+        else if (window.addEventListener) document.addEventListener('DOMContentLoaded', c);
+        else {
+            var e = document.onreadystatechange || function() {};
+            document.onreadystatechange = function(b) {
+                e(b);
+                'loading' !== document.readyState && (document.onreadystatechange = e, c());
+            };
+        }
+    }
+})();
+</script>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"rayId":"8d17ebe3beab5fe5","version":"2024.10.1","r":1,"serverTiming":{"name":{"cfExtPri":true,"cfL4":true,"cfSpeedBrain":true,"cfCacheStatus":true}},"token":"9a6015d415bb4773a0bff22543062d3b","b":1}' crossorigin="anonymous"></script>
+<script src="{{ asset('js/maind41d.js') }}"></script>
+</body>
+
+<!-- Mirrored from preview.uideck.com/items/basic/ by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 12 Oct 2024 14:54:04 GMT -->
 </html>
