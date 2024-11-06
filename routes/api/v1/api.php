@@ -30,6 +30,7 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
+// API MOBILE
 Route::group(['namespace' => 'Api\V1'], function () {
 
     // get products
