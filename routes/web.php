@@ -92,7 +92,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     // });
 
     Route::controller(FoodTypeController::class)->group(function () {
-        Route::get('/admin/all-food-type', 'Index')->name('allfoodtype');
+        Route::get('/admin/all-fo od-type', 'Index')->name('allfoodtype');
         // Route::get('/admin/food-type/search', 'SearchFoodType')->name('searchfoodtype');
         Route::get('/admin/add-food-type', 'AddFoodType')->name('addfoodtype');
         Route::post('/admin/store-food-type', 'StoreFoodType')->name('storefoodtype');

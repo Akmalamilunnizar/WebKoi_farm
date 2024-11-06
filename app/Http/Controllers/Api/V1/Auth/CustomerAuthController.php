@@ -1,5 +1,5 @@
 <?php
-
+//mobile
 namespace App\Http\Controllers\Api\V1\Auth;
 
 use App\CentralLogics\Helpers;
@@ -19,7 +19,7 @@ class CustomerAuthController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'email' => 'required',
-            'password' => 'required|min:8'
+            'password' => 'required|min:6'
         ]);
 
         if ($validator->fails()) {
@@ -32,7 +32,7 @@ class CustomerAuthController extends Controller
 
         if (auth()->attempt($data)) {
             //auth()->user() is coming from laravel auth:api middleware
-            $token = auth()->user()->createToken('RestaurantCustomerAuth')->accessToken;
+            $token = auth()->user()->createToken('KoiCustomerAuth')->accessToken;
             if (!auth()->user()->status) {
                 $errors = [];
                 array_push($errors, ['code' => 'auth-003', 'message' => trans('messages.your_account_is_blocked')]);
@@ -58,9 +58,7 @@ class CustomerAuthController extends Controller
             //'l_name' => 'required',
             'email' => 'required|unique:users',
             'phone' => 'required|unique:users|min:11',
-            'password' => 'required',
-            'min:8',
-            'regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%]).*$/',
+            'password' => 'required|min:6|regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%]).*$/',
         ],
         [
             'f_name.required' => 'Nama tidak boleh kurang dari 3 huruf.',
