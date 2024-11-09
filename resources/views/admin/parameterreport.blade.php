@@ -29,18 +29,6 @@ Laporan - Parameter Ikan Koi
         </ul>
     </div>
     <div class="d-flex mb-3">
-        <div class="btn-group me-2">
-            <button type="button" class="btn btn-success dropdown-toggle" data-bs-toggle="dropdown"
-                aria-expanded="false">
-                Minggu
-            </button>
-            <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="javascript:void(0);">Minggu 1</a></li>
-                <li><a class="dropdown-item" href="javascript:void(0);">Minggu 2</a></li>
-                <li><a class="dropdown-item" href="javascript:void(0);">Minggu 3</a></li>
-                <li><a class="dropdown-item" href="javascript:void(0);">Minggu 4</a></li>
-            </ul>
-        </div>
         <div class="btn-group">
             <button type="button" class="btn btn-success dropdown-toggle" data-bs-toggle="dropdown"
                 aria-expanded="false">
@@ -79,7 +67,7 @@ Laporan - Parameter Ikan Koi
                         <th>No</th>
                         <th>Parameter</th>
                         <th>Rentang Normal</th>
-                        <th>Status Mingguan</th>
+                        <th>Status</th>
                         <th>Keterangan</th>
                     </tr>
                 </thead>
@@ -93,70 +81,17 @@ Laporan - Parameter Ikan Koi
                     </tr>
                     <tr>
                         <td>2</td>
-                        <td>Suhu</td>
-                        <td>20°C - 25°C</td>
+                        <td>TDS</td>
+                        <td>100 - 300 ppm</td>
                         <td>Optimal</td>
-                        <td>Suhu sesuai dengan kebutuhan ikan koi</td>
+                        <td>Stabil jika dalam rentang ini</td>
                     </tr>
                     <tr>
                         <td>3</td>
-                        <td>Oksigen Terlarut</td>
-                        <td>5 - 7 ppm</td>
+                        <td>DS</td>
+                        <td>100 - 300 ppm</td>
                         <td>Baik</td>
-                        <td>Kadar oksigen mencukupi untuk ikan</td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>Amonia (NH3)</td>
-                        <td>
-                            < 0.02 ppm</td>
-                        <td>Rendah</td>
-                        <td>Level amonia aman</td>
-                    </tr>
-                    <tr>
-                        <td>5</td>
-                        <td>Karbon Dioksida (CO2)</td>
-                        <td>
-                            < 10 ppm</td>
-                        <td>Stabil</td>
-                        <td>Tidak ada peningkatan signifikan</td>
-                    </tr>
-                    <tr>
-                        <td>6</td>
-                        <td>Nitrit (NO2)</td>
-                        <td>
-                            < 0.5 ppm</td>
-                        <td>Rendah</td>
-                        <td>Kadar nitrit aman untuk ikan</td>
-                    </tr>
-                    <tr>
-                        <td>7</td>
-                        <td>Kesadahan (GH)</td>
-                        <td>50 - 150 ppm</td>
-                        <td>Normal</td>
-                        <td>Kesadahan air dalam batas normal</td>
-                    </tr>
-                    <tr>
-                        <td>8</td>
-                        <td>Alkalinitas (KH)</td>
-                        <td>70 - 100 ppm</td>
-                        <td>Stabil</td>
-                        <td>Alkalinitas mendukung stabilitas pH</td>
-                    </tr>
-                    <tr>
-                        <td>9</td>
-                        <td>Nitrat (NO3)</td>
-                        <td>
-                            < 50 ppm</td>
-                        <td>Aman</td>
-                        <td>Nitrat dalam kadar rendah</td>
-                    </tr>
-                    <tr>
-                        <td>10</td>
-                        <td>Salinitas</td>
-                        <td>0 - 0.3%</td>
-                        <td>Optimal</td>
-                        <td>Salinitas cocok untuk ikan air tawar</td>
+                        <td>Stabil jika dalam rentang ini</td>
                     </tr>
                 </tbody>
             </table>

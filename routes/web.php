@@ -8,12 +8,16 @@ use App\Http\Controllers\Api\V1\FoodTypeController;
 // use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Api\V1\OrderController;
 use App\Http\Controllers\Api\V1\PondController;
+use App\Http\Controllers\Api\V1\ParameterReportController;
+use App\Http\Controllers\Api\V1\DiseaseReportController;
 use App\Http\Controllers\Api\V1\ProductController;
 use App\Http\Controllers\Api\V1\SubCategoryController;
 use App\Http\Controllers\Api\V1\UserController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Models\Pond;
+use App\Models\ParameterReport;
+use App\Models\DiseaseReport;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\V1\DiagnosaController;
 
@@ -80,6 +84,15 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
         Route::post('/admin/update-pond', 'UpdatePond')->name('updatepond');
         Route::get('/admin/delete-pond/{id}', 'DeletePond')->name('deletepond');
     });
+    Route::controller(ParameterReportController::class)->group(function () {
+        Route::get('/admin/parameter-report', 'Index')->name('parameterreport');
+        
+    });
+
+    Route::controller(DiseaseReportController::class)->group(function () {
+        Route::get('/admin/disease-report', 'Index')->name('diseasereport');
+        
+    });
 
     // Route::controller(FoodsController::class)->group(function () {
     //     Route::get('/admin/all-food', 'Index')->name('allfoods');
@@ -94,7 +107,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     // });
 
     Route::controller(FoodTypeController::class)->group(function () {
-        Route::get('/admin/all-food-type', 'Index')->name('allfoodtype');
+        Route::get('/admin/all-fo od-type', 'Index')->name('allfoodtype');
         // Route::get('/admin/food-type/search', 'SearchFoodType')->name('searchfoodtype');
         Route::get('/admin/add-food-type', 'AddFoodType')->name('addfoodtype');
         Route::post('/admin/store-food-type', 'StoreFoodType')->name('storefoodtype');
@@ -181,8 +194,6 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     //     Route::post('/admin/update-product', 'UpdateProduct')->name('updateproduct');
     //     Route::get('/admin/delete-product/{id}', 'DeleteProduct')->name('deleteproduct');
     // });
-
-
 
 });
 

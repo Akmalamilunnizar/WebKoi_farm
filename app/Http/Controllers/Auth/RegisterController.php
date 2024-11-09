@@ -7,6 +7,9 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\Request;
+use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\Session;
 
 class RegisterController extends Controller
 {
@@ -46,27 +49,46 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
-    protected function validator(array $data)
+    public function register(Request $request)
     {
-        return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+        // Buat validasi
+        $validatedData = $request->validate([
+            'f_name' => 'required|string|max:200',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|string|min:4|confirmed', // pw harus cocok dengan konfirmasi
+            'password_confirmation' => 'required',
+            'phone' => 'required|numeric',
         ]);
-    }
+        
+        try {
+            // Buat user baru
+            $user = User::create([
+                'f_name' => $request->f_name,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+                'phone' => $request->phone
+            ]);
 
-    /**
-     * Create a new user instance after a valid registration.
-     *
-     * @param  array  $data
-     * @return \App\Models\User
-     */
-    protected function create(array $data)
-    {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-        ]);
+            // Simpan user
+            $user->save();
+
+            // Set flash message untuk pendaftaran berhasil
+            Session::flash('success', 'Pendaftaran berhasil! Silakan masuk.');
+
+            // Redirect ke halaman login
+            return redirect('login');
+        } catch (QueryException $e) {
+            // Set flash message jika terjadi error pada database
+            Session::flash('error', 'Pendaftaran gagal: ' . $e->getMessage());
+
+            // Redirect kembali ke halaman register
+            return redirect('register');
+        } catch (\Exception $e) {
+            // Set flash message untuk error lainnya
+            Session::flash('error', 'Pendaftaran gagal, silakan coba lagi. Error: ' . $e->getMessage());
+
+            // Redirect kembali ke halaman register
+            return redirect('register');
+        }
     }
 }

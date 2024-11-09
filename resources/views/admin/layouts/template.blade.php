@@ -165,16 +165,33 @@
                                             </a>
                                         </li>
 
-                                        <! -- Header -->
-                                            <li class="menu-header small text-uppercase">
-                                                <span class="menu-header-text">Pesanan</span>
-                                            </li>
-                                            <!-- Apps -->
-                                            <li
+                                        <!-- Header -->
+
+                                        <li class="menu-header small text-uppercase">
+                                            <span class="menu-header-text">Laporan</span>
+                                        </li>
+
+                                        <!-- Apps -->
+                                        <li
+                                            class="menu-item {{ request()->is('admin/parameter-report*') ? 'active' : '' }}">
+                                            <a href="{{ route('parameterreport') }}" class="menu-link">
+                                                <i class="menu-icon tf-icons bx bx-collection"></i>
+                                                <div data-i18n="Basic">Parameter</div>
+                                            </a>
+                                        </li>
+
+                                        <li
+                                            class="menu-item {{ request()->is('admin/disease-report*') ? 'active' : '' }}">
+                                            <a href="{{ route('diseasereport') }}" class="menu-link">
+                                                <i class="menu-icon tf-icons bx bx-collection"></i>
+                                                <div data-i18n="Basic">Kesehatan</div>
+                                            </a>
+                                        </li>
+                                        <!-- <li
                                                 class="menu-item {{ request()->is('admin/pending-order*') ? 'active' : '' }}">
                                                 <a href="{{ route('pendingorder') }}" class="menu-link">
                                                     <i class="menu-icon tf-icons bx bx-collection"></i>
-                                                    <div data-i18n="Basic">Laporan Parameter</div>
+                                                    <div data-i18n="Basic">Parameter</div>
                                                 </a>
                                             </li>
                                             <li
@@ -183,7 +200,7 @@
                                                     <i class="menu-icon tf-icons bx bx-collection"></i>
                                                     <div data-i18n="Basic">Profil</div>
                                                 </a>
-                                            </li>
+                                            </li> -->
                         </ul>
             </aside>
             <!-- / Menu -->

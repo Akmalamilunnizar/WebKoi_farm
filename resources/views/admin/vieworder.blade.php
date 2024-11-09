@@ -31,7 +31,6 @@
                             </h4>
                         </div>
                     @endif
-
                     <div class="card-body">
                         @if ($errors->any())
                             <div class="alert alert-danger">
