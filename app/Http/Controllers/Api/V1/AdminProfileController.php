@@ -1,0 +1,65 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use App\Models\User;
+
+class AdminProfileController extends Controller
+{
+    // Menampilkan daftar profil pengguna
+    public function index()
+    {
+        $profiles = User::all();
+        return view('admin.profiles.index', compact('profiles'));
+    }
+
+    // Mencari profil berdasarkan nama atau email
+    public function searchProfile(Request $request)
+    {
+        $query = $request->input('query');
+        $profiles = User::where('name', 'LIKE', "%{$query}%")
+                        ->orWhere('email', 'LIKE', "%{$query}%")
+                        ->get();
+
+        return view('admin.profiles.index', compact('profiles'));
+    }
+
+    // Menampilkan halaman edit profil
+    public function edit($id)
+    {
+        $profile = User::findOrFail($id);
+        return view('admin.profiles.edit', compact('profile'));
+    }
+
+    // Memperbarui data profil
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255|unique:users,email,' . $id,
+            'password' => 'nullable|min:8|confirmed',
+        ]);
+
+        $profile = User::findOrFail($id);
+        $profile->name = $request->input('name');
+        $profile->email = $request->input('email');
+
+        if ($request->filled('password')) {
+            $profile->password = bcrypt($request->input('password'));
+        }
+
+        $profile->save();
+
+        return redirect()->route('admin.profiles.index')->with('success', 'Profil berhasil diperbarui');
+    }
+
+    // Menghapus profil
+    public function destroy($id)
+    {
+        $profile = User::findOrFail($id);
+        $profile->delete();
+
+        return redirect()->route('admin.profiles.index')->with('success', 'Profil berhasil dihapus');
+    }
+}

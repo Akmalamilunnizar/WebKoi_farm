@@ -73,8 +73,8 @@ class DashboardController extends Controller
         'todayOrder',
         'todayMonthOrder',
         'todayYearOrder'));
+        return view("admin.adminprofile", compact('users'));
     }
-
 
 
     public function AdminLogout(Request $request)

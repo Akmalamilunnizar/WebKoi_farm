@@ -55,7 +55,6 @@ Route::get('/', function () {
 Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::controller(DashboardController::class)->group(function () {
         Route::get('admin/dashboard', 'Index')->name('admindashboard');
-        // Route::get('resources/admin/logout', 'AdminLogout')->name('adminlogout');
     });
 
     //     Route::controller(ProfileController::class)->group(function () {
@@ -82,14 +81,13 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
         Route::post('/admin/update-pond', 'UpdatePond')->name('updatepond');
         Route::get('/admin/delete-pond/{id}', 'DeletePond')->name('deletepond');
     });
+
     Route::controller(ParameterReportController::class)->group(function () {
         Route::get('/admin/parameter-report', 'Index')->name('parameterreport');
-        
     });
 
     Route::controller(DiseaseReportController::class)->group(function () {
         Route::get('/admin/disease-report', 'Index')->name('diseasereport');
-        
     });
 
     // Route::controller(FoodsController::class)->group(function () {
@@ -122,6 +120,15 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
         Route::get('/admin/edit-users/{id}', 'EditUsers')->name('editusers');
         Route::post('/admin/update-users', 'UpdateUsers')->name('update-users');
         Route::get('/admin/delete-users/{id}', 'DeleteUsers')->name('deleteusers');
+    });
+
+    Route::controller(OrderController::class)->group(function () {
+        Route::get('/admin/pending-order', 'Index')->name('pendingorder');
+        Route::get('/admin/pending-order/search', 'SearchPending')->name('searchorder');
+        Route::get('/admin/history-order', 'IndexHistory')->name('historyorder');
+        Route::get('/admin/view-order/{id}', 'ViewOrder')->name('vieworder');
+        Route::get('/admin/update-order/{id}', 'UpdateOrder')->name('updateorder');
+        Route::get('/admin/delete-order/{id}', 'DeleteOrder')->name('deleteorder');
     });
 
     Route::controller(OrderController::class)->group(function () {

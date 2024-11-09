@@ -167,20 +167,21 @@
                                                 <div data-i18n="Basic">Kesehatan</div>
                                             </a>
                                         </li>
-                                        <!-- <li
-                                                class="menu-item {{ request()->is('admin/pending-order*') ? 'active' : '' }}">
-                                                <a href="{{ route('pendingorder') }}" class="menu-link">
-                                                    <i class="menu-icon tf-icons bx bx-collection"></i>
-                                                    <div data-i18n="Basic">Parameter</div>
-                                                </a>
-                                            </li>
-                                            <li
-                                                class="menu-item {{ request()->is('admin/history-order*') ? 'active' : '' }}">
-                                                <a href="{{ route('historyorder') }}" class="menu-link">
-                                                    <i class="menu-icon tf-icons bx bx-collection"></i>
-                                                    <div data-i18n="Basic">Profil</div>
-                                                </a>
-                                            </li> -->
+
+                                        <!-- Header -->
+
+                                        <li class="menu-header small text-uppercase">
+                                            <span class="menu-header-text">Profil</span>
+                                        </li>
+
+                                        <!-- Apps -->
+                                        <li
+                                            class="menu-item {{ request()->is('admin/profile*') ? 'active' : '' }}">
+                                            <a href="{{ route('profile') }}" class="menu-link">
+                                                <i class="menu-icon tf-icons bx bx-collection"></i>
+                                                <div data-i18n="Basic">Profil</div>
+                                            </a>
+                                        </li>
                         </ul>
             </aside>
             <!-- / Menu -->
