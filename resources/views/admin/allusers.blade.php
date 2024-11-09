@@ -18,7 +18,7 @@ Semua Pengguna - Restorant
     <h4 class="py-3 mb-4"><span class="text-muted fw-light">Halaman/</span> Semua Pengguna</h4>
 
     <div class="card">
-        <h5 class="card-header">Pengguna Yang Tersedia</h5>
+        <h5 class="card-header">Pengguna Yang Tersedia </h5>
         @if(session()->has('message'))
             <div class="alert alert-success">
                 {{ session()->get('message') }}
