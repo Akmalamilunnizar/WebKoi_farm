@@ -110,6 +110,24 @@
                                 </li>
 
                                 <! -- Header -->
+                                <li class="menu-header small text-uppercase">
+                                        <span class="menu-header-text">Diagnosa Penyakit</span>
+                                    </li>
+                                <li class="menu-item {{ request()->is('admin/add-diagnosa*') ? 'active' : '' }}">
+                                    <a href="{{ route('add-diagnosa') }}" class="menu-link">
+                                        <i class="menu-icon tf-icons bx bx-collection"></i>
+                                        <div data-i18n="Basic">Tambah Diagnosa Penyakit</div>
+                                    </a>
+                                </li>
+                                <li class="menu-item {{ request()->is('admin/all-diagnosa*') ? 'active' : '' }}">
+                                    <a href="{{ route('allDiagnosaPenyakit') }}" class="menu-link">
+                                        <i class="menu-icon tf-icons bx bx-collection"></i>
+                                        <div data-i18n="Basic">Daftar Diagnosa Penyakit</div>
+                                    </a>
+                                </li>
+                               
+
+                                <! -- Header -->
                                     <li class="menu-header small text-uppercase">
                                         <span class="menu-header-text">Pengguna</span>
                                     </li>
@@ -126,6 +144,8 @@
                                             <div data-i18n="Basic">Semua Pengguna</div>
                                         </a>
                                     </li>
+
+
 
                                     <! -- Header -->
                                         <li class="menu-header small text-uppercase">

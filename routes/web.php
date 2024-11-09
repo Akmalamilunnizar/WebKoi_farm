@@ -19,6 +19,8 @@ use App\Models\Pond;
 use App\Models\ParameterReport;
 use App\Models\DiseaseReport;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\V1\DiagnosaController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -121,6 +123,17 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
         Route::post('/admin/update-users', 'UpdateUsers')->name('update-users');
         Route::get('/admin/delete-users/{id}', 'DeleteUsers')->name('deleteusers');
     });
+
+    Route::controller(DiagnosaController::class)->group(function () {
+        Route::get('/admin/all-diagnosa', 'Index')->name('allDiagnosaPenyakit');
+        Route::get('/admin/search-diagnosa', 'SearchDiagnosa')->name('searchdiagnosa');
+        Route::get('/admin/add-diagnosa', 'AddDiagnosa')->name('add-diagnosa');
+        Route::post('/admin/store-diagnosa', 'StoreDiagnosa')->name('storediagnosa');
+        Route::get('/admin/edit-diagnosa/{id}', 'editDiagnosa')->name('editdiagnosa');
+        Route::post('/admin/update-diagnosa/{id}', 'updateDiagnosa')->name('update-diagnosa');
+        Route::get('/admin/delete-diagnosa/{id}', 'deleteDiagnosa')->name('deletediagnosa');
+    });
+
 
     Route::controller(OrderController::class)->group(function () {
         Route::get('/admin/pending-order', 'Index')->name('pendingorder');
