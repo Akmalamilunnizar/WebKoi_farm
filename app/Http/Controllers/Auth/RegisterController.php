@@ -14,12 +14,12 @@ use Illuminate\Support\Facades\Session;
 class RegisterController extends Controller
 {
     /*
-    |--------------------------------------------------------------------------
+    |------------------------------------------------------------x--------------
     | Register Controller
     |--------------------------------------------------------------------------
     |
     | This controller handles the registration of new users as well as their
-    | validation and creation. By default this controller uses a trait to
+    | validation and creation. By default this controller uses a trait 
     | provide this functionality without requiring any additional code.
     |
     */

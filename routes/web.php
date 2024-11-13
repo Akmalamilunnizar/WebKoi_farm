@@ -21,18 +21,8 @@ use App\Models\DiseaseReport;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\V1\DiagnosaController;
 use App\Http\Controllers\Api\V1\AdminProfileController;
+use App\Http\Controllers\Api\V1\DaftarKoiController;
 
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
 
 Route::get('/', function () {
     return view('welcome');
@@ -60,6 +50,8 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
         Route::get('admin/dashboard', 'Index')->name('admindashboard');
     });
 
+
+
     //     Route::controller(ProfileController::class)->group(function () {
     //         Route::get('logout', function ()
     // {
@@ -71,6 +63,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     //         // Route::post('/admin/logout', 'AdminLogout')->name('adminlogout');
     //     });
     // Route::get('resources/admin/logout', 'App\Http\Controllers\Auth\AuthenticatedSessionController@logout');
+
 
     Route::controller(PondController::class)->group(function () {
         Route::get('/admin/all-pond', 'Index')->name('allponds');
@@ -92,6 +85,14 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::controller(DiseaseReportController::class)->group(function () {
         Route::get('/admin/disease-report', 'Index')->name('diseasereport');
     });
+
+    Route::controller(DaftarKoiController::class)->group(function () {
+        Route::get('/admin/daftar-koi', 'index')->name('daftarkoi');
+        Route::get('/admin/daftar-koi/add-daftar-koi', 'addDaftarKoi')->name('adddaftarkoi');
+        Route::post('/admin/daftar-koi/add-daftar-koi', 'addDaftarKoi')->name('adddaftarkoi');
+    });
+    
+    
 
     // Route::controller(FoodsController::class)->group(function () {
     //     Route::get('/admin/all-food', 'Index')->name('allfoods');
