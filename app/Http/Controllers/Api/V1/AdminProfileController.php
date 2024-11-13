@@ -1,9 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api\V1;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+
 
 class AdminProfileController extends Controller
 {
@@ -11,18 +13,22 @@ class AdminProfileController extends Controller
     public function index()
     {
         $profiles = User::all();
-        return view('admin.profiles.index', compact('profiles'));
+        return view('admin.adminprofile', compact('profiles'));
     }
 
     // Mencari profil berdasarkan nama atau email
-    public function searchProfile(Request $request)
+    public function SearchProfile(Request $request)
     {
-        $query = $request->input('query');
-        $profiles = User::where('name', 'LIKE', "%{$query}%")
-                        ->orWhere('email', 'LIKE', "%{$query}%")
-                        ->get();
+        $search = $request->search;
 
-        return view('admin.profiles.index', compact('profiles'));
+        $users = User::where(function ($query) use ($search) {
+
+            $query->where('id', 'like', "%$search%")
+            ->orWhere('f_name','like',"%$search%");
+
+        })->get();
+
+        return view('admin.allusers', compact('users', 'search'));
     }
 
     // Menampilkan halaman edit profil

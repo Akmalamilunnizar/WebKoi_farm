@@ -196,7 +196,7 @@
 
                                         <!-- Apps -->
                                         <li
-                                            class="menu-item {{ request()->is('admin/profile*') ? 'active' : '' }}">
+                                            class="menu-item {{ request()->is('admin/admin-profile*') ? 'active' : '' }}">
                                             <a href="{{ route('profile') }}" class="menu-link">
                                                 <i class="menu-icon tf-icons bx bx-collection"></i>
                                                 <div data-i18n="Basic">Profil</div>

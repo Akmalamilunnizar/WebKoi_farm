@@ -20,6 +20,7 @@ use App\Models\ParameterReport;
 use App\Models\DiseaseReport;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\V1\DiagnosaController;
+use App\Http\Controllers\Api\V1\AdminProfileController;
 
 
 /*
@@ -144,8 +145,8 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
         Route::get('/admin/delete-order/{id}', 'DeleteOrder')->name('deleteorder');
     });
 
-    Route::controller(OrderController::class)->group(function () {
-        Route::get('/admin/pending-order', 'Index')->name('pendingorder');
+    Route::controller(AdminProfileController::class)->group(function () {
+        Route::get('/admin/admin-profile', 'Index')->name('profile');
         Route::get('/admin/pending-order/search', 'SearchPending')->name('searchorder');
         Route::get('/admin/history-order', 'IndexHistory')->name('historyorder');
         Route::get('/admin/view-order/{id}', 'ViewOrder')->name('vieworder');
