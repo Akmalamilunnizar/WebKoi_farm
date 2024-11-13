@@ -60,8 +60,8 @@
                             <img src="{{ asset('dashboard2/assets/img/favicon/logo.png') }}"
                                 style="width: 143px; height: auto; margin-top: 20px; align" />
                             <hr </span>
-                            <span class="app-brand-text demo menu-text fw-bold ms-2"
-                                style="display: flex; flex-direction: column; align-items: center;">Koi Farm</span>
+                            <!-- <span class="app-brand-text demo menu-text fw-bold ms-2"
+                                style="display: flex; flex-direction: column; align-items: center;">Koi Farm</span> -->
                     </a>
 
                     <a href="javascript:void(0);"
@@ -145,11 +145,24 @@
                                         </a>
                                     </li>
 
+                                    <!-- <! -- Header -->
+                                    <li class="menu-header small text-uppercase">
+                                        <span class="menu-header-text">Daftar Koi</span>
+                                    </li>
+                                    <li class="menu-item {{ request()->is('admin/daftar-koi*') ? 'active' : '' }}">
+                                    <a href="{{ route('daftarkoi') }}" class="menu-link">
+                                        <i class="menu-icon tf-icons bx bx-collection"></i>
+                                        <div data-i18n="Basic">Daftar Ikan Koi</div>
+                                    </a>
+                                </li>
+                                    <!-- Apps -->
+                                    
+                                    
 
 
                                     <! -- Header -->
                                         <li class="menu-header small text-uppercase">
-                                            <span class="menu-header-text">Makanan</span>
+                                            <span class="menu-header-text">Kolam</span>
                                         </li>
                                         <!-- Apps -->
                                         <li class="menu-item {{ request()->is('admin/add-pond*') ? 'active' : '' }}">

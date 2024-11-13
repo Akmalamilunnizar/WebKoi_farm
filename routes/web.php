@@ -20,18 +20,7 @@ use App\Models\ParameterReport;
 use App\Models\DiseaseReport;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\V1\DiagnosaController;
-
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
+use App\Http\Controllers\Api\V1\DaftarKoiController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -60,6 +49,8 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
         // Route::get('resources/admin/logout', 'AdminLogout')->name('adminlogout');
     });
 
+
+
     //     Route::controller(ProfileController::class)->group(function () {
     //         Route::get('logout', function ()
     // {
@@ -71,6 +62,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     //         // Route::post('/admin/logout', 'AdminLogout')->name('adminlogout');
     //     });
     // Route::get('resources/admin/logout', 'App\Http\Controllers\Auth\AuthenticatedSessionController@logout');
+
 
     Route::controller(PondController::class)->group(function () {
         Route::get('/admin/all-pond', 'Index')->name('allponds');
@@ -93,6 +85,19 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
         Route::get('/admin/disease-report', 'Index')->name('diseasereport');
         
     });
+
+    Route::controller(DaftarKoiController::class)->group(function () {
+        // GET request untuk menampilkan halaman daftar koi
+        Route::get('/admin/daftar-koi', 'index')->name('daftarkoi');
+        
+        // GET request untuk menampilkan form tambah koi
+        Route::get('/admin/daftar-koi/add-daftar-koi', 'addDaftarKoi')->name('adddaftarkoi');
+        
+        // POST request untuk memproses form tambah koi
+        Route::post('/admin/daftar-koi/add-daftar-koi', 'addDaftarKoi')->name('adddaftarkoi');
+    });
+    
+    
 
     // Route::controller(FoodsController::class)->group(function () {
     //     Route::get('/admin/all-food', 'Index')->name('allfoods');
