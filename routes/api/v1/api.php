@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 // use App\Http\Controllers\Api\V1\Auth\CustomerAuthController;
 // use App\Http\Controllers\Api\V1\ProductController;
+use App\Http\Controllers\Api\V1\DaftarKoiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -79,5 +80,8 @@ Route::group(['namespace' => 'Api\V1'], function () {
         Route::get('place-api-details', 'ConfigController@place_api_details');
         Route::get('geocode-api', 'ConfigController@geocode_api');
     });
+
+
+    Route::get('/daftarkoi', [DaftarKoiController::class, 'getAllKoi']);
 });
 
