@@ -52,23 +52,23 @@
         <div class="layout-container">
             <!-- Menu -->
 
-            <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
-                <div class="main-sidebar sidebar-style-2">
-                    <a href="dashboard" class="app-brand-link">
-                        <span class="app-brand-logo demo"
-                            style="display: flex; flex-direction: column; align-items: center;">
-                            <img src="{{ asset('dashboard2/assets/img/favicon/logo.png') }}"
-                                style="width: 143px; height: auto; margin-top: 20px; align" />
-                            <hr </span>
-                            <!-- <span class="app-brand-text demo menu-text fw-bold ms-2"
-                                style="display: flex; flex-direction: column; align-items: center;">Koi Farm</span> -->
-                    </a>
+                <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
+                    <div class="main-sidebar sidebar-style-2">
+                        <a href="dashboard" class="app-brand-link">
+                            <span class="app-brand-logo demo"
+                                style="display: flex; flex-direction: column; align-items: center;">
+                                <img src="{{ asset('dashboard2/assets/img/favicon/logo.png') }}"
+                                    style="width: 143px; height: auto; margin-top: 20px;" />
+                                <hr> </span>
+                                <!-- <span class="app-brand-text demo menu-text fw-bold ms-2"
+                                    style="display: flex; flex-direction: column; align-items: center;">Koi Farm</span> -->
+                        </a>
 
-                    <a href="javascript:void(0);"
-                        class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
-                        <i class="bx bx-chevron-left bx-sm align-middle"></i>
-                    </a>
-                </div>
+                        <a href="javascript:void(0);"
+                            class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
+                            <i class="bx bx-chevron-left bx-sm align-middle"></i>
+                        </a>
+                    </div>
 
                 <div class="menu-inner-shadow"></div>
 
@@ -110,97 +110,97 @@
                                 </li>
 
                                 <! -- Header -->
-                                <li class="menu-header small text-uppercase">
+                                    <li class="menu-header small text-uppercase">
                                         <span class="menu-header-text">Diagnosa Penyakit</span>
                                     </li>
-                                <li class="menu-item {{ request()->is('admin/add-diagnosa*') ? 'active' : '' }}">
-                                    <a href="{{ route('add-diagnosa') }}" class="menu-link">
-                                        <i class="menu-icon tf-icons bx bx-collection"></i>
-                                        <div data-i18n="Basic">Tambah Diagnosa Penyakit</div>
-                                    </a>
-                                </li>
-                                <li class="menu-item {{ request()->is('admin/all-diagnosa*') ? 'active' : '' }}">
-                                    <a href="{{ route('allDiagnosaPenyakit') }}" class="menu-link">
-                                        <i class="menu-icon tf-icons bx bx-collection"></i>
-                                        <div data-i18n="Basic">Daftar Diagnosa Penyakit</div>
-                                    </a>
-                                </li>
-                               
-
-                                <! -- Header -->
-                                    <li class="menu-header small text-uppercase">
-                                        <span class="menu-header-text">Pengguna</span>
-                                    </li>
-                                    <!-- Apps -->
-                                    <li class="menu-item {{ request()->is('admin/add-users*') ? 'active' : '' }}">
-                                        <a href="{{ route('add-users') }}" class="menu-link">
+                                    <li class="menu-item {{ request()->is('admin/add-diagnosa*') ? 'active' : '' }}">
+                                        <a href="{{ route('add-diagnosa') }}" class="menu-link">
                                             <i class="menu-icon tf-icons bx bx-collection"></i>
-                                            <div data-i18n="Basic">Tambah Pengguna</div>
+                                            <div data-i18n="Basic">Tambah Diagnosa Penyakit</div>
                                         </a>
                                     </li>
-                                    <li class="menu-item {{ request()->is('admin/all-users*') ? 'active' : '' }}">
-                                        <a href="{{ route('allusers') }}" class="menu-link">
+                                    <li class="menu-item {{ request()->is('admin/all-diagnosa*') ? 'active' : '' }}">
+                                        <a href="{{ route('allDiagnosaPenyakit') }}" class="menu-link">
                                             <i class="menu-icon tf-icons bx bx-collection"></i>
-                                            <div data-i18n="Basic">Semua Pengguna</div>
+                                            <div data-i18n="Basic">Daftar Diagnosa Penyakit</div>
                                         </a>
                                     </li>
-
-                                    <!-- <! -- Header -->
-                                    <li class="menu-header small text-uppercase">
-                                        <span class="menu-header-text">Daftar Koi</span>
-                                    </li>
-                                    <li class="menu-item {{ request()->is('admin/daftar-koi*') ? 'active' : '' }}">
-                                    <a href="{{ route('daftarkoi') }}" class="menu-link">
-                                        <i class="menu-icon tf-icons bx bx-collection"></i>
-                                        <div data-i18n="Basic">Daftar Ikan Koi</div>
-                                    </a>
-                                </li>
-                                    <!-- Apps -->
-                                    
-                                    
 
 
                                     <! -- Header -->
                                         <li class="menu-header small text-uppercase">
-                                            <span class="menu-header-text">Kolam</span>
+                                            <span class="menu-header-text">Pengguna</span>
                                         </li>
                                         <!-- Apps -->
-                                        <li class="menu-item {{ request()->is('admin/add-pond*') ? 'active' : '' }}">
-                                            <a href="{{ route('addponds') }}" class="menu-link">
+                                        <li class="menu-item {{ request()->is('admin/add-users*') ? 'active' : '' }}">
+                                            <a href="{{ route('add-users') }}" class="menu-link">
                                                 <i class="menu-icon tf-icons bx bx-collection"></i>
-                                                <div data-i18n="Basic">Tambah Kolam</div>
+                                                <div data-i18n="Basic">Tambah Pengguna</div>
                                             </a>
                                         </li>
-                                        <li class="menu-item {{ request()->is('admin/all-pond*') ? 'active' : '' }}">
-                                            <a href="{{ route('allponds') }}" class="menu-link">
+                                        <li class="menu-item {{ request()->is('admin/all-users*') ? 'active' : '' }}">
+                                            <a href="{{ route('allusers') }}" class="menu-link">
                                                 <i class="menu-icon tf-icons bx bx-collection"></i>
-                                                <div data-i18n="Basic">Semua Kolam</div>
+                                                <div data-i18n="Basic">Semua Pengguna</div>
                                             </a>
                                         </li>
 
-                                        <!-- Header -->
-
+                                        <!-- <! -- Header -->
                                         <li class="menu-header small text-uppercase">
-                                            <span class="menu-header-text">Laporan</span>
+                                            <span class="menu-header-text">Daftar Koi</span>
                                         </li>
-
+                                        <li class="menu-item {{ request()->is('admin/daftar-koi*') ? 'active' : '' }}">
+                                            <a href="{{ route('daftarkoi') }}" class="menu-link">
+                                                <i class="menu-icon tf-icons bx bx-collection"></i>
+                                                <div data-i18n="Basic">Daftar Ikan Koi</div>
+                                            </a>
+                                        </li>
                                         <!-- Apps -->
-                                        <li
-                                            class="menu-item {{ request()->is('admin/parameter-report*') ? 'active' : '' }}">
-                                            <a href="{{ route('parameterreport') }}" class="menu-link">
-                                                <i class="menu-icon tf-icons bx bx-collection"></i>
-                                                <div data-i18n="Basic">Parameter</div>
-                                            </a>
-                                        </li>
 
-                                        <li
-                                            class="menu-item {{ request()->is('admin/disease-report*') ? 'active' : '' }}">
-                                            <a href="{{ route('diseasereport') }}" class="menu-link">
-                                                <i class="menu-icon tf-icons bx bx-collection"></i>
-                                                <div data-i18n="Basic">Kesehatan</div>
-                                            </a>
-                                        </li>
-                                        <!-- <li
+
+
+
+                                        <! -- Header -->
+                                            <li class="menu-header small text-uppercase">
+                                                <span class="menu-header-text">Kolam</span>
+                                            </li>
+                                            <!-- Apps -->
+                                            <li class="menu-item {{ request()->is('admin/add-pond*') ? 'active' : '' }}">
+                                                <a href="{{ route('addponds') }}" class="menu-link">
+                                                    <i class="menu-icon tf-icons bx bx-collection"></i>
+                                                    <div data-i18n="Basic">Tambah Kolam</div>
+                                                </a>
+                                            </li>
+                                            <li class="menu-item {{ request()->is('admin/all-pond*') ? 'active' : '' }}">
+                                                <a href="{{ route('allponds') }}" class="menu-link">
+                                                    <i class="menu-icon tf-icons bx bx-collection"></i>
+                                                    <div data-i18n="Basic">Semua Kolam</div>
+                                                </a>
+                                            </li>
+
+                                            <!-- Header -->
+
+                                            <li class="menu-header small text-uppercase">
+                                                <span class="menu-header-text">Laporan</span>
+                                            </li>
+
+                                            <!-- Apps -->
+                                            <li
+                                                class="menu-item {{ request()->is('admin/parameter-report*') ? 'active' : '' }}">
+                                                <a href="{{ route('parameterreport') }}" class="menu-link">
+                                                    <i class="menu-icon tf-icons bx bx-collection"></i>
+                                                    <div data-i18n="Basic">Parameter</div>
+                                                </a>
+                                            </li>
+
+                                            <li
+                                                class="menu-item {{ request()->is('admin/disease-report*') ? 'active' : '' }}">
+                                                <a href="{{ route('diseasereport') }}" class="menu-link">
+                                                    <i class="menu-icon tf-icons bx bx-collection"></i>
+                                                    <div data-i18n="Basic">Kesehatan</div>
+                                                </a>
+                                            </li>
+                                            <!-- <li
                                                 class="menu-item {{ request()->is('admin/pending-order*') ? 'active' : '' }}">
                                                 <a href="{{ route('pendingorder') }}" class="menu-link">
                                                     <i class="menu-icon tf-icons bx bx-collection"></i>
