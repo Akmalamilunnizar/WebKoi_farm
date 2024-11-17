@@ -22,6 +22,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\V1\DiagnosaController;
 use App\Http\Controllers\Api\V1\AdminProfileController;
 use App\Http\Controllers\Api\V1\DaftarKoiController;
+use App\Http\Controllers\Api\V1\JenisKoiController;
 
 
 Route::get('/', function () {
@@ -88,11 +89,30 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 
     Route::controller(DaftarKoiController::class)->group(function () {
         Route::get('/admin/daftar-koi', 'index')->name('daftarkoi');
+<<<<<<< HEAD
         Route::get('/admin/daftar-koi/add-daftar-koi', 'addDaftarKoi')->name('adddaftarkoi');
         Route::post('/admin/daftar-koi/add-daftar-koi', 'addDaftarKoi')->name('adddaftarkoi');
+=======
+        // GET request untuk menampilkan form tambah koi
+        Route::get('/admin/daftar-koi/add-daftar-koi', 'addDaftarKoi')->name('adddaftarkoi');
+        // POST request untuk memproses form tambah koi
+        Route::post('/admin/daftar-koi/add-daftar-koi', 'addDaftarKoi')->name('adddaftarkoi'); // Ubah ke store, bukan addDaftarKoi
+        // Rute untuk tambah jenis koi baru
+        Route::post('/admin/jenis-koi/add', [JenisKoiController::class, 'addDaftarKoi'])->name('addJenisKoi');
+        // Route untuk detail koi
+        Route::get('/admin/daftar-koi/koi/{id}/detail', 'show')->name('koi.detail');
+        // Route untuk edit koi
+        Route::get('/admin/daftar-koi/koi/{id}/edit', 'edit')->name('koi.edit');
+        // Route untuk update koi
+        Route::put('/admin/daftar-koi/koi/{id}/update', 'update')->name('koi.update'); // Perbaiki route untuk update
+        // Route untuk delete koi
+        Route::delete('/admin/daftar-koi/koi/{id}', 'destroy')->name('koi.delete');
+
+        Route::post('/add-penyakit', [DaftarKoiController::class, 'addPenyakit'])->name('addPenyakit');
+>>>>>>> 85e86aad8632adf664006c4598b2d0c5c668e072
     });
-    
-    
+
+
 
     // Route::controller(FoodsController::class)->group(function () {
     //     Route::get('/admin/all-food', 'Index')->name('allfoods');

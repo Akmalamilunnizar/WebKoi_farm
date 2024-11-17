@@ -13,6 +13,7 @@ Daftar Ikan Koi
         </form>
     </div>
 </div>
+
 @endsection
 @section('content')
 <div class="container mt-4">
@@ -23,58 +24,67 @@ Daftar Ikan Koi
                 + Tambah Data Baru
             </a>
         </div>
+
+        @if(session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+        @endif
+
         <table class="table">
             <thead>
                 <tr>
-                    <th>Id Koi</th>
+                    <th>ID</th>
+                    <th>Nama Koi</th>
                     <th>Jenis Koi</th>
+                    <th>Tanggal Lahir</th>
                     <th>Umur Ikan</th>
-                    <th>Tanggal Daftar</th> <!-- Kolom baru untuk Tanggal Daftar -->
-                    <th>Status</th>
-                    <th>Kolam</th>
+                    <th>Tanggal Daftar</th>
+                    <th>Penyakit</th>
+                    <!-- <th>Status</th> -->
+                    <!-- <th>Kolam</th> -->
                     <th>Aksi</th>
                 </tr>
             </thead>
             <tbody>
+                @foreach ($koiFishes as $fish)
                 <tr>
-                    <td>IK001</td>
-                    <td>Kohaku</td>
-                    <td>2 tahun</td>
-                    <td>2023-01-15</td> <!-- Nilai contoh untuk Tanggal Daftar -->              
-                    <td><span class="badge bg-label-success me-1">Sehat</span></td>
-                    <td>Kolam 1</td>
+                    <td>{{ $fish->id }}</td>
+                    <td>{{ $fish->name }}</td>
+                    <td>{{ $fish->jenisKoi ? $fish->jenisKoi->name : 'Jenis tidak tersedia' }}</td> <!-- Jenis Koi (relasi) -->
+                    <td>{{ $fish->tanggal_lahir }}</td>
+                    <td>{{ $fish->umur }} tahun</td> <!-- Umur Ikan -->
+                    <td>{{ $fish->created_at }}</td><!-- Tanggal Daftar -->
+                    <!-- <td>{{ $fish->updated_at }}</td> -->
+                    <td>{{ $fish->penyakit ? $fish->penyakit->nama_penyakit : 'Penyakit tidak tersedia' }}</td>
+                    <!-- <td>{{ $fish->kolam }}</td> Kolam -->
+
+                    <!-- Tabel dengan dropdown untuk edit dan delete -->
                     <td>
                         <div class="dropdown">
                             <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
                                 <i class="bx bx-dots-vertical-rounded"></i>
                             </button>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-detail me-1"></i> Detail</a>
-                                <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-edit-alt me-1"></i> Edit</a>
-                                <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-trash me-1"></i> Delete</a>
+                                <!-- Detail button -->
+                                <a class="dropdown-item" href="{{ route('koi.detail', $fish->id) }}"><i class="bx bx-detail me-1"></i> Detail</a>
+
+                                <!-- Edit button -->
+                                <a class="dropdown-item" href="{{ route('koi.edit', $fish->id) }}"><i class="bx bx-edit-alt me-1"></i> Edit</a>
+
+                                <!-- Delete button with confirmation -->
+                                <form action="{{ route('koi.delete', $fish->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this item?');" style="display:inline;">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="dropdown-item" style="background: none; border: none; color: inherit;">
+                                        <i class="bx bx-trash me-1"></i> Delete
+                                    </button>
+                                </form>
                             </div>
                         </div>
                     </td>
                 </tr>
-                <tr>
-                    <td>IK002</td>
-                    <td>Sanke</td>
-                    <td>1.5 tahun</td>
-                    <td>2023-03-20</td> <!-- Nilai contoh untuk Tanggal Daftar -->           
-                    <td><span class="badge bg-label-danger me-1">Sakit</span></td>
-                    <td>Kolam 2</td>
-                    <td>
-                        <div class="dropdown">
-                            <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                                <i class="bx bx-dots-vertical-rounded"></i>
-                            </button>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-edit-alt me-1"></i> Edit</a>
-                                <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-trash me-1"></i> Delete</a>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
+                @endforeach
             </tbody>
         </table>
     </div>
