@@ -1,17 +1,16 @@
 <!DOCTYPE html>
 <html class="no-js" lang="en">
 
-<!-- Mirrored from preview.uideck.com/items/basic/ by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 12 Oct 2024 14:53:48 GMT -->
 
 <head>
   <meta charset="utf-8" />
 
-  <title>SANKE - Koi Landing Page</title>
+  <title>SANKE | Selamat Datang Di Website Koi</title>
   <meta name="description" content="A SaaS landing page template." />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <!-- Favicon -->
-  <link rel="shortcut icon" href="{{ asset('assets/images/logo/logo.png') }}" type="image/png" />
+  <link rel="shortcut icon" href="{{ asset('assets/images/logo/logo4.png') }}" type="image/png" />
 
   <!-- CSS Files -->
   <link rel="stylesheet" href="{{ asset('css/animate.css') }}" />
@@ -35,13 +34,6 @@
 </head>
 
 <body>
-  <!--[if IE]>
-      <p class="browserupgrade">
-        You are using an <strong>outdated</strong> browser. Please
-        <a href="https://browsehappy.com/">upgrade your browser</a> to improve
-        your experience and security.
-      </p>
-    <![endif]-->
 
   <div class="preloader">
     <div class="loader">
@@ -96,9 +88,6 @@
                   <li class="nav-item">
                     <a class="page-scroll" href="#team">Team</a>
                   </li>
-                  <!-- <li class="nav-item">
-<a class="page-scroll" href="#blog">Blog</a>
-</li> -->
                 </ul>
               </div>
 
@@ -111,17 +100,12 @@
                   Register
                 </a>
               </div>
-
             </nav>
-
           </div>
         </div>
-
       </div>
-
     </div>
-    <!-- 
-<div id="home" class="header-hero bg_cover" style="background-image: url('{{ asset('assets/images/header/banner-bg.svg') }}')"> -->
+
     <div id="home" class="header-hero bg_cover" style="background-image: url(assets/images/header/banner-bg.svg)">
       <div class="container">
         <div class="row justify-content-center">
@@ -137,12 +121,6 @@
                 Memanfaatkan teknologi Internet of Things (IoT) untuk Controlling dan Monitoring secara otomatis di
                 kolam ikan koi.
               </p>
-              <!-- <a href="javascript:void(0)" class="main-btn wow fadeInUp" data-wow-duration="1.3s" data-wow-delay="1.1s">
-Login
-</a> -->
-              <!-- <a href="{{ url('/login')}}" class="main-btn wow fadeInUp" data-wow-duration="1.3s" data-wow-delay="1.1s">
-Login
-</a> -->
             </div>
 
           </div>
@@ -367,7 +345,9 @@ Login
                 Gumuksari, Tegal Besar, Kaliwates, Jember Regency, East Java 68131, Indonesia
                 Kabupaten Jember, Jawa Timur, 68131
               </p>
-              <a href="javascript:void(0)" class="main-btn">Temukan Lokasi Kami</a>
+              <a href="https://maps.app.goo.gl/DuKjA14h9GYk25sM7" target="_blank" class="main-btn">Temukan Lokasi
+                Kami</a>
+
             </div>
 
           </div>
@@ -404,7 +384,7 @@ Login
                 Memberikan kemudahan akses informasi langsung di perangkat Anda.
 
               </p>
-              <a href="javascript:void(0)" class="main-btn">Try it Free</a>
+              <a href="javascript:void(0)" class="main-btn">Unduh Aplikasi</a>
             </div>
 
           </div>
@@ -527,7 +507,7 @@ Login
         <div class="col-lg-5">
           <div class="section-title text-center pb-30">
             <div class="line m-auto"></div>
-            <h3 class="title"><span>Meet Our</span> Creative Team Members</h3>
+            <h3 class="title">Tim Kami</h3>
           </div>
         </div>
       </div>
@@ -537,14 +517,14 @@ Login
         <!-- Member 1 -->
         <div class="col-lg-3 col-md-7 col-sm-8">
           <div class="single-team text-center mt-30 wow fadeIn" data-wow-duration="1s" data-wow-delay="0.2s">
-            <!-- <div class="team-image">
-            <img src="{{ asset('assets/images/team/cowo3.png') }}" alt="Team" />
-          </div> -->
+            <div class="team-image">
+              <img src="{{ asset('assets/images/team/cowo3.png') }}" alt="Team" />
+            </div>
             <div class="team-content">
               <h5 class="holder-name">
-                <a href="javascript:void(0)">Isabela Moreira</a>
+                <a href="javascript:void(0)">Muhammad Guntur Wijaya</a>
               </h5>
-              <p class="text">Leader </p>
+              <p class="text">Developer Mobile Apps</p>
             </div>
           </div>
         </div>
@@ -552,12 +532,12 @@ Login
         <!-- Member 2 -->
         <div class="col-lg-3 col-md-7 col-sm-8">
           <div class="single-team text-center mt-30 wow fadeIn" data-wow-duration="1s" data-wow-delay="0.5s">
-            <!-- <div class="team-image">
-            <img src="{{ asset('assets/images/team/cowo1.png') }}" alt="Team" />
-          </div> -->
+            <div class="team-image">
+              <img src="{{ asset('assets/images/team/cowo1.png') }}" alt="Team" />
+            </div>
             <div class="team-content">
               <h5 class="holder-name">
-                <a href="javascript:void(0)">Elon Musk</a>
+                <a href="javascript:void(0)">Mohammad Ihsanuddin</a>
               </h5>
               <p class="text">Developer Web</p>
             </div>
@@ -567,14 +547,14 @@ Login
         <!-- Member 3 -->
         <div class="col-lg-3 col-md-7 col-sm-8">
           <div class="single-team text-center mt-30 wow fadeIn" data-wow-duration="1s" data-wow-delay="0.8s">
-            <!-- <div class="team-image">
-            <img src="{{ asset('assets/images/team/cowo2.png') }}" alt="Team" />
-          </div> -->
+            <div class="team-image">
+              <img src="{{ asset('assets/images/team/cowo2.png') }}" alt="Team" />
+            </div>
             <div class="team-content">
               <h5 class="holder-name">
-                <a href="javascript:void(0)">Fiona Smith</a>
+                <a href="javascript:void(0)">Akmal Amilunnizar</a>
               </h5>
-              <p class="text">Developer Mobile Apps</p>
+              <p class="text">Image Processing and Vision</p>
             </div>
           </div>
         </div>
@@ -585,14 +565,15 @@ Login
         <!-- Member 4 -->
         <div class="col-lg-3 col-md-7 col-sm-8">
           <div class="single-team text-center mt-30 wow fadeIn" data-wow-duration="1s" data-wow-delay="1.1s">
-            <!-- <div class="team-image">
-            <img src="{{ asset('assets/images/team/cowo4.png') }}" alt="Team" />
-          </div> -->
+
+            <div class="team-image">
+              <img src="{{ asset('assets/images/team/cewe1.png') }}" alt="Team" />
+            </div>
             <div class="team-content">
               <h5 class="holder-name">
-                <a href="javascript:void(0)">John Doe</a>
+                <a href="javascript:void(0)">Khoirunisa Mutawakilah</a>
               </h5>
-              <p class="text">IoT Enginner</p>
+              <p class="text">Developer Web</p>
             </div>
           </div>
         </div>
@@ -600,206 +581,20 @@ Login
         <!-- Member 5 -->
         <div class="col-lg-3 col-md-7 col-sm-8">
           <div class="single-team text-center mt-30 wow fadeIn" data-wow-duration="1s" data-wow-delay="1.4s">
-            <!-- <div class="team-image">
-            <img src="{{ asset('assets/images/team/cewe1.png') }}" alt="Team" />
-          </div> -->
+            <div class="team-image">
+              <img src="{{ asset('assets/images/team/cowo4.png') }}" alt="Team" />
+            </div>
             <div class="team-content">
               <h5 class="holder-name">
-                <a href="javascript:void(0)">Jane Doe</a>
+                <a href="javascript:void(0)">Akhisyamsah Yusfalana</a>
               </h5>
-              <p class="text">Tester and Integrator</p>
+              <p class="text">IoT Enginner</p>
             </div>
           </div>
         </div>
       </div>
-
     </div>
   </section>
-
-  <!-- <section id="testimonial" class="testimonial-area pt-120">
-<div class="container">
-<div class="row justify-content-center">
-<div class="col-lg-5">
-<div class="section-title text-center pb-40">
-<div class="line m-auto"></div>
-<h3 class="title">Users sharing<span> their experience</span></h3>
-</div>
-
-</div>
-</div>
-<div class="testimonial-wrapper">
-
-<div class="row g-0 testimonial-active wow fadeInUpBig" data-wow-duration="1s" data-wow-delay="0.8s">
-<div class="col-lg-4">
-<div class="single-testimonial">
-<div class="
-                    testimonial-review
-                    d-flex
-                    align-items-center
-                    justify-content-between
-                  ">
-<div class="quota">
-<i class="lni lni-quotation"> </i>
-</div>
-<div class="star">
-<ul>
-<li><i class="lni lni-star-filled"> </i></li>
-<li><i class="lni lni-star-filled"> </i></li>
-<li><i class="lni lni-star-filled"> </i></li>
-<li><i class="lni lni-star-filled"> </i></li>
-<li><i class="lni lni-star-filled"> </i></li>
-</ul>
-</div>
-</div>
-<div class="testimonial-text">
-<p class="text">
-Lorem ipsum dolor sit amet,consetetur sadipscing elitr,
-seddiam nonu eirmod tempor invidunt labore.Lorem ipsum dolor
-sit amet,consetetur sadipscing elitr, seddiam nonu.
-</p>
-</div>
-<div class="testimonial-author d-flex align-items-center">
-<div class="author-image">
-<img class="shape" src="{{ asset('assets/images/testimonials/textimonial-shape.svg') }}" alt="shape" />
-<img class="author" src="{{ asset('assets/images/testimonials/author-1.png') }}" alt="author" />
-</div>
-<div class="author-content media-body">
-<h6 class="holder-name">Jenny Deo</h6>
-<p class="text">CEO, SpaceX</p>
-</div>
-</div>
-</div>
-
-</div>
-<div class="col-lg-4">
-<div class="single-testimonial">
-<div class="
-                    testimonial-review
-                    d-flex
-                    align-items-center
-                    justify-content-between
-                  ">
-<div class="quota">
-<i class="lni lni-quotation"> </i>
-</div>
-<div class="star">
-<ul>
-<li><i class="lni lni-star-filled"> </i></li>
-<li><i class="lni lni-star-filled"> </i></li>
-<li><i class="lni lni-star-filled"> </i></li>
-<li><i class="lni lni-star-filled"> </i></li>
-<li><i class="lni lni-star-filled"> </i></li>
-</ul>
-</div>
-</div>
-<div class="testimonial-text">
-<p class="text">
-Lorem ipsum dolor sit amet,consetetur sadipscing elitr,
-seddiam nonu eirmod tempor invidunt labore.Lorem ipsum dolor
-sit amet,consetetur sadipscing elitr, seddiam nonu.
-</p>
-</div>
-<div class="testimonial-author d-flex align-items-center">
-<div class="author-image">
-<img class="shape" src="{{ asset('assets/images/testimonials/textimonial-shape.svg') }}" alt="shape" />
-<img class="author" src="{{ asset('assets/images/testimonials/author-1.png') }}" alt="author" />
-</div>
-<div class="author-content media-body">
-<h6 class="holder-name">Marjin Otte</h6>
-<p class="text">UX Specialist, Yoast</p>
-</div>
-</div>
-</div>
-
-</div>
-<div class="col-lg-4">
-<div class="single-testimonial">
-<div class="
-                    testimonial-review
-                    d-flex
-                    align-items-center
-                    justify-content-between
-                  ">
-<div class="quota">
-<i class="lni lni-quotation"> </i>
-</div>
-<div class="star">
-<ul>
-<li><i class="lni lni-star-filled"> </i></li>
-<li><i class="lni lni-star-filled"> </i></li>
-<li><i class="lni lni-star-filled"> </i></li>
-<li><i class="lni lni-star-filled"> </i></li>
-<li><i class="lni lni-star-filled"> </i></li>
-</ul>
-</div>
-</div>
-<div class="testimonial-text">
-<p class="text">
-Lorem ipsum dolor sit amet,consetetur sadipscing elitr,
-seddiam nonu eirmod tempor invidunt labore.Lorem ipsum dolor
-sit amet,consetetur sadipscing elitr, seddiam nonu.
-</p>
-</div>
-<div class="testimonial-author d-flex align-items-center">
-<div class="author-image">
-<img class="shape" src="{{ asset('assets/images/testimonials/textimonial-shape.svg') }}" alt="shape" />
-<img class="author" src="{{ asset('assets/images/testimonials/author-3.png') }}" alt="author" />
-</div>
-<div class="author-content media-body">
-<h6 class="holder-name">David Smith</h6>
-<p class="text">CTO, Alphabet</p>
-</div>
-</div>
-</div>
-
-</div>
-<div class="col-lg-4">
-<div class="single-testimonial">
-<div class="
-                    testimonial-review
-                    d-flex
-                    align-items-center
-                    justify-content-between
-                  ">
-<div class="quota">
-<i class="lni lni-quotation"> </i>
-</div>
-<div class="star">
-<ul>
-<li><i class="lni lni-star-filled"> </i></li>
-<li><i class="lni lni-star-filled"> </i></li>
-<li><i class="lni lni-star-filled"> </i></li>
-<li><i class="lni lni-star-filled"> </i></li>
-<li><i class="lni lni-star-filled"> </i></li>
-</ul>
-</div>
-</div>
-<div class="testimonial-text">
-<p class="text">
-Lorem ipsum dolor sit amet,consetetur sadipscing elitr,
-seddiam nonu eirmod tempor invidunt labore.Lorem ipsum dolor
-sit amet,consetetur sadipscing elitr, seddiam nonu.
-</p>
-</div>
-<div class="testimonial-author d-flex align-items-center">
-<div class="author-image">
-<img class="shape" src="{{ asset('assets/images/testimonials/textimonial-shape.svg') }}" alt="shape" />
-<img class="author" src="{{ asset('assets/images/testimonials/author-1.png') }}" alt="author" />
-</div>
-<div class="author-content media-body">
-<h6 class="holder-name">Fajar Siddiq</h6>
-<p class="text">COO, MakerFlix</p>
-</div>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-</div>
-
-</section> -->
 
 
 
@@ -836,22 +631,22 @@ sit amet,consetetur sadipscing elitr, seddiam nonu.
               </p>
               <ul class="social">
                 <li>
-                  <a href="javascript:void(0)">
+                  <a href="https://www.instagram.com/genks.the/">
                     <i class="lni lni-facebook-filled"> </i>
                   </a>
                 </li>
                 <li>
-                  <a href="javascript:void(0)">
+                  <a href="https://www.instagram.com/genks.the/">
                     <i class="lni lni-twitter-filled"> </i>
                   </a>
                 </li>
                 <li>
-                  <a href="javascript:void(0)">
+                  <a href="https://www.instagram.com/genks.the/">
                     <i class="lni lni-instagram-filled"> </i>
                   </a>
                 </li>
                 <li>
-                  <a href="javascript:void(0)">
+                  <a href="https://www.instagram.com/genks.the/">
                     <i class="lni lni-linkedin-original"> </i>
                   </a>
                 </li>
@@ -859,37 +654,7 @@ sit amet,consetetur sadipscing elitr, seddiam nonu.
             </div>
 
           </div>
-          <div class="col-lg-5 col-md-7 col-sm-12">
-            <div class="footer-link d-flex mt-50 justify-content-sm-between">
-              <div class="link-wrapper wow fadeIn" data-wow-duration="1s" data-wow-delay="0.4s">
-                <div class="footer-title">
-                  <h4 class="title">Quick Link</h4>
-                </div>
-                <ul class="link">
-                  <li><a href="javascript:void(0)">Road Map</a></li>
-                  <li><a href="javascript:void(0)">Privacy Policy</a></li>
-                  <li><a href="javascript:void(0)">Refund Policy</a></li>
-                  <li><a href="javascript:void(0)">Terms of Service</a></li>
-                  <li><a href="javascript:void(0)">Pricing</a></li>
-                </ul>
-              </div>
 
-              <div class="link-wrapper wow fadeIn" data-wow-duration="1s" data-wow-delay="0.6s">
-                <div class="footer-title">
-                  <h4 class="title">Resources</h4>
-                </div>
-                <ul class="link">
-                  <li><a href="javascript:void(0)">Home</a></li>
-                  <li><a href="javascript:void(0)">Page</a></li>
-                  <li><a href="javascript:void(0)">Portfolio</a></li>
-                  <li><a href="javascript:void(0)">Blog</a></li>
-                  <li><a href="javascript:void(0)">Contact</a></li>
-                </ul>
-              </div>
-
-            </div>
-
-          </div>
           <div class="col-lg-3 col-md-5 col-sm-12">
             <div class="footer-contact mt-50 wow fadeIn" data-wow-duration="1s" data-wow-delay="0.8s">
               <div class="footer-title">
@@ -898,18 +663,16 @@ sit amet,consetetur sadipscing elitr, seddiam nonu.
               <ul class="contact">
                 <li>0811-3662-488</li>
                 <li>
-                <li>email.com</li>
-                <li>www.yourweb.com</li>
+                <li>genkskoi99@gmail.com</li>
+                <li>www.genks99.com</li>
                 <li>
                   Gumuksari, Tegal Besar, Kec. Kaliwates,<br />
                   Kabupaten Jember, Jawa Timur 68131
                 </li>
               </ul>
             </div>
-
           </div>
         </div>
-
       </div>
 
       <div class="footer-copyright">
@@ -918,8 +681,8 @@ sit amet,consetetur sadipscing elitr, seddiam nonu.
             <div class="copyright d-sm-flex justify-content-between">
               <div class="copyright-content">
                 <p class="text">
-                  Designed and Developed by
-                  <a href="https://uideck.com/" rel="nofollow">UIdeck and Sanke</a>
+                  The Genk's Koi 99 Farm |
+                  <a href="" rel="nofollow">Kabupaten Jember</a>
                 </p>
               </div>
 
@@ -984,7 +747,5 @@ sit amet,consetetur sadipscing elitr, seddiam nonu.
     crossorigin="anonymous"></script>
   <script src="{{ asset('js/maind41d.js') }}"></script>
 </body>
-
-<!-- Mirrored from preview.uideck.com/items/basic/ by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 12 Oct 2024 14:54:04 GMT -->
 
 </html>

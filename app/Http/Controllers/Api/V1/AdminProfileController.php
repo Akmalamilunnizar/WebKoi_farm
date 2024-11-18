@@ -31,12 +31,6 @@ class AdminProfileController extends Controller
         return view('admin.allusers', compact('users', 'search'));
     }
 
-    // Menampilkan halaman edit profil
-    public function edit($id)
-    {
-        $profile = User::findOrFail($id);
-        return view('admin.profiles.edit', compact('profile'));
-    }
 
     // Memperbarui data profil
     public function update(Request $request, $id)
@@ -44,7 +38,7 @@ class AdminProfileController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255|unique:users,email,' . $id,
-            'password' => 'nullable|min:8|confirmed',
+            'email_verified_at' => 'date',
         ]);
 
         $profile = User::findOrFail($id);
@@ -59,6 +53,9 @@ class AdminProfileController extends Controller
 
         return redirect()->route('admin.profiles.index')->with('success', 'Profil berhasil diperbarui');
     }
+
+
+
 
     // Menghapus profil
     public function destroy($id)

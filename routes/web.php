@@ -89,10 +89,8 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 
     Route::controller(DaftarKoiController::class)->group(function () {
         Route::get('/admin/daftar-koi', 'index')->name('daftarkoi');
-<<<<<<< HEAD
         Route::get('/admin/daftar-koi/add-daftar-koi', 'addDaftarKoi')->name('adddaftarkoi');
         Route::post('/admin/daftar-koi/add-daftar-koi', 'addDaftarKoi')->name('adddaftarkoi');
-=======
         // GET request untuk menampilkan form tambah koi
         Route::get('/admin/daftar-koi/add-daftar-koi', 'addDaftarKoi')->name('adddaftarkoi');
         // POST request untuk memproses form tambah koi
@@ -109,7 +107,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
         Route::delete('/admin/daftar-koi/koi/{id}', 'destroy')->name('koi.delete');
 
         Route::post('/add-penyakit', [DaftarKoiController::class, 'addPenyakit'])->name('addPenyakit');
->>>>>>> 85e86aad8632adf664006c4598b2d0c5c668e072
+
     });
 
 

@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('koi_fish', function (Blueprint $table) {
-            $table->date('tanggal_lahir')->after('jenis_koi')->nullable(); // tambahkan kolom di sini
+            $table->date('tanggal_lahir')->nullable();
         });
     }
 

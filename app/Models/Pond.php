@@ -1,26 +1,27 @@
 <?php
+
 namespace App\Models;
-use Encore\Admin\Traits\DefaultDatetimeFormat;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Pond extends Model
 {
-    // use DefaultDatetimeFormat;
-    //table name
+    use HasFactory;
+
+    protected $table = 'ponds';
+
+    // Kolom yang dapat diisi secara massal
     protected $fillable = [
         'name',
         'volume',
-        'created_at',
-        'updated_at',
         'img',
         'jml_ikan',
         'relay_condition'
     ];
 
-    protected $table = 'ponds';
-
-    public function getRecent(){
-        return $this->limit(5)->orderBy('id', 'DESC')->get();
+    public function getRecent()
+    {
+        return $this->orderBy('id', 'DESC')->limit(5)->get();
     }
-
 }
