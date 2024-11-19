@@ -42,6 +42,13 @@ Route::group(['namespace' => 'Api\V1'], function () {
         //   Route::get('test', 'ProductController@test_get_recommended_products');
     });
 
+    Route::group(['prefix' => 'pond'], function () {
+        Route::get('list', 'PondController@get_pond_list');
+        Route::get('details', 'PondController@get_order_details');
+        Route::post('place', 'PondController@place_order');
+    });
+
+
     // registration and login
     Route::group(['prefix' => 'auth', 'namespace' => 'Auth'], function () {
         Route::post('register', 'CustomerAuthController@register');
@@ -70,6 +77,7 @@ Route::group(['namespace' => 'Api\V1'], function () {
             Route::post('place', 'OrderController@place_order');
             Route::put('payment-method', 'OrderController@update_payment_method');
         });
+
     });
 
     Route::group(['prefix' => 'config'], function () {

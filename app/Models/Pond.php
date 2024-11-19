@@ -13,11 +13,15 @@ class Pond extends Model
 
     // Kolom yang dapat diisi secara massal
     protected $fillable = [
-        'name',
-        'volume',
-        'img',
-        'jml_ikan',
-        'relay_condition'
+        'id' => 'integer',
+        'name' => 'string',
+        'volume' => 'integer',
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
+        'img' => 'string',
+        'jml_ikan' => 'integer',
+        'relay_condition' => 'integer',
+        'details_count' => 'integer',
     ];
 
     public function getRecent()
