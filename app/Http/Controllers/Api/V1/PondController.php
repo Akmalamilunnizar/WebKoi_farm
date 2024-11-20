@@ -2,12 +2,8 @@
 
 namespace App\Http\Controllers\Api\V1;
 
-// use Encore\Admin\Controllers\AdminController;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
-// use Encore\Admin\Form;
-// use Encore\Admin\Grid;
-// use Encore\Admin\Show;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use App\Models\Pond;
@@ -17,7 +13,8 @@ use Encore\Admin\Layout\Content;
 
 class PondController extends Controller
 {
-    public function Index(){
+    public function Index()
+    {
         // $jml_ikan
         $jml_ikan = DB::table('detail_koi')
             ->selectRaw('count(*) as jml_ikan, fish_id')
@@ -27,7 +24,8 @@ class PondController extends Controller
         return view("admin.allponds", compact('ponds', 'jml_ikan'));
     }
 
-    public function ManagePonds(){
+    public function ManagePonds()
+    {
         // $jml_ikan
         $jml_ikan = DB::table('detail_koi')
             ->selectRaw('count(*) as jml_ikan, fish_id')
@@ -44,29 +42,30 @@ class PondController extends Controller
         $ponds = Pond::where(function ($query) use ($search) {
 
             $query->where('id', 'like', "%$search%")
-            ->orWhere('name','like',"%$search%");
-
+                ->orWhere('name', 'like', "%$search%");
         })->get();
 
         return view('admin.allponds', compact('ponds', 'search'));
     }
 
-    public function AddPond(){
+    public function AddPond()
+    {
 
 
         return view("admin.addponds");
     }
 
-    public function StorePond(Request $request){
+    public function StorePond(Request $request)
+    {
         $request->validate([
-            'name' =>'required|unique:ponds',
+            'name' => 'required|unique:ponds',
             'volume' => 'required',
             'img' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
         $image = $request->file('img');
-        $img_name = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
-        $request->img->move(public_path('uploads/images'),$img_name);
+        $img_name = hexdec(uniqid()) . '.' . $image->getClientOriginalExtension();
+        $request->img->move(public_path('uploads/images'), $img_name);
         $img_url = 'images/' . $img_name;
 
         $mytime = Carbon::now();
@@ -82,7 +81,8 @@ class PondController extends Controller
         return redirect()->route('allponds')->with('message', 'Kolam telah berhasil ditambah!');
     }
 
-    public function EditPond($id){
+    public function EditPond($id)
+    {
 
         $pondinfo = Pond::findOrFail($id);
         // $category_parent = $pondinfo->type_id;
@@ -92,19 +92,21 @@ class PondController extends Controller
         return view('admin.editpond', compact('pondinfo'));
     }
 
-    public function EditPondImg($id){
+    public function EditPondImg($id)
+    {
         $pondinfo = Pond::findOrFail($id);
         return view('admin.editpondimg', compact('pondinfo'));
     }
 
-    public function UpdatePondImg(Request $request){
+    public function UpdatePondImg(Request $request)
+    {
         $request->validate([
             'img' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
         $id = $request->id;
         $image = $request->file('img');
-        $img_name = hexdec(uniqid()).'.'. $image->getClientOriginalExtension();
-        $request->img->move(public_path('uploads/images'),$img_name);
+        $img_name = hexdec(uniqid()) . '.' . $image->getClientOriginalExtension();
+        $request->img->move(public_path('uploads/images'), $img_name);
         $img_url = 'images/' . $img_name;
 
         Pond::findOrFail($id)->update([
@@ -114,11 +116,12 @@ class PondController extends Controller
         return redirect()->route('allponds')->with('message', 'Update Foto Kolam Berhasil!');
     }
 
-    public function UpdatePond(Request $request){
+    public function UpdatePond(Request $request)
+    {
         $pondid = $request->id;
 
         $request->validate([
-            'name' => ['required',Rule::unique('ponds')->ignore($request->id),],
+            'name' => ['required', Rule::unique('ponds')->ignore($request->id),],
             'volume' => 'required'
         ]);
 
@@ -127,17 +130,27 @@ class PondController extends Controller
         Pond::findOrFail($pondid)->update([
             'name' => $request->name,
             'updated_at' => $mytime,
-            'volume' => $request ->volume,
+            'volume' => $request->volume,
         ]);
 
         return redirect()->route('allponds')->with('message', 'Update Informasi Kolam Berhasil!');
     }
 
-    public function DeletePond($id){
+    public function DeletePond($id)
+    {
         Pond::findOrFail($id)->delete();
 
         return redirect()->route('allponds')->with('message', 'Penghapusan Kolam Berhasil!');
     }
+
+    public function get_pond_list()
+    {
+        $pond = Pond::get(); // Retrieve all records from the 'pond' table
+
+        return response()->json($pond, 200);
+    }
+
+
     /**
      * Title for current resource.
      *

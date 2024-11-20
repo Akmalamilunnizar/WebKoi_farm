@@ -41,8 +41,6 @@
 
     <!-- Helpers -->
     <script src="{{ asset('dashboard2/assets/vendor/js/helpers.js') }}"></script>
-    <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
-    <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="{{ asset('dashboard2/assets/js/config.js') }}"></script>
 </head>
 
@@ -50,82 +48,107 @@
     <!-- Layout wrapper -->
     <div class="layout-wrapper layout-content-navbar">
         <div class="layout-container">
-            <!-- Menu -->
 
-            <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
+            <!-- Menu -->
+            <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme"
+                style="background: linear-gradient(to bottom, #32CD32, #228B22);">
                 <div class="main-sidebar sidebar-style-2">
                     <a href="dashboard" class="app-brand-link">
                         <span class="app-brand-logo demo"
                             style="display: flex; flex-direction: column; align-items: center;">
                             <img src="{{ asset('dashboard2/assets/img/favicon/logo.png') }}"
-                                style="width: 143px; height: auto; margin-top: 20px; align" />
-                            <hr </span>
-                            <span class="app-brand-text demo menu-text fw-bold ms-2"
-                                style="display: flex; flex-direction: column; align-items: center;">Koi Farm</span>
+                                style="width: 275px; height: auto; margin-top: 20px;" />
+                            <hr>
+                            <p
+                                style="color: #ffffff; font-size: 17px; font-weight:  margin-top: 10px; border-bottom: 1px solid #ffffff; padding-bottom: 8px;">
+                                The Genks Koi 99 Farm
+                            </p>
+                        </span>
                     </a>
+                    <div style="margin-top: 30px;"></div>
 
                     <a href="javascript:void(0);"
                         class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
                         <i class="bx bx-chevron-left bx-sm align-middle"></i>
                     </a>
                 </div>
-
                 <div class="menu-inner-shadow"></div>
-
                 <ul class="menu-inner py-1">
-                    <!-- Dashboards -->
-                    <li class="menu-item active open">
-                        <a href="javascript:void(0);" class="menu-link menu-toggle">
-                            <i class="menu-icon tf-icons bx bx-home-circle"></i>
-                            <div data-i18n="Dashboards">Halaman</div>
-                            {{-- <div class="badge bg-danger rounded-pill ms-auto">5</div> --}}
+                    <li class="menu-item {{ request()->is('admin/dashboard') ? 'active' : '' }}">
+                        <a href="{{ route('admindashboard') }}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-home"></i>
+                            <div data-i18n="Analytics" class="larger-text">Dashboard</div>
                         </a>
-                        <ul class="menu-sub">
-                            <li class="menu-item {{ request()->is('admin/dashboard') ? 'active' : '' }}">
-                                <a href="{{ route('admindashboard') }}" class="menu-link">
-                                    <div data-i18n="Analytics">Dashboard</div>
-                                </a>
-                            </li>
+                    </li>
+                    <li class="menu-item {{ request()->is('admin/all-diagnosa*') ? 'active' : '' }}">
+                        <a href="{{ route('allDiagnosaPenyakit') }}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-health"></i>
+                            <div data-i18n="Basic" class="larger-text">Penyakit Ikan Koi</div>
+                        </a>
+                    </li>
+                    <li class="menu-item {{ request()->is('admin/daftar-koi*') ? 'active' : '' }}">
+                        <a href="{{ route('daftarkoi') }}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-table"></i>
+                            <div data-i18n="Basic" class="larger-text">Daftar Ikan Koi</div>
+                        </a>
+                    </li>
+                    <li class="menu-item {{ request()->is('admin/all-pond*') ? 'active' : '' }}">
+                        <a href="{{ route('allponds') }}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-collection"></i>
+                            <div data-i18n="Basic" class="larger-text">Semua Kolam</div>
+                        </a>
+                    </li>
+                    <li class="menu-item {{ request()->is('admin/admin-profile*') ? 'active' : '' }}">
+                        <a href="{{ route('profile') }}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-user"></i>
+                            <div data-i18n="Basic" class="larger-text">Profil</div>
+                        </a>
+                    </li>
+                    <div class="koi-image-container">
+                        <img src="{{ asset('assets/images/koi1.png') }}"
+                            style="opacity: 0.5; margin-top: 70px; width: 230px; height: auto;" />
+                    </div>
+                </ul>
+                <style>
+                    /* Mengubah warna teks menu menjadi putih terang dan bold */
+                    #layout-menu .menu-item .menu-link {
+                        color: #ffffff !important;
+                        /* Warna putih terang */
+                        font-weight: bold !important;
+                        /* Tebal */
+                    }
 
-                            <!-- Layouts -->
+                    .larger-text {
+                        font-size: 1.2rem;
+                        /* Sesuaikan ukuran sesuai kebutuhan */
+                        font-weight: bold;
+                        /* Opsional untuk membuat teks lebih tegas */
+                    }
 
-                            <! -- Header -->
-                                <!-- <li class="menu-header small text-uppercase">
-                                    <span class="menu-header-text">Tipe Makanan</span>
-                                </li> -->
-                                <!-- Apps -->
-                                <!-- <li class="menu-item {{ request()->is('admin/add-food-type*') ? 'active' : '' }}">
-                                    <a href="{{ route('addfoodtype') }}" class="menu-link">
-                                        <i class="menu-icon tf-icons bx bx-collection"></i>
-                                        <div data-i18n="Basic">Tambah Tipe Makanan</div>
-                                    </a>
-                                </li> -->
-                                {{-- {{ dump(request()->is('admin/all-food-type*')) }} --}}
 
-                                <!-- <li class="menu-item {{ request()->is('admin/all-food-type*') ? 'active' : '' }}">
-                                    <a href="{{ route('allfoodtype') }}" class="menu-link">
-                                        <i class="menu-icon tf-icons bx bx-collection"></i>
-                                        <div data-i18n="Basic">Semua Tipe Makanan</div>
-                                    </a>
-                                </li> -->
+                    #layout-menu .menu-header .menu-header-text {
+                        color: #ffffff !important;
+                        /* Warna putih terang untuk header */
+                        font-weight: bold !important;
+                        /* Tebal */
+                    }
 
-                                <! -- Header -->
-                                <li class="menu-header small text-uppercase">
-                                        <span class="menu-header-text">Diagnosa Penyakit</span>
-                                    </li>
-                                <li class="menu-item {{ request()->is('admin/add-diagnosa*') ? 'active' : '' }}">
-                                    <a href="{{ route('add-diagnosa') }}" class="menu-link">
-                                        <i class="menu-icon tf-icons bx bx-collection"></i>
-                                        <div data-i18n="Basic">Tambah Diagnosa Penyakit</div>
-                                    </a>
-                                </li>
-                                <li class="menu-item {{ request()->is('admin/all-diagnosa*') ? 'active' : '' }}">
-                                    <a href="{{ route('allDiagnosaPenyakit') }}" class="menu-link">
-                                        <i class="menu-icon tf-icons bx bx-collection"></i>
-                                        <div data-i18n="Basic">Daftar Diagnosa Penyakit</div>
-                                    </a>
-                                </li>
-                               
+                    /* Mengubah warna teks menu menjadi putih terang dan bold untuk item yang aktif */
+                    #layout-menu .menu-item.active .menu-link {
+                        color: #ffffff !important;
+                        font-weight: bold !important;
+                        background-color: transparent !important;
+                        /* Menjaga latar belakang tetap seperti sebelumnya */
+                    }
+
+
+                    /* Mengubah warna teks menu menjadi putih terang dan bold pada hover, jika perlu */
+                    #layout-menu .menu-item .menu-link:hover {
+                        color: #ffffff !important;
+                        background-color: rgba(0, 0, 0, 0.1) !important;
+                        /* Ubah efek hover sesuai kebutuhan */
+                    }
+
 
                                 <! -- Header -->
                                     <li class="menu-header small text-uppercase">
@@ -202,15 +225,24 @@
                                                 </a>
                                             </li> -->
                         </ul>
+
+                    /* Jika Anda ingin mengubah latar belakang item menu aktif */
+                    #layout-menu .menu-item.active {
+                        background-color: rgba(0, 0, 0, 0.2) !important;
+                        /* Sesuaikan warna latar belakang aktif */
+                    }
+                </style>
+
             </aside>
             <!-- / Menu -->
 
             <!-- Layout container -->
             <div class="layout-page">
-                <!-- Navbar -->
 
+                <!-- Navbar -->
+                <!-- Navbar -->
                 <nav class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
-                    id="layout-navbar">
+                    id="layout-navbar" style="background: linear-gradient(135deg, #28a745, #0e6b2f);">
                     <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
                         <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
                             <i class="bx bx-menu bx-sm"></i>
@@ -220,24 +252,8 @@
                     <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
                         <!-- Search -->
                         @yield('search')
-                        {{-- <div class="navbar-nav align-items-center">
-                            <div class="nav-item d-flex align-items-center">
-                                <i class="bx bx-search fs-4 lh-0"></i>
-                                <input type="text" class="form-control border-0 shadow-none ps-1 ps-sm-2"
-                                    placeholder="Pencarian..." aria-label="Search..." />
-                            </div>
-                        </div> --}}
-                        <!-- /Search -->
 
                         <ul class="navbar-nav flex-row align-items-center ms-auto">
-                            <!-- Place this tag where you want the button to render. -->
-                            {{-- <li class="nav-item lh-1 me-3">
-                                <a class="github-button"
-                                    href="https://github.com/themeselection/sneat-html-admin-template-free"
-                                    data-icon="octicon-star" data-size="large" data-show-count="true"
-                                    aria-label="Star themeselection/sneat-html-admin-template-free on GitHub">Star</a>
-                            </li> --}}
-
                             <!-- User -->
                             <li class="nav-item navbar-dropdown dropdown-user dropdown">
                                 <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);"
@@ -267,31 +283,6 @@
                                     <li>
                                         <div class="dropdown-divider"></div>
                                     </li>
-                                    {{-- <li>
-                                        <a class="dropdown-item" href="#">
-                                            <i class="bx bx-user me-2"></i>
-                                            <span class="align-middle">My Profile</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="#">
-                                            <i class="bx bx-cog me-2"></i>
-                                            <span class="align-middle">Settings</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="test">
-                                            <span class="d-flex align-items-center align-middle">
-                                                <i class="flex-shrink-0 bx bx-credit-card me-2"></i>
-                                                <span class="flex-grow-1 align-middle ms-1">Billing</span>
-                                                <span
-                                                    class="flex-shrink-0 badge badge-center rounded-pill bg-danger w-px-20 h-px-20">4</span>
-                                            </span>
-                                        </a>
-                                    </li> --}}
-                                    <li>
-                                        <div class="dropdown-divider"></div>
-                                    </li>
                                     <li>
                                         <a class="dropdown-item" href="{{ route('adminlogout') }}">
                                             <i class="bx bx-power-off me-2"></i>
@@ -304,6 +295,8 @@
                         </ul>
                     </div>
                 </nav>
+                <!-- / Navbar -->
+
 
                 <!-- / Navbar -->
 

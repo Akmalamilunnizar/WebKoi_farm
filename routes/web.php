@@ -20,18 +20,10 @@ use App\Models\ParameterReport;
 use App\Models\DiseaseReport;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\V1\DiagnosaController;
+use App\Http\Controllers\Api\V1\AdminProfileController;
+use App\Http\Controllers\Api\V1\DaftarKoiController;
+use App\Http\Controllers\Api\V1\JenisKoiController;
 
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
 
 Route::get('/', function () {
     return view('welcome');
@@ -57,8 +49,9 @@ Route::get('/', function () {
 Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::controller(DashboardController::class)->group(function () {
         Route::get('admin/dashboard', 'Index')->name('admindashboard');
-        // Route::get('resources/admin/logout', 'AdminLogout')->name('adminlogout');
     });
+
+
 
     //     Route::controller(ProfileController::class)->group(function () {
     //         Route::get('logout', function ()
@@ -72,6 +65,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     //     });
     // Route::get('resources/admin/logout', 'App\Http\Controllers\Auth\AuthenticatedSessionController@logout');
 
+
     Route::controller(PondController::class)->group(function () {
         Route::get('/admin/all-pond', 'Index')->name('allponds');
         Route::get('/admin/manage-pond', 'ManagePonds')->name('manageponds');
@@ -84,15 +78,39 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
         Route::post('/admin/update-pond', 'UpdatePond')->name('updatepond');
         Route::get('/admin/delete-pond/{id}', 'DeletePond')->name('deletepond');
     });
+
     Route::controller(ParameterReportController::class)->group(function () {
         Route::get('/admin/parameter-report', 'Index')->name('parameterreport');
-        
     });
 
     Route::controller(DiseaseReportController::class)->group(function () {
         Route::get('/admin/disease-report', 'Index')->name('diseasereport');
-        
     });
+
+    Route::controller(DaftarKoiController::class)->group(function () {
+        Route::get('/admin/daftar-koi', 'index')->name('daftarkoi');
+        Route::get('/admin/daftar-koi/add-daftar-koi', 'addDaftarKoi')->name('adddaftarkoi');
+        Route::post('/admin/daftar-koi/add-daftar-koi', 'addDaftarKoi')->name('adddaftarkoi');
+        // GET request untuk menampilkan form tambah koi
+        Route::get('/admin/daftar-koi/add-daftar-koi', 'addDaftarKoi')->name('adddaftarkoi');
+        // POST request untuk memproses form tambah koi
+        Route::post('/admin/daftar-koi/add-daftar-koi', 'addDaftarKoi')->name('adddaftarkoi'); // Ubah ke store, bukan addDaftarKoi
+        // Rute untuk tambah jenis koi baru
+        Route::post('/admin/jenis-koi/add', [JenisKoiController::class, 'addDaftarKoi'])->name('addJenisKoi');
+        // Route untuk detail koi
+        Route::get('/admin/daftar-koi/koi/{id}/detail', 'show')->name('koi.detail');
+        // Route untuk edit koi
+        Route::get('/admin/daftar-koi/koi/{id}/edit', 'edit')->name('koi.edit');
+        // Route untuk update koi
+        Route::put('/admin/daftar-koi/koi/{id}/update', 'update')->name('koi.update'); // Perbaiki route untuk update
+        // Route untuk delete koi
+        Route::delete('/admin/daftar-koi/koi/{id}', 'destroy')->name('koi.delete');
+
+        Route::post('/add-penyakit', [DaftarKoiController::class, 'addPenyakit'])->name('addPenyakit');
+
+    });
+
+
 
     // Route::controller(FoodsController::class)->group(function () {
     //     Route::get('/admin/all-food', 'Index')->name('allfoods');
@@ -140,6 +158,15 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 
     Route::controller(OrderController::class)->group(function () {
         Route::get('/admin/pending-order', 'Index')->name('pendingorder');
+        Route::get('/admin/pending-order/search', 'SearchPending')->name('searchorder');
+        Route::get('/admin/history-order', 'IndexHistory')->name('historyorder');
+        Route::get('/admin/view-order/{id}', 'ViewOrder')->name('vieworder');
+        Route::get('/admin/update-order/{id}', 'UpdateOrder')->name('updateorder');
+        Route::get('/admin/delete-order/{id}', 'DeleteOrder')->name('deleteorder');
+    });
+
+    Route::controller(AdminProfileController::class)->group(function () {
+        Route::get('/admin/admin-profile', 'Index')->name('profile');
         Route::get('/admin/pending-order/search', 'SearchPending')->name('searchorder');
         Route::get('/admin/history-order', 'IndexHistory')->name('historyorder');
         Route::get('/admin/view-order/{id}', 'ViewOrder')->name('vieworder');

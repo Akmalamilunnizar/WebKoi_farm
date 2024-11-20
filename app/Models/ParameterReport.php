@@ -19,3 +19,4 @@ class ParameterReport extends Model
         return $this->limit(10)->orderBy('id', 'DESC')->get();
     }
 }
+

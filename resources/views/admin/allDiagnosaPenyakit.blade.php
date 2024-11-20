@@ -1,6 +1,6 @@
 @extends('admin.layouts.template')
 @section('page_title')
-Daftar Diagnosa Penyakit - Restorant
+SANKE |  Halaman Daftar Penyakit Ikan Koi
 @endsection
 
 @section('search')
@@ -18,10 +18,20 @@ Daftar Diagnosa Penyakit - Restorant
 
 @section('content')
 <div class="container-xxl flex-grow-1 container-p-y">
-  <h4 class="py-3 mb-4"><span class="text-muted fw-light">Halaman/</span> Daftar Diagnosa Penyakit</h4>
 
+  <div class="btn-group mb-3">
+    <button type="button" class="btn btn-outline-success dropdown-toggle custom-dropdown" data-bs-toggle="dropdown"
+      aria-expanded="false">
+      Kolam
+    </button>
+    <ul class="dropdown-menu">
+      <li><a class="dropdown-item" href="javascript:void(0);">Kolam 1</a></li>
+      <li><a class="dropdown-item" href="javascript:void(0);">Kolam 2</a></li>
+    </ul>
+  </div>
   <div class="card">
-    <h5 class="card-header">Diagnosa Penyakit Yang Tersedia</h5>
+    <h5 class="card-header">Daftar Penyakit Ikan Koi</h5>
+
     @if(session()->has('message'))
     <div class="alert alert-success">
       {{ session()->get('message') }}
@@ -58,6 +68,7 @@ Daftar Diagnosa Penyakit - Restorant
         <td>
           <a href="{{ route('editdiagnosa', $diagnosa->id) }}" class="btn btn-primary">Edit</a>
           <a href="{{ route('showdiagnosa', $diagnosa->id) }}" class="btn btn-info">Detail</a>
+
           <a href="{{ url('admin/delete-diagnosa/' . $diagnosa->id) }}" class="btn btn-warning"
           onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">Hapus</a>
         </td>
@@ -68,4 +79,5 @@ Daftar Diagnosa Penyakit - Restorant
     </div>
   </div>
 </div>
+
 @endsection
