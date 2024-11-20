@@ -90,24 +90,24 @@
                             <!-- Layouts -->
 
                             <! -- Header -->
-                                <li class="menu-header small text-uppercase">
+                                <!-- <li class="menu-header small text-uppercase">
                                     <span class="menu-header-text">Tipe Makanan</span>
-                                </li>
+                                </li> -->
                                 <!-- Apps -->
-                                <li class="menu-item {{ request()->is('admin/add-food-type*') ? 'active' : '' }}">
+                                <!-- <li class="menu-item {{ request()->is('admin/add-food-type*') ? 'active' : '' }}">
                                     <a href="{{ route('addfoodtype') }}" class="menu-link">
                                         <i class="menu-icon tf-icons bx bx-collection"></i>
                                         <div data-i18n="Basic">Tambah Tipe Makanan</div>
                                     </a>
-                                </li>
+                                </li> -->
                                 {{-- {{ dump(request()->is('admin/all-food-type*')) }} --}}
 
-                                <li class="menu-item {{ request()->is('admin/all-food-type*') ? 'active' : '' }}">
+                                <!-- <li class="menu-item {{ request()->is('admin/all-food-type*') ? 'active' : '' }}">
                                     <a href="{{ route('allfoodtype') }}" class="menu-link">
                                         <i class="menu-icon tf-icons bx bx-collection"></i>
                                         <div data-i18n="Basic">Semua Tipe Makanan</div>
                                     </a>
-                                </li>
+                                </li> -->
 
                                 <! -- Header -->
                                 <li class="menu-header small text-uppercase">
@@ -149,7 +149,7 @@
 
                                     <! -- Header -->
                                         <li class="menu-header small text-uppercase">
-                                            <span class="menu-header-text">Makanan</span>
+                                            <span class="menu-header-text">Kolam</span>
                                         </li>
                                         <!-- Apps -->
                                         <li class="menu-item {{ request()->is('admin/add-pond*') ? 'active' : '' }}">

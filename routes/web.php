@@ -134,6 +134,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
         Route::get('/admin/edit-diagnosa/{id}', 'editDiagnosa')->name('editdiagnosa');
         Route::post('/admin/update-diagnosa/{id}', 'updateDiagnosa')->name('update-diagnosa');
         Route::get('/admin/delete-diagnosa/{id}', 'deleteDiagnosa')->name('deletediagnosa');
+        Route::get('/admin/show-diagnosa/{id}', 'showDiagnosa')->name('showdiagnosa');
     });
 
 

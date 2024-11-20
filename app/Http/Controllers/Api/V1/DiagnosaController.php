@@ -100,7 +100,7 @@ class DiagnosaController extends Controller
             'penyebab' => $request->penyebab,
             'keterangan' => $request->keterangan,
         ]);
-        
+
 
         return redirect()->route('allDiagnosaPenyakit')->with('message', 'Diagnosa penyakit berhasil diperbarui!');
 
@@ -114,4 +114,11 @@ class DiagnosaController extends Controller
 
         return redirect()->route('allDiagnosaPenyakit')->with('message', 'Diagnosa penyakit berhasil dihapus');
     }
+
+    public function showDiagnosa($id)
+    {
+        $diagnosa = DiagnosaPenyakit::findOrFail($id);
+        return view('admin.detailDiagnosaPenyakit', compact('diagnosa'));
+    }
+
 }
