@@ -20,5 +20,10 @@ class Penyakit extends Model
     {
         return $this->hasMany(KoiFish::class, 'id_penyakit');  // Relasi one-to-many dengan tabel koi_fish
     }
+
+    public function jenisPenyakit()
+    {
+        return $this->belongsTo(Penyakit::class, 'penyakit');
+    }
     public $timestamps = false; // Nonaktifkan penggunaan timestamps
 }

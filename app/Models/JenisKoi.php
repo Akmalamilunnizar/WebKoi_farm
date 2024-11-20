@@ -15,4 +15,8 @@ class JenisKoi extends Model
     ];
 
     public $timestamps = false;  // Karena tabel jenis_koi tidak menggunakan created_at dan updated_at
+    public function jenisKoi()
+    {
+        return $this->belongsTo(JenisKoi::class, 'jenis_koi');
+    }
 }

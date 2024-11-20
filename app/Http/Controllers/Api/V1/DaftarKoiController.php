@@ -184,6 +184,8 @@ class DaftarKoiController extends Controller
     {
         // Logika untuk mendapatkan data koi
         $kois = KoiFish::all();
+        $kois = KoiFish::with(['jenisKoi', 'penyakit'])->get();
+
         return response()->json([
             'message' => 'Data koi berhasil didapatkan',
             'data' => $kois
