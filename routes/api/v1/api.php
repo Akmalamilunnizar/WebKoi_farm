@@ -48,6 +48,13 @@ Route::group(['namespace' => 'Api\V1'], function () {
         Route::post('place', 'PondController@place_order');
     });
 
+    Route::group(['prefix' => 'koi'], function () {
+        Route::get('list', 'DaftarKoiController@get_koi_list');
+        Route::get('details', 'DaftarKoiController@get_koi_details');
+        Route::post('place', 'DaftarKoiController@place_order');
+        Route::get('ponds', 'DaftarKoiController@getKoiByPondId');
+    });
+
 
     // registration and login
     Route::group(['prefix' => 'auth', 'namespace' => 'Auth'], function () {
@@ -90,6 +97,6 @@ Route::group(['namespace' => 'Api\V1'], function () {
     });
 
 
-    Route::get('/daftarkoi', [DaftarKoiController::class, 'getAllKoi']);
+    // Route::get('/daftarkoi', [DaftarKoiController::class, 'getAllKoi']);
 });
 

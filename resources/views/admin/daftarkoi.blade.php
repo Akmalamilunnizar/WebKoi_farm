@@ -39,6 +39,7 @@ SANKE | Halaman Daftar Ikan Koi
                     <th>Nama Koi</th>
                     <th>Jenis Koi</th>
                     <th>Tanggal Lahir</th>
+                    <th>Kolam</th>
                     <th>Umur Ikan</th>
                     <th>Tanggal Daftar</th>
                     <th>Penyakit</th>
@@ -52,6 +53,7 @@ SANKE | Halaman Daftar Ikan Koi
                         <td>{{ $fish->name }}</td>
                         <td>{{ $fish->jenisKoi ? $fish->jenisKoi->name : 'Jenis tidak tersedia' }}</td>
                         <td>{{ $fish->tanggal_lahir }}</td>
+                        <td>{{ $fish->ponds->first()?->name }}</td>
                         <td>{{ $fish->umur }} tahun</td>
                         <td>{{ $fish->created_at }}</td>
                         <td>{{ $fish->penyakit ? $fish->penyakit->nama_penyakit : 'Penyakit tidak tersedia' }}</td>

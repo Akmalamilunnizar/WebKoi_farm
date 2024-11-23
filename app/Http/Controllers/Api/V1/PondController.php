@@ -50,8 +50,6 @@ class PondController extends Controller
 
     public function AddPond()
     {
-
-
         return view("admin.addponds");
     }
 

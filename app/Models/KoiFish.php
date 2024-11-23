@@ -36,6 +36,12 @@ class KoiFish extends Model
         return $this->belongsTo(JenisKoi::class, 'jenis', 'id');
     }
 
+    // A Koi Fish belongs to a Pond
+    public function pond()
+    {
+        return $this->belongsTo(Pond::class, 'pond_id');
+    }
+
     // public function penyakit() // Relasi ke model Penyakit()
     // {
     //     return $this->belongsTo(Penyakit::class, 'penyakit', 'id');
@@ -47,8 +53,8 @@ class KoiFish extends Model
         return $this->belongsTo(Penyakit::class, 'id_penyakit');
     }
 
-    public function koiFish()
+    public function ponds()
     {
-        return $this->hasMany(KoiFish::class, 'id_penyakit');
+        return $this->belongsToMany(Pond::class, 'detail_koi', 'fish_id', 'pond_id');
     }
 }

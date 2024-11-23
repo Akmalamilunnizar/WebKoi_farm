@@ -41,7 +41,7 @@ class DaftarKoiController extends Controller
     //             'keterangan' => 'nullable|string',
     //             'tanggal_lahir' => 'nullable|date',  // Menjadikan tanggal lahir opsional
     //             'umur' => 'nullable|integer',  // Menjadikan umur opsional
-    //         ]); 
+    //         ]);
 
     //         // Setelah berhasil menyimpan, redirect ke halaman daftar koi
     //         return redirect()->route('daftarkoi')->with('success', 'Data koi berhasil ditambahkan!');
@@ -136,7 +136,7 @@ class DaftarKoiController extends Controller
         $koi->tanggal_lahir = $request->input('tanggal_lahir');
         $koi->umur = $request->input('umur');
         $penyakit = Penyakit::where('nama_penyakit', 'White Spot')->first();
-        $koi->id_penyakit = $penyakit->id; // Set ID penyakit   
+        $koi->id_penyakit = $penyakit->id; // Set ID penyakit
         $koi->description = $request->input('description');
 
         // Jika ada gambar baru, simpan gambar tersebut
@@ -180,7 +180,7 @@ class DaftarKoiController extends Controller
         return redirect()->back()->with('success', 'Penyakit berhasil ditambahkan!');
     }
 
-    public function getAllKoi()
+    public function get_koi_list()
     {
         // Logika untuk mendapatkan data koi
         $kois = KoiFish::all();
@@ -190,6 +190,31 @@ class DaftarKoiController extends Controller
             'message' => 'Data koi berhasil didapatkan',
             'data' => $kois
             // data lainnya
+        ]);
+    }
+
+    public function getKoiByPondId(Request $request)
+    {
+        $pondId = $request->query('pondId');  // Get the pondId from the query string
+
+        if (!$pondId) {
+            return response()->json(['message' => 'pondId is required'], 400);
+        }
+
+        // Assuming you have a 'ponds' relationship in the KoiFish model
+        $kois = KoiFish::whereHas('ponds', function($query) use ($pondId) {
+            $query->where('ponds.id', $pondId);  // Filter koi fish by pondId
+        })
+        ->with(['jenisKoi', 'penyakit'])  // Include related models
+        ->get();
+
+        if ($kois->isEmpty()) {
+            return response()->json(['message' => 'No koi fish found for the specified pond'], 404);
+        }
+
+        return response()->json([
+            'message' => 'Data koi successfully fetched',
+            'data' => $kois
         ]);
     }
 }

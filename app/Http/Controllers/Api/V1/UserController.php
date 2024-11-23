@@ -86,7 +86,7 @@ class UserController extends Controller
         ]);
 
 
-        $userid = $request->id;
+        $userid = $request->id; 
         $mytime = Carbon::now();
         $mytime->toDateTimeString();
         User::findOrFail($userid)->update([

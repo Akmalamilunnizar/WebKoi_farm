@@ -167,6 +167,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 
     Route::controller(AdminProfileController::class)->group(function () {
         Route::get('/admin/admin-profile', 'Index')->name('profile');
+        Route::post('/admin/store-profile', 'StoreProfile')->name('storeprofile');
         Route::get('/admin/pending-order/search', 'SearchPending')->name('searchorder');
         Route::get('/admin/history-order', 'IndexHistory')->name('historyorder');
         Route::get('/admin/view-order/{id}', 'ViewOrder')->name('vieworder');

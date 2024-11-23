@@ -31,7 +31,8 @@ class User extends Authenticatable implements CanResetPasswordContract
         'phone',
         'email',
         'password',
-        'email_verified_at'
+        'email_verified_at',
+        'img'
     ];
 
     /**
