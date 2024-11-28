@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use DB;
 
+
 class DashboardController extends Controller
 {
 
@@ -23,7 +24,7 @@ class DashboardController extends Controller
         $bulan = date('m');
         for ($i=1; $i <= $bulan; $i++) {
             $totalPesanan = Order::whereIn('id', $itemsId)->whereYear('created_at', $tahun)->whereMonth('created_at', $i)->sum('order_amount');
-            $dataBulan[] = Helpers::ubahAngkaToBulan($i);
+            $dataBulan[] = self::ubahAngkaToBulan($i);
             $dataTotalPesanan[] = $totalPesanan;
 
         };
@@ -85,5 +86,25 @@ class DashboardController extends Controller
         $request->session()->regenerateToken();
 
         return redirect('/login');
+    }
+
+    public static function ubahAngkaToBulan($bulanAngka)
+    {
+        $bulanArray = [
+            '0' => '',
+            '1' => 'Januari',
+            '2' => 'Februari',
+            '3' => 'Maret',
+            '4' => 'April',
+            '5' => 'Mei',
+            '6' => 'Juni',
+            '7' => 'Juli',
+            '8' => 'Agustus',
+            '9' => 'September',
+            '10' => 'Oktober',
+            '11' => 'November',
+            '12' => 'Desember',
+        ];
+        return $bulanArray[$bulanAngka + 0];
     }
 }
