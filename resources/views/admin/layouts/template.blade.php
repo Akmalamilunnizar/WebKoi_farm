@@ -98,6 +98,12 @@
                             <div data-i18n="Basic" class="larger-text">Semua Kolam</div>
                         </a>
                     </li>
+                    <li class="menu-item {{ request()->is('admin/all-pcv*') ? 'active' : '' }}">
+                        <a href="{{ route('pcv') }}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-collection"></i>
+                            <div data-i18n="Basic" class="larger-text">Deteksi Penyakit</div>
+                        </a>
+                    </li>
                     <li class="menu-item {{ request()->is('admin/admin-profile*') ? 'active' : '' }}">
                         <a href="{{ route('profile') }}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-user"></i>

@@ -23,7 +23,7 @@ use App\Http\Controllers\Api\V1\DiagnosaController;
 use App\Http\Controllers\Api\V1\AdminProfileController;
 use App\Http\Controllers\Api\V1\DaftarKoiController;
 use App\Http\Controllers\Api\V1\JenisKoiController;
-
+use App\Http\Controllers\Api\V1\PcvController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -107,7 +107,6 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
         Route::delete('/admin/daftar-koi/koi/{id}', 'destroy')->name('koi.delete');
 
         Route::post('/add-penyakit', [DaftarKoiController::class, 'addPenyakit'])->name('addPenyakit');
-
     });
 
 
@@ -167,6 +166,17 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 
     Route::controller(AdminProfileController::class)->group(function () {
         Route::get('/admin/admin-profile', 'Index')->name('profile');
+        Route::post('/admin/store-profile', 'StoreProfile')->name('storeprofile');
+        Route::get('/admin/pending-order/search', 'SearchPending')->name('searchorder');
+        Route::get('/admin/history-order', 'IndexHistory')->name('historyorder');
+        Route::get('/admin/view-order/{id}', 'ViewOrder')->name('vieworder');
+        Route::get('/admin/update-order/{id}', 'UpdateOrder')->name('updateorder');
+        Route::get('/admin/delete-order/{id}', 'DeleteOrder')->name('deleteorder');
+    });
+
+    Route::controller(PcvController::class)->group(function () {
+        Route::get('/admin/pcv-page', 'Index')->name('pcv');
+        Route::post('/admin/predict', 'Result')->name('predict');
         Route::post('/admin/store-profile', 'StoreProfile')->name('storeprofile');
         Route::get('/admin/pending-order/search', 'SearchPending')->name('searchorder');
         Route::get('/admin/history-order', 'IndexHistory')->name('historyorder');

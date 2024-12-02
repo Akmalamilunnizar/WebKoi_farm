@@ -12,11 +12,13 @@ class DiagnosaPenyakit extends Model
     protected $table = 'diagnosa_penyakit';
 
     protected $fillable = [
-        'tanggal',
+        'id',
         'jenis_koi',
         'penyakit',
         'penyebab',
         'gambar_koi',
         'keterangan',
+        'created_at',
+        'updated_at'
     ];
 }
