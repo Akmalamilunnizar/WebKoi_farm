@@ -27,44 +27,60 @@ SANKE | Halaman Dashboard Admin
 
 <script>
     // Line Chart (Laporan Penjualan)
+    // Line Chart (Laporan Sensor)
     var lineChartOptions = {
-        series: [{
-            name: "Total Pendapatan",
-            data: @json($dataTotalPesanan)
-        }],
-        chart: {
-            height: 345,
-            type: 'line',
-            zoom: {
-                enabled: false
+        series: [
+            {
+                name: "pH",
+                data: @json($dataSensorPH)
+            },
+            {
+                name: "Suhu",
+                data: @json($dataSensorSuhu)
+            },
+            {
+                name: "TDS",
+                data: @json($dataSensorTDS)
             }
+        ],
+        chart: {
+            type: 'bar',
+            height: 350
+        },
+        plotOptions: {
+            bar: {
+                horizontal: false,
+                columnWidth: '55%',
+                borderRadius: 5,
+                borderRadiusApplication: 'end'
+            },
         },
         dataLabels: {
             enabled: false
         },
         stroke: {
-            curve: 'straight'
-        },
-        title: {
-            text: 'Grafik Sensor Kolam',
-            align: 'left'
-        },
-        grid: {
-            row: {
-                colors: ['#f3f3f3', 'transparent'],
-                opacity: 0.5
-            }
+            show: true,
+            width: 2,
+            colors: ['transparent']
         },
         xaxis: {
-            categories: @json($dataBulan)
+            categories: @json($dataBulan),
+            title: {
+                text: 'Bulan'
+            }
         },
         yaxis: {
-            labels: {
-                formatter: function (value) {
-                    return value.toLocaleString("id-ID", {
-                        style: "currency",
-                        currency: "IDR"
-                    });
+            title: {
+                text: 'Nilai Sensor'
+            }
+        },
+        fill: {
+            opacity: 1
+        },
+        tooltip: {
+            y: {
+                formatter: function (val) {
+                    return val + " unit";
                 }
             }
         }
@@ -76,7 +92,11 @@ SANKE | Halaman Dashboard Admin
 
     // Pie Chart (Example Pie Chart)
     var pieChartOptions = {
-        series: [44, 55, 43],
+        series: [
+            {{ $phValue }},
+            {{ $suhuValue }},
+            {{ $tdsValue }}
+        ],
         chart: {
             width: 435,
             type: 'pie',
@@ -177,7 +197,7 @@ SANKE | Halaman Dashboard Admin
                                     </div>
                                 </div>
                                 <span class="d-block mb-1 text-center">pH</span>
-                                <h3 class="card-title text-center mb-2">{{ $totalTypeFoods }}</h3>
+                                <h3 class="card-title text-center mb-2">{{ $phValue }}</h3>
                                 <small class="text-danger fw-semibold text-center"><i
                                         class="bx bx-down-arrow-alt"></i></small>
                             </div>
@@ -193,7 +213,7 @@ SANKE | Halaman Dashboard Admin
                                     </div>
                                 </div>
                                 <span class="fw-semibold d-block mb-1 text-center">Suhu</span>
-                                <h3 class="card-title text-center mb-2">{{ $totalFoods }}</h3>
+                                <h3 class="card-title text-center mb-2">{{ $suhuValue }}</h3>
                                 <small class="text-success fw-semibold text-center"><i
                                         class="bx bx-up-arrow-alt"></i></small>
                             </div>
@@ -209,7 +229,7 @@ SANKE | Halaman Dashboard Admin
                                     </div>
                                 </div>
                                 <span class="fw-semibold d-block mb-1 text-center">TDS</span>
-                                <h3 class="card-title text-center mb-2">{{ $totalFoods }}</h3>
+                                <h3 class="card-title text-center mb-2">{{ $tdsValue }}</h3>
                                 <small class="text-success fw-semibold text-center"><i
                                         class="bx bx-up-arrow-alt"></i></small>
                             </div>

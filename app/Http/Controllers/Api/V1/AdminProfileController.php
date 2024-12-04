@@ -10,10 +10,9 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 
-
 class AdminProfileController extends Controller
 {
-    // Menampilkan daftar profil pengguna
+    // Menampilkan profil admin yang sedang login
     public function index()
     {
         $profile = Auth::user();
@@ -26,96 +25,108 @@ class AdminProfileController extends Controller
         $search = $request->search;
 
         $users = User::where(function ($query) use ($search) {
-
             $query->where('id', 'like', "%$search%")
-            ->orWhere('f_name','like',"%$search%");
-
+                ->orWhere('f_name', 'like', "%$search%");
         })->get();
 
         return view('admin.adminprofile', compact('users', 'search'));
     }
 
-
     // Memperbarui data profil
     public function update(Request $request, $id)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
+            'f_name' => 'required|string|max:255',
             'email' => 'required|email|max:255|unique:users,email,' . $id,
-            'email_verified_at' => 'date',
+            'email_verified_at' => 'nullable|date',
         ]);
 
-        $profile = User::findOrFail($id);
-        $profile->name = $request->input('name');
-        $profile->email = $request->input('email');
+        try {
+            $profile = User::findOrFail($id);
+            $profile->f_name = $request->input('f_name');
+            $profile->email = $request->input('email');
 
-        if ($request->filled('password')) {
-            $profile->password = bcrypt($request->input('password'));
+            if ($request->filled('password')) {
+                $profile->password = bcrypt($request->input('password'));
+            }
+
+            $profile->save();
+
+            return redirect()->route('admin.profiles.index')->with('success', 'Profil berhasil diperbarui.');
+        } catch (\Exception $e) {
+            Log::error('Error updating profile: ' . $e->getMessage());
+            return redirect()->back()->withErrors(['error' => 'Terjadi kesalahan saat memperbarui profil.']);
         }
-
-        $profile->save();
-
-        return redirect()->route('admin.profiles.index')->with('success', 'Profil berhasil diperbarui');
     }
 
-    // edit profile for web
+    // Mengupdate profil admin
     public function StoreProfile(Request $request)
-{
-    $id = Auth::user()->id;
-    $profile = User::find($id);
-    $profile->name = $request->input('name');
-    $profile->email = $request->input('email');
+    {
+        $id = Auth::user()->id;
+        $profile = User::find($id);
 
-    $request->validate([
-        'name' => 'required|string|max:255',
-        'email' => 'required|email|max:255|unique:users,email,' . $id,
-        'email_verified_at' => 'date',
-        'currentPassword' => 'nullable|min:6', // Ensure current password is provided
-        'newPassword' => 'nullable|min:6|confirmed', // Ensure new password matches confirmation
-    ]);
-
-    // $profile = User::findOrFail($id);
-    // Check if the user wants to change the password
-    if ($request->filled('newPassword')) {
-        // Verify current password
-        if (!Hash::check($request->input('currentPassword'), $profile->password)) {
-            return redirect()->back()->withErrors(['currentPassword' => 'Password saat ini tidak valid.']);
-        }
-
-        // Update the password
-        $profile->password = bcrypt($request->input('newPassword'));
-    }
-
-    if ($request->hasFile('img')) {
         $request->validate([
-            'img' => 'required|image|mimes:png,jpg,gif,jpeg',
+            'f_name' => 'required|string|max:255',
+            'email' => 'required|email|max:255|unique:users,email,' . $id,
+            'currentPassword' => 'nullable|min:6', // Password saat ini opsional
+            'newPassword' => 'nullable|min:6|confirmed', // Validasi konfirmasi password baru
+            'img' => 'nullable|image|mimes:png,jpg,gif,jpeg|max:2048',
         ]);
 
-        $del = 'uploads/users/' . $profile->img;
-        if (File::exists($del)) {
-            File::delete($del);
+        try {
+            // Update nama dan email
+            $profile->f_name = $request->input('f_name');
+            $profile->email = $request->input('email');
+
+            // Verifikasi dan update password jika ada
+            if ($request->filled('newPassword')) {
+                if (!Hash::check($request->input('currentPassword'), $profile->password)) {
+                    return redirect()->back()->withErrors(['currentPassword' => 'Password saat ini tidak valid.']);
+                }
+
+                $profile->password = bcrypt($request->input('newPassword'));
+            }
+
+            // Update gambar profil jika ada
+            if ($request->hasFile('img')) {
+                $del = public_path('uploads/users/' . $profile->img);
+                if (File::exists($del)) {
+                    File::delete($del);
+                }
+
+                $file = $request->file('img');
+                $filename = '_profile_' . time() . '.' . $file->getClientOriginalExtension();
+                $file->move(public_path('uploads/users/'), $filename);
+                $profile->img = $filename;
+            }
+
+            $profile->save();
+
+            return redirect()->route('profile')->with('success', 'Profil berhasil diperbarui.');
+        } catch (\Exception $e) {
+            Log::error('Error updating profile: ' . $e->getMessage());
+            return redirect()->back()->withErrors(['error' => 'Terjadi kesalahan saat memperbarui profil.']);
         }
-
-        $file = $request->file('img');
-        $exe = $file->getClientOriginalExtension();
-        $filename = '_profile' . microtime() . '.' . $exe;
-        $file->move('uploads/users/', $filename);
-        $profile->img = $filename;
     }
-
-    $profile->save();
-    Log::info('Store Profile Request:', $request->all());
-
-    return redirect()->route('admin.profiles')->with('success', 'Profil berhasil diperbarui');
-}
-
 
     // Menghapus profil
     public function destroy($id)
     {
-        $profile = User::findOrFail($id);
-        $profile->delete();
+        try {
+            $profile = User::findOrFail($id);
 
-        return redirect()->route('admin.profiles.index')->with('success', 'Profil berhasil dihapus');
+            // Hapus gambar profil jika ada
+            $imgPath = public_path('uploads/users/' . $profile->img);
+            if (File::exists($imgPath)) {
+                File::delete($imgPath);
+            }
+
+            $profile->delete();
+
+            return redirect()->route('admin.profiles.index')->with('success', 'Profil berhasil dihapus.');
+        } catch (\Exception $e) {
+            Log::error('Error deleting profile: ' . $e->getMessage());
+            return redirect()->back()->withErrors(['error' => 'Terjadi kesalahan saat menghapus profil.']);
+        }
     }
 }

@@ -3,79 +3,68 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
-use App\Charts\OrderChart;
-use Carbon\Carbon;
-use App\Models\Food;
-use App\Models\FoodType;
-use App\Models\User;
-use App\CentralLogics\Helpers;
-use App\Models\Order;
+use App\Models\Sensor;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-use DB;
-
 
 class DashboardController extends Controller
 {
+    public function Index()
+{
+    // Data terbaru per bulan untuk setiap sensor
+    $dataSensorPH = Sensor::selectRaw('MONTH(created_at) as bulan, ph as nilai')
+        ->whereIn('id_sensor', function ($query) {
+            $query->select(DB::raw('MAX(id_sensor)'))
+                ->from('sensor')
+                ->groupBy(DB::raw('MONTH(created_at)'));
+        })
+        ->orderBy('bulan')
+        ->pluck('nilai');
 
-    public function Index(OrderChart $chart){
-        $itemsId = Order::where('payment_status', 'confirmed')->pluck('id');
-        $tahun = date('Y');
-        $bulan = date('m');
-        for ($i=1; $i <= $bulan; $i++) {
-            $totalPesanan = Order::whereIn('id', $itemsId)->whereYear('created_at', $tahun)->whereMonth('created_at', $i)->sum('order_amount');
-            $dataBulan[] = self::ubahAngkaToBulan($i);
-            $dataTotalPesanan[] = $totalPesanan;
+    $dataSensorSuhu = Sensor::selectRaw('MONTH(created_at) as bulan, suhu as nilai')
+        ->whereIn('id_sensor', function ($query) {
+            $query->select(DB::raw('MAX(id_sensor)'))
+                ->from('sensor')
+                ->groupBy(DB::raw('MONTH(created_at)'));
+        })
+        ->orderBy('bulan')
+        ->pluck('nilai');
 
-        };
-        $data['dataBulan'] = $dataBulan;
-        $data['dataTotalPesanan'] = $dataTotalPesanan;
-        // $data['data'];
-        $data['chart'] = $chart->build();
-        // $data['order'] = Order::
+    $dataSensorTDS = Sensor::selectRaw('MONTH(created_at) as bulan, tds as nilai')
+        ->whereIn('id_sensor', function ($query) {
+            $query->select(DB::raw('MAX(id_sensor)'))
+                ->from('sensor')
+                ->groupBy(DB::raw('MONTH(created_at)'));
+        })
+        ->orderBy('bulan')
+        ->pluck('nilai');
 
+    $dataBulan = Sensor::selectRaw('MONTH(created_at) as bulan')
+        ->whereIn('id_sensor', function ($query) {
+            $query->select(DB::raw('MAX(id_sensor)'))
+                ->from('sensor')
+                ->groupBy(DB::raw('MONTH(created_at)'));
+        })
+        ->orderBy('bulan')
+        ->pluck('bulan');
 
-        $totalRevenue = Order::whereIn('id', $itemsId)->sum('order_amount');
+    // Nilai terbaru dari setiap sensor
+    $latestSensorData = Sensor::latest()->first();
+    $phValue = $latestSensorData->ph ?? 0; // Default ke 0 jika tidak ada data
+    $suhuValue = $latestSensorData->suhu ?? 0;
+    $tdsValue = $latestSensorData->tds ?? 0;
 
-
-        $totalFoods = Food::count();
-        $totalTypeFoods = FoodType::count();
-
-        $totalAllUsers = User::count();
-        // $totalUser = User::where('role_id','0')->count();
-        // $totalAdmin = User::where('role_id','1')->count();
-
-        $todayDate = Carbon::now()->format('d-m-Y');
-        $thisMonth = Carbon::now()->format('m');
-        $thisYear = Carbon::now()->format('Y');
-
-        $totalOrders = Order::count();
-        $items = Order::all();
-
-        // $totalRevenue = {{ $order->products->sum('order_amount') }};
-        $todayOrder = Order::whereDate('created_at', $todayDate)->count();
-        $todayMonthOrder = Order::whereMonth('created_at', $thisMonth)->count();
-        $todayYearOrder = Order::whereYear('created_at', $thisYear)->count();
-        // totalUser,
-        // totalAdmin,
-        return view("admin.dashboard", compact('totalFoods',
-        'totalTypeFoods',
-        'totalAllUsers',
-        'items',
-        'totalRevenue',
-        'data',
+    return view('admin.dashboard', compact(
         'dataBulan',
-        'dataTotalPesanan',
-
-        'todayDate',
-        'thisMonth',
-        'thisYear',
-        'totalOrders',
-        'todayOrder',
-        'todayMonthOrder',
-        'todayYearOrder'));
-        return view("admin.adminprofile", compact('users'));
-    }
+        'dataSensorPH',
+        'dataSensorSuhu',
+        'dataSensorTDS',
+        'phValue',
+        'suhuValue',
+        'tdsValue'
+    ));
+}
 
 
     public function AdminLogout(Request $request)
