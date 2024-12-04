@@ -12,9 +12,10 @@ class DiagnosaController extends Controller
     // Menampilkan semua diagnosa penyakit
     public function index()
     {
+        $diagnoses_d = DiagnosaPenyakit::with(['koiFish', 'penyakit'])->get();
         $diagnosas = DiagnosaPenyakit::all();
 
-        return view("admin.allDiagnosaPenyakit", compact('diagnosas'));
+        return view("admin.allDiagnosaPenyakit", compact('diagnosas', 'diagnoses_d'));
     }
 
     // Pencarian diagnosa penyakit berdasarkan jenis koi atau penyakit
@@ -117,8 +118,9 @@ class DiagnosaController extends Controller
 
     public function showDiagnosa($id)
     {
+        $diagnoses_d = DiagnosaPenyakit::with(['koiFish', 'penyakit'])->get();
         $diagnosa = DiagnosaPenyakit::findOrFail($id);
-        return view('admin.detailDiagnosaPenyakit', compact('diagnosa'));
+        return view('admin.detailDiagnosaPenyakit', compact('diagnosa', 'diagnoses_d'));
     }
 
 }

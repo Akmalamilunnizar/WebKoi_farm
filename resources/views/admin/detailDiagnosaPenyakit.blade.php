@@ -18,7 +18,7 @@ Detail Diagnosa Penyakit - Restorant
         <h5 class="card-header">Detail Ikan Koi</h5>
         <div class="card-body">
             <div class="mb-3">
-                <strong>Jenis Koi :</strong> {{ $diagnosa->jenis_koi }}
+                <strong>Jenis Koi :</strong> {{ $koi->jenis_koi }}
             </div>
             <div class="mb-3">
                 <strong>Penyakit :</strong> {{ $diagnosa->penyakit }}
@@ -29,8 +29,8 @@ Detail Diagnosa Penyakit - Restorant
             <div class="mb-3">
                 <strong>Gambar Koi Terdiagnosa:</strong><br>
                 @if($diagnosa->gambar_koi)
-                    <a href="{{ asset('storage/' . $diagnosa->gambar_koi) }}" target="_blank">
-                        <img src="{{ asset('storage/' . $diagnosa->gambar_koi) }}" alt="Gambar Koi" width="150"
+                    <a href="{{ asset('storage/images/' . $diagnosa->gambar_koi) }}" target="_blank">
+                        <img src="{{ asset('storage/images/' . $diagnosa->gambar_koi) }}" alt="Gambar Koi" height="150"
                             style="cursor: pointer;">
                     </a>
                 @else

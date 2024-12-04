@@ -48,10 +48,18 @@ class KoiFish extends Model
     // }
 
     // Relasi dengan Penyakit
+
+
     public function penyakit()
     {
         return $this->belongsTo(Penyakit::class, 'id_penyakit');
     }
+
+    public function diagnosaPenyakit()
+    {
+        return $this->hasMany(DiagnosaPenyakit::class, 'id_koi', 'id');
+    }
+
 
     public function ponds()
     {

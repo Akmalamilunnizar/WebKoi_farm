@@ -8,9 +8,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use App\Models\User;
 use App\Models\DiagnosaPenyakit;
+use App\Models\KoiFish;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Http;
+use Carbon\Carbon;
 
 
 class PcvController extends Controller
@@ -19,7 +21,8 @@ class PcvController extends Controller
     public function Index()
     {
         // $profile = Auth::user();
-        return view('admin.pcv');
+        $koi = KoiFish::latest()->get();
+        return view('admin.pcv', compact('koi'));
     }
 
     public function ResultNodb(Request $request)
@@ -94,59 +97,93 @@ class PcvController extends Controller
 
 
     public function Result(Request $request)
-    {
-        // Validate the uploaded file
-        $request->validate([
-            'imagefile' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-        ]);
+{
+    $koi = KoiFish::whereDoesntHave('diagnosaPenyakit')->latest()->get();
 
-        // Get the uploaded file
-        $file = $request->file('imagefile');
+    // Validate the uploaded file
+    $request->validate([
+        'imagefile' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+    ]);
 
-        // Validate the file's existence and upload status
-        if (!$file->isValid()) {
-            return back()->withErrors(['error' => 'Invalid file upload.']);
-        }
+    // Get the koi_id from the form
+    $koi_id = $request->input('koi_id');  // This will contain the selected koi_id
 
-        // Send the file to the Flask API
-        try {
-            $response = Http::attach(
-                'imagefile',
-                file_get_contents($file->getRealPath()),
-                $file->getClientOriginalName()
-            )->post('http://127.0.0.1:5000/predict'); // Ensure the URL matches your Flask API endpoint
+    // Get the uploaded file
+    $file = $request->file('imagefile');
 
-            if ($response->successful()) {
-                // Extract response data
-                $data = $response->json();
-                $prediction = $data['prediction'];
-                $probabilities = $data['probabilities'];
-                $imageUrl = $data['image_url'];
-
-                // Optionally, store the result in the database
-                DiagnosaPenyakit::create([
-                    'jenis_koi' => 'N/A', // Replace with actual value if needed
-                    'penyakit' => $prediction,
-                    'penyebab' => json_encode($probabilities),
-                    'gambar_koi' => $imageUrl,
-                    'keterangan' => 'Diagnosis completed successfully.',
-                    'created_at' => now(),
-                    'updated_at' => now(),
-                ]);
-
-                // Return the response to the view
-                return view('admin.pcv', [
-                    'prediction' => $prediction,
-                    'classes_with_percentages' => $probabilities,
-                    'image_url' => $imageUrl,
-                ]);
-            } else {
-                return response()->json(['error' => 'Failed to predict'], $response->status());
-            }
-        } catch (\Exception $e) {
-            return response()->json(['error' => 'Error connecting to Flask API: ' . $e->getMessage()], 500);
-        }
+    // Validate the file's existence and upload status
+    if (!$file->isValid()) {
+        return back()->withErrors(['error' => 'Invalid file upload.']);
     }
+
+    // Mapping function to convert disease names to numerical values
+    function mapDiseaseToNumber($disease) {
+        $mapping = [
+            'Bacterial Disease' => 1,
+            'Fungal Disease' => 2,
+            'Parasite Disease' => 4,
+        ];
+        return $mapping[$disease] ?? 0; // Default to 0 if not found
+    }
+
+    try {
+        // Process the uploaded image and send it to the Flask API
+        $response = Http::attach(
+            'imagefile',
+            file_get_contents($file->getRealPath()),
+            $file->getClientOriginalName()
+        )->post('http://127.0.0.1:5000/predict');
+
+        if ($response->successful()) {
+            $data = $response->json();
+            $prediction = $data['prediction'];
+            $probabilities = $data['probabilities'];
+            $imageUrl = $data['image_url'];
+
+            // Optionally, you can save the diagnosis to the database
+            DiagnosaPenyakit::create([
+                'id_koi' => $koi_id, // Store the selected koi_id
+                'id_penyakit' => mapDiseaseToNumber($prediction),
+                'gambar_koi' => $imageUrl,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+            
+            return view('admin.pcv', [
+                'prediction' => $prediction,
+                'classes_with_percentages' => $probabilities,
+                'image_url' => $imageUrl,
+                'koi' => $koi,
+            ]);
+        } else {
+            return response()->json(['error' => 'Failed to predict'], $response->status());
+        }
+    } catch (\Illuminate\Database\QueryException $e) {
+        // Handle database errors, including duplicate entry errors
+        if ($e->getCode() === '23000') { // Integrity constraint violation
+            return response()->json([
+                'error' => 'Duplicate entry detected. The koi is already associated with a disease.',
+                'exception_message' => $e->getMessage()
+            ], 409); // HTTP 409 Conflict
+        }
+
+        // Handle other database errors
+        return response()->json([
+            'error' => 'Database error occurred.',
+            'exception_message' => $e->getMessage()
+        ], 500);
+    } catch (\Exception $e) {
+        // Handle other exceptions
+        return response()->json([
+            'error' => 'An error occurred while processing your request.',
+            'exception_message' => $e->getMessage()
+        ], 500);
+    }
+}
+
+
+
+
 
 
 

@@ -23,30 +23,34 @@
         </text>
         <style>
             /* Center the form and preview container */
-            form.text-center {
+            /* form.text-center {
                 display: flex;
                 flex-direction: column;
                 align-items: center;
                 justify-content: center;
-                min-height: 50vh; /* Adjust as needed */
-            }
+                min-height: 50vh;
+
+            } */
 
             #preview {
+                align-items: center;
                 display: none;
                 max-width: 300px;
                 max-height: 300px;
                 margin-top: 20px;
                 border: 1px solid #ddd;
-                object-fit: contain; /* Ensures the image is well-scaled */
+                object-fit: contain;
+                /* Ensures the image is well-scaled */
             }
 
             button[type="submit"] {
-                margin-top: 20px; /* Space between the preview and the button */
+                margin-top: 20px;
+                /* Space between the preview and the button */
             }
         </style>
         <div class="card mt-4">
             <div class="card-header d-flex justify-content-between align-items-center">
-                <h5>Daftar Ikan Koi</h5>
+                <h5>Tambah Penyakit Koi</h5>
             </div>
 
             @if (session('success'))
@@ -60,6 +64,21 @@
             <!-- Form to upload image -->
             <form action="{{ url('/admin/predict') }}" method="post" enctype="multipart/form-data" class="text-center">
                 @csrf <!-- CSRF token for form security -->
+                <div class="row mb-3 align-items-center">
+                    <label class="col-sm-2 col-form-label" for="koi_id">Pilih Koi</label>
+                    <div class="col-sm-10">
+                        <div class="input-group">
+                            <select class="form-select" id="koi_id" name="koi_id" required>
+                                <option value="">Pilih Koi</option>
+                                @foreach ($koi as $koi)
+                                    <option value="{{ $koi->id }}">{{ $koi->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+
                 <input type="file" name="imagefile" accept="image/*" required onchange="previewImage(event)">
                 <img id="preview" alt="Image Preview">
                 <button type="submit">Predict Image</button>
@@ -75,7 +94,7 @@
                             <li>{{ $class_name }}: {{ $percentage }}%</li>
                         @endforeach
                     </ul>
-                    <img src="{{ $image_url }}" alt="Uploaded Image" style="max-width: 300px; max-height: 300px;">
+                    <img src="{{ asset('storage/' . $image_url) }}" alt="Uploaded Image" style="max-width: 300px; max-height: 300px;">
                 </div>
             @endif
 

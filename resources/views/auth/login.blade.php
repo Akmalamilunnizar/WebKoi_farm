@@ -137,6 +137,11 @@
               <label class="form-check-label" for="remember-me"> Simpan Login </label>
             </div>
             <a href="forgotpw"><span>Lupa Password?</span></a>
+            @if (Route::has('password.request'))
+                        <a class="text-sm text-blue-500 hover:underline" href="{{ route('password.request') }}">
+                            {{ __('Forgot your password?') }}
+                        </a>
+                    @endif
           </div>
         </div>
         <button class="btn btn-primary d-grid w-100" type="submit">Login</button>
