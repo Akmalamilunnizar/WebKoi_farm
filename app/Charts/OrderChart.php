@@ -3,7 +3,7 @@
 namespace App\Charts;
 
 use ArielMejiaDev\LarapexCharts\LarapexChart;
-use App\Models\Order;
+use App\Models\Sensor;
 class OrderChart
 {
     protected $chart;
@@ -18,7 +18,7 @@ class OrderChart
         $tahun = date('Y');
         $bulan = date('m');
         for ($i=1; $i < $bulan; $i++) {
-            $totalPesanan = Order::whereYear('created_at', $tahun)->whereMonth('created_at', $i)->sum('order_amount');
+            $totalPesanan = Sensor::whereYear('created_at', $tahun)->whereMonth('created_at', $i)->sum('ph');
             $dataBulan[] = $i;
         };
         return $this->chart->lineChart()
