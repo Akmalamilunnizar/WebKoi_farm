@@ -24,13 +24,13 @@
         <style>
             /* Center the form and preview container */
             /* form.text-center {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                min-height: 50vh;
+                            display: flex;
+                            flex-direction: column;
+                            align-items: center;
+                            justify-content: center;
+                            min-height: 50vh;
 
-            } */
+                        } */
 
             #preview {
                 align-items: center;
@@ -53,14 +53,21 @@
                 <h5>Tambah Penyakit Koi</h5>
             </div>
 
-            @if (session('success'))
+            <h1 class="text-center">Image Classifier</h1>
+            {{-- @if (session('success'))
                 <div class="alert alert-success">
                     {{ session('success') }}
                 </div>
+            @endif --}}
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
             @endif
-
-            <h1 class="text-center">Image Classifier</h1>
-
             <!-- Form to upload image -->
             <form action="{{ url('/admin/predict') }}" method="post" enctype="multipart/form-data" class="text-center">
                 @csrf <!-- CSRF token for form security -->
@@ -94,7 +101,7 @@
                             <li>{{ $class_name }}: {{ $percentage }}%</li>
                         @endforeach
                     </ul>
-                    <img src="{{ asset('storage/' . $image_url) }}" alt="Uploaded Image" style="max-width: 300px; max-height: 300px;">
+                    <img src="{{ asset($image_url) }}" alt="Uploaded Image" style="max-width: 300px; max-height: 300px;">
                 </div>
             @endif
 

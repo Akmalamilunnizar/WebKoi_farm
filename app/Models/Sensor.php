@@ -19,7 +19,7 @@ class Sensor extends Model
 
     protected $fillable = [
         'id_sensor',
-        'suhu',
+        'temperature',
         'ph',
         'tds',
         'kekeruhan',
@@ -27,7 +27,7 @@ class Sensor extends Model
 
     protected $casts = [
         'id_sensor' => 'integer',
-        'suhu' => 'integer',
+        'temperature' => 'integer',
         'ph' => 'integer',
         'tds' => 'integer',
         'kekeruhan' => 'integer',

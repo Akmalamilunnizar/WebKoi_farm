@@ -25,108 +25,46 @@ class PcvController extends Controller
         return view('admin.pcv', compact('koi'));
     }
 
-    public function ResultNodb(Request $request)
+    public function Result(Request $request)
     {
-        // Validate the uploaded image
+        $koi = KoiFish::whereDoesntHave('diagnosaPenyakit')->latest()->get();
+
+        // Validate the uploaded file
         $request->validate([
+            'koi_id' => 'required|unique:diagnosa_penyakit,id_koi',
             'imagefile' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ], [
+            'koi_id.required' => 'Silakan pilih ikan koi.',
+            'koi_id.unique' => 'Ikan koi yang dipilih sudah didiagnosa sebelumnya.',
+            'imagefile.required' => 'Silakan unggah gambar.',
+            'imagefile.image' => 'File yang diunggah harus berupa gambar.',
+            'imagefile.mimes' => 'Gambar harus dalam format jpeg, png, jpg, atau gif.',
+            'imagefile.max' => 'Ukuran gambar tidak boleh lebih dari 2MB.',
         ]);
 
+        // Get the koi_id from the form
+        $koi_id = $request->input('koi_id');  // This will contain the selected koi_id
 
         // Get the uploaded file
         $file = $request->file('imagefile');
 
-        $data = $request->all();
-        $data = $request->except('_token');
-        $response = Http::post('http://127.0.0.1/predict', $data);
-        if ($response->successful()) {
-            $predictedDisease = $response->json()['Predicted Disease'] ?? null;
-            if ($predictedDisease !== null) {
-                return $predictedDisease;
-            } else {
-                return response()->json(['error' => 'Failed'], 500);
-            }
-        } else {
-            return response()->json(['error' => 'Failed to predict '], $response->status());
+        // Validate the file's existence and upload status
+        if (!$file->isValid()) {
+            return back()->withErrors(['error' => 'Invalid file upload.']);
         }
-        // Prepare the file for storing
-        $fileName = time() . '_' . $file->getClientOriginalName();
-        $filePath = public_path('uploads');
-        $file->move($filePath, $fileName);
-        $uploadedFilePath = '/uploads/' . $fileName;
 
-        // try {
-        //     // Send the image to the Flask API
-        //     $response = Http::attach(
-        //         'imagefile',
-        //         file_get_contents($file->getRealPath()),
-        //         $fileName
-        //     )->post('http://127.0.0.1:5000/predict'); // Update URL if necessary
-
-        //     // Handle API response
-        //     if ($response->successful()) {
-        //         $data = $response->json();
-
-        //         // Extract prediction data from Flask response
-        //         $prediction = $data['prediction'];
-        //         $classes_with_percentages = $data['probabilities'];
-        //         $image_url = $uploadedFilePath; // Use local uploaded path for consistency
-
-        //         // Save diagnosis data to the database
-        //         DiagnosaPenyakit::create([
-        //             'tanggal' => now(),
-        //             'jenis_koi' => 'N/A', // Replace with user input if available
-        //             'penyakit' => $prediction,
-        //             'penyebab' => json_encode($classes_with_percentages),
-        //             'gambar_koi' => $uploadedFilePath,
-        //             'keterangan' => 'Diagnosis berhasil.', // Modify if needed
-        //         ]);
-
-        //         // Return the view with prediction data
-        //         return view('admin.pcv', compact('prediction', 'classes_with_percentages', 'image_url'));
-        //     } else {
-        //         // Handle unsuccessful API response
-        //         return back()->withErrors(['error' => 'Failed to get prediction from the model.']);
-        //     }
-        // } catch (\Exception $e) {
-        //     // Handle exceptions
-        //     return back()->withErrors(['error' => 'An error occurred: ' . $e->getMessage()]);
-        // }
-    }
+        // Mapping function to convert disease names to numerical values
+        function mapDiseaseToNumber($disease)
+        {
+            $mapping = [
+                'Bacterial Disease' => 1,
+                'Fungal Disease' => 2,
+                'Parasite Disease' => 4,
+            ];
+            return $mapping[$disease] ?? 0; // Default to 0 if not found
+        }
 
 
-
-    public function Result(Request $request)
-{
-    $koi = KoiFish::whereDoesntHave('diagnosaPenyakit')->latest()->get();
-
-    // Validate the uploaded file
-    $request->validate([
-        'imagefile' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-    ]);
-
-    // Get the koi_id from the form
-    $koi_id = $request->input('koi_id');  // This will contain the selected koi_id
-
-    // Get the uploaded file
-    $file = $request->file('imagefile');
-
-    // Validate the file's existence and upload status
-    if (!$file->isValid()) {
-        return back()->withErrors(['error' => 'Invalid file upload.']);
-    }
-
-    // Mapping function to convert disease names to numerical values
-    function mapDiseaseToNumber($disease) {
-        $mapping = [
-            'Bacterial Disease' => 1,
-            'Fungal Disease' => 2,
-            'Parasite Disease' => 4,
-        ];
-        return $mapping[$disease] ?? 0; // Default to 0 if not found
-    }
-
-    try {
         // Process the uploaded image and send it to the Flask API
         $response = Http::attach(
             'imagefile',
@@ -148,7 +86,7 @@ class PcvController extends Controller
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);
-            
+
             return view('admin.pcv', [
                 'prediction' => $prediction,
                 'classes_with_percentages' => $probabilities,
@@ -158,28 +96,7 @@ class PcvController extends Controller
         } else {
             return response()->json(['error' => 'Failed to predict'], $response->status());
         }
-    } catch (\Illuminate\Database\QueryException $e) {
-        // Handle database errors, including duplicate entry errors
-        if ($e->getCode() === '23000') { // Integrity constraint violation
-            return response()->json([
-                'error' => 'Duplicate entry detected. The koi is already associated with a disease.',
-                'exception_message' => $e->getMessage()
-            ], 409); // HTTP 409 Conflict
-        }
-
-        // Handle other database errors
-        return response()->json([
-            'error' => 'Database error occurred.',
-            'exception_message' => $e->getMessage()
-        ], 500);
-    } catch (\Exception $e) {
-        // Handle other exceptions
-        return response()->json([
-            'error' => 'An error occurred while processing your request.',
-            'exception_message' => $e->getMessage()
-        ], 500);
     }
-}
 
 
 

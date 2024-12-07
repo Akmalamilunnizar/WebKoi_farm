@@ -36,7 +36,7 @@ SANKE | Halaman Dashboard Admin
             },
             {
                 name: "Suhu",
-                data: @json($dataSensorSuhu)
+                data: @json($dataSensorTemperature)
             },
             {
                 name: "TDS",
@@ -94,7 +94,7 @@ SANKE | Halaman Dashboard Admin
     var pieChartOptions = {
         series: [
             {{ $phValue }},
-            {{ $suhuValue }},
+            {{ $temperatureValue }},
             {{ $tdsValue }}
         ],
         chart: {
@@ -213,7 +213,7 @@ SANKE | Halaman Dashboard Admin
                                     </div>
                                 </div>
                                 <span class="fw-semibold d-block mb-1 text-center">Suhu</span>
-                                <h3 class="card-title text-center mb-2">{{ $suhuValue }}</h3>
+                                <h3 class="card-title text-center mb-2">{{ $temperatureValue }}</h3>
                                 <small class="text-success fw-semibold text-center"><i
                                         class="bx bx-up-arrow-alt"></i></small>
                             </div>
