@@ -14,26 +14,23 @@
   box-sizing: border-box;
 }
 body {
-  display:flex;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh; /* Change height to min-height */
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    background-color: #f4f6f8;
+  }
 
-  align-items:center;
-  justify-content:center;
-  height: 100vh;
-  margin: 0;
-
-  font-family: 'Montserrat', sans-serif;
-  font-size: 14px;
-  background-color:#f4f6f8;
-}
-.container{
-  display:flex;
-
-  align-items:center;
-  justify-content:center;
-  height:100%;
-  width:100%;
-
-  overflow:hidden;
+  .container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100%; /* Adjust height here to allow flexibility */
+    width: 100%;
+    overflow: auto; /* Adjust as needed */
 
   &__image{
     position:relative;
