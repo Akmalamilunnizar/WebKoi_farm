@@ -60,7 +60,7 @@
                                 style="width: 275px; height: auto; margin-top: 20px;" />
                             <hr>
                             <p
-                                style="color: #ffffff; font-size: 17px; font-weight:  margin-top: 10px; border-bottom: 1px solid #ffffff; padding-bottom: 8px;">
+                                style="color: #ffffff; font-size: 17px; font-weight: bold;  margin-top: 10px; border-bottom: 1px solid #ffffff; padding-bottom: 8px;">
                                 The Genks Koi 99 Farm
                             </p>
                         </span>
@@ -72,7 +72,7 @@
                         <i class="bx bx-chevron-left bx-sm align-middle"></i>
                     </a>
                 </div>
-                <div class="menu-inner-shadow"></div>
+                {{-- <div class="menu-inner-shadow"></div> --}}
                 <ul class="menu-inner py-1">
                     <li class="menu-item {{ request()->is('admin/dashboard') ? 'active' : '' }}">
                         <a href="{{ route('admindashboard') }}" class="menu-link">
@@ -118,6 +118,10 @@
                 <style>
                     /* Mengubah warna teks menu menjadi putih terang dan bold */
                     #layout-menu .menu-item .menu-link {
+                        overflow-y: auto;
+                        /* Enable scrolling */
+                        max-height: 100vh;
+                        /* Limit sidebar height to the viewport */
                         color: #ffffff !important;
                         /* Warna putih terang */
                         font-weight: bold !important;
@@ -141,6 +145,10 @@
 
                     /* Mengubah warna teks menu menjadi putih terang dan bold untuk item yang aktif */
                     #layout-menu .menu-item.active .menu-link {
+                        overflow-y: auto;
+                        /* Enable scrolling */
+                        max-height: 100vh;
+                        /* Limit sidebar height to the viewport */
                         color: #ffffff !important;
                         font-weight: bold !important;
                         background-color: transparent !important;
@@ -150,87 +158,17 @@
 
                     /* Mengubah warna teks menu menjadi putih terang dan bold pada hover, jika perlu */
                     #layout-menu .menu-item .menu-link:hover {
+                        overflow-y: auto;
+                        /* Enable scrolling */
+                        max-height: 100vh;
+                        /* Limit sidebar height to the viewport */
                         color: #ffffff !important;
                         background-color: rgba(0, 0, 0, 0.1) !important;
                         /* Ubah efek hover sesuai kebutuhan */
                     }
 
 
-                                <! -- Header -->
-                                    <li class="menu-header small text-uppercase">
-                                        <span class="menu-header-text">Pengguna</span>
-                                    </li>
-                                    <!-- Apps -->
-                                    <li class="menu-item {{ request()->is('admin/add-users*') ? 'active' : '' }}">
-                                        <a href="{{ route('add-users') }}" class="menu-link">
-                                            <i class="menu-icon tf-icons bx bx-collection"></i>
-                                            <div data-i18n="Basic">Tambah Pengguna</div>
-                                        </a>
-                                    </li>
-                                    <li class="menu-item {{ request()->is('admin/all-users*') ? 'active' : '' }}">
-                                        <a href="{{ route('allusers') }}" class="menu-link">
-                                            <i class="menu-icon tf-icons bx bx-collection"></i>
-                                            <div data-i18n="Basic">Semua Pengguna</div>
-                                        </a>
-                                    </li>
-
-
-
-                                    <! -- Header -->
-                                        <li class="menu-header small text-uppercase">
-                                            <span class="menu-header-text">Kolam</span>
-                                        </li>
-                                        <!-- Apps -->
-                                        <li class="menu-item {{ request()->is('admin/add-pond*') ? 'active' : '' }}">
-                                            <a href="{{ route('addponds') }}" class="menu-link">
-                                                <i class="menu-icon tf-icons bx bx-collection"></i>
-                                                <div data-i18n="Basic">Tambah Kolam</div>
-                                            </a>
-                                        </li>
-                                        <li class="menu-item {{ request()->is('admin/all-pond*') ? 'active' : '' }}">
-                                            <a href="{{ route('allponds') }}" class="menu-link">
-                                                <i class="menu-icon tf-icons bx bx-collection"></i>
-                                                <div data-i18n="Basic">Semua Kolam</div>
-                                            </a>
-                                        </li>
-
-                                        <!-- Header -->
-
-                                        <li class="menu-header small text-uppercase">
-                                            <span class="menu-header-text">Laporan</span>
-                                        </li>
-
-                                        <!-- Apps -->
-                                        <li
-                                            class="menu-item {{ request()->is('admin/parameter-report*') ? 'active' : '' }}">
-                                            <a href="{{ route('parameterreport') }}" class="menu-link">
-                                                <i class="menu-icon tf-icons bx bx-collection"></i>
-                                                <div data-i18n="Basic">Parameter</div>
-                                            </a>
-                                        </li>
-
-                                        <li
-                                            class="menu-item {{ request()->is('admin/disease-report*') ? 'active' : '' }}">
-                                            <a href="{{ route('diseasereport') }}" class="menu-link">
-                                                <i class="menu-icon tf-icons bx bx-collection"></i>
-                                                <div data-i18n="Basic">Kesehatan</div>
-                                            </a>
-                                        </li>
-                                        <!-- <li
-                                                class="menu-item {{ request()->is('admin/pending-order*') ? 'active' : '' }}">
-                                                <a href="{{ route('pendingorder') }}" class="menu-link">
-                                                    <i class="menu-icon tf-icons bx bx-collection"></i>
-                                                    <div data-i18n="Basic">Parameter</div>
-                                                </a>
-                                            </li>
-                                            <li
-                                                class="menu-item {{ request()->is('admin/history-order*') ? 'active' : '' }}">
-                                                <a href="{{ route('historyorder') }}" class="menu-link">
-                                                    <i class="menu-icon tf-icons bx bx-collection"></i>
-                                                    <div data-i18n="Basic">Profil</div>
-                                                </a>
-                                            </li> -->
-                        </ul>
+                    < ! -- Header --><li class="menu-header small text-uppercase"><span class="menu-header-text">Pengguna</span></li>< !-- Apps --><li class="menu-item {{ request()->is('admin/add-users*') ? 'active' : '' }}"><a href="{{ route('add-users') }}" class="menu-link"><i class="menu-icon tf-icons bx bx-collection"></i><div data-i18n="Basic">Tambah Pengguna</div></a></li><li class="menu-item {{ request()->is('admin/all-users*') ? 'active' : '' }}"><a href="{{ route('allusers') }}" class="menu-link"><i class="menu-icon tf-icons bx bx-collection"></i><div data-i18n="Basic">Semua Pengguna</div></a></li>< ! -- Header --><li class="menu-header small text-uppercase"><span class="menu-header-text">Kolam</span></li>< !-- Apps --><li class="menu-item {{ request()->is('admin/add-pond*') ? 'active' : '' }}"><a href="{{ route('addponds') }}" class="menu-link"><i class="menu-icon tf-icons bx bx-collection"></i><div data-i18n="Basic">Tambah Kolam</div></a></li><li class="menu-item {{ request()->is('admin/all-pond*') ? 'active' : '' }}"><a href="{{ route('allponds') }}" class="menu-link"><i class="menu-icon tf-icons bx bx-collection"></i><div data-i18n="Basic">Semua Kolam</div></a></li>< !-- Header --><li class="menu-header small text-uppercase"><span class="menu-header-text">Laporan</span></li>< !-- Apps --><li class="menu-item {{ request()->is('admin/parameter-report*') ? 'active' : '' }}"><a href="{{ route('parameterreport') }}" class="menu-link"><i class="menu-icon tf-icons bx bx-collection"></i><div data-i18n="Basic">Parameter</div></a></li><li class="menu-item {{ request()->is('admin/disease-report*') ? 'active' : '' }}"><a href="{{ route('diseasereport') }}" class="menu-link"><i class="menu-icon tf-icons bx bx-collection"></i><div data-i18n="Basic">Kesehatan</div></a></li>< !-- <li class="menu-item {{ request()->is('admin/pending-order*') ? 'active' : '' }}"><a href="{{ route('pendingorder') }}" class="menu-link"><i class="menu-icon tf-icons bx bx-collection"></i><div data-i18n="Basic">Parameter</div></a></li><li class="menu-item {{ request()->is('admin/history-order*') ? 'active' : '' }}"><a href="{{ route('historyorder') }}" class="menu-link"><i class="menu-icon tf-icons bx bx-collection"></i><div data-i18n="Basic">Profil</div></a></li>--></ul>
 
                     /* Jika Anda ingin mengubah latar belakang item menu aktif */
                     #layout-menu .menu-item.active {
@@ -280,7 +218,9 @@
                                                     </div>
                                                 </div>
                                                 <div class="flex-grow-1">
-                                                    <span class="fw-medium d-block">{{ Auth::user()->f_name }}</span>
+                                                    @auth
+                                                        <span class="fw-medium d-block">{{ Auth::user()->f_name }}</span>
+                                                    @endauth
                                                     <small class="text-muted">Admin</small>
                                                 </div>
                                             </div>
