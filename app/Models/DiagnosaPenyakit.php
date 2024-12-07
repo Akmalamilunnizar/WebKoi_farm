@@ -25,11 +25,18 @@ class DiagnosaPenyakit extends Model
         return $this->belongsTo(KoiFish::class, 'id_koi', 'id');
     }
 
-    // Relationship with Penyakit (for id_penyakit)
+
     public function penyakit()
     {
         return $this->belongsTo(Penyakit::class, 'id_penyakit', 'id');
     }
+
+    // Relationship with Penyakit (for id_penyakit)
+    public function diagnosaPenyakit()
+    {
+        return $this->hasMany(DiagnosaPenyakit::class, 'id_penyakit', 'id');
+    }
+
 
     // Accessor to retrieve 'jenis_koi' from the related 'KoiFish'
     public function getJenisKoiAttribute()

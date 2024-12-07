@@ -56,7 +56,7 @@
                                 {{-- Show related Koi name --}}
                                 <td>{{ $diagnosas->koiFish->name ?? 'Koi not available' }}</td>  {{-- This will display the Koi name --}}
                                 {{-- Show related Penyakit name --}}
-                                <td>{{ $diagnosas->penyakit->name ?? 'Penyakit not available' }}</td>  {{-- This will display the Penyakit name --}}
+                                <td>{{ $diagnosas->penyakit->nama_penyakit ?? 'Penyakit not available' }}</td>  {{-- This will display the Penyakit name --}}
                                 <td>
                                     @if ($diagnosas->gambar_koi)
                                         <img src="{{ asset($diagnosas->gambar_koi) }}" alt="Gambar Koi" width="50">

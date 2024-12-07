@@ -18,19 +18,17 @@ Detail Diagnosa Penyakit - Restorant
         <h5 class="card-header">Detail Ikan Koi</h5>
         <div class="card-body">
             <div class="mb-3">
-                <strong>Jenis Koi :</strong> {{ $koi->jenis_koi }}
+                <strong>Jenis Koi :</strong> {{ $diagnosa->koiFish->jenisKoi->name ?? 'Jenis not available' }}
             </div>
+
             <div class="mb-3">
-                <strong>Penyakit :</strong> {{ $diagnosa->penyakit }}
-            </div>
-            <div class="mb-3">
-                <strong>Penyebab :</strong> {{ $diagnosa->penyebab }}
+                <strong>Penyakit :</strong> {{ $diagnosa->penyakit->nama_penyakit }}
             </div>
             <div class="mb-3">
                 <strong>Gambar Koi Terdiagnosa:</strong><br>
                 @if($diagnosa->gambar_koi)
-                    <a href="{{ asset('storage/images/' . $diagnosa->gambar_koi) }}" target="_blank">
-                        <img src="{{ asset('storage/images/' . $diagnosa->gambar_koi) }}" alt="Gambar Koi" height="150"
+                    <a href="{{ asset($diagnosa->gambar_koi) }}" target="_blank">
+                        <img src="{{ asset($diagnosa->gambar_koi) }}" alt="Gambar Koi" height="150"
                             style="cursor: pointer;">
                     </a>
                 @else
@@ -38,10 +36,7 @@ Detail Diagnosa Penyakit - Restorant
                 @endif
             </div>
             <div class="mb-3">
-                <strong>Keterangan :</strong> {{ $diagnosa->keterangan }}
-            </div>
-            <div class="mb-3">
-                <strong>Kemungkinan Penyakit :</strong> <!-- {{ $diagnosa->keterangan }} -->
+                <strong>Keterangan :</strong> {{ $diagnosa->penyakit->description }}
             </div>
             <a href="{{ route('allDiagnosaPenyakit') }}" class="btn btn-secondary">Kembali</a>
         </div>

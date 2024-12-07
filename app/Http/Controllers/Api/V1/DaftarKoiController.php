@@ -74,7 +74,6 @@ class DaftarKoiController extends Controller
             $koi->umur = $validated['umur'];
             $koi->created_at = $validated['created_at'];
             $koi->id_penyakit = $validated['penyakit'];
-            $koi->description = $validated['description'];
 
             // Simpan file gambar
             if ($request->hasFile('img')) {

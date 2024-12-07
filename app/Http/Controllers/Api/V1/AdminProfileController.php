@@ -65,13 +65,37 @@ class AdminProfileController extends Controller
         $id = Auth::user()->id;
         $profile = User::find($id);
 
-        $request->validate([
-            'f_name' => 'required|string|max:255',
-            'email' => 'required|email|max:255|unique:users,email,' . $id,
-            'currentPassword' => 'nullable|min:6', // Password saat ini opsional
-            'newPassword' => 'nullable|min:6|confirmed', // Validasi konfirmasi password baru
-            'img' => 'nullable|image|mimes:png,jpg,gif,jpeg|max:2048',
-        ]);
+        $request->validate(
+            [
+                'f_name' => 'required|string|max:255',
+                'email' => 'required|email|max:255|unique:users,email,' . $id,
+                'currentPassword' => 'nullable|min:6', // Password saat ini opsional
+                'newPassword' => 'nullable|min:6|confirmed', // Validasi konfirmasi password baru
+                'img' => 'nullable|image|mimes:png,jpg,gif,jpeg|max:2048',
+            ],
+            [
+                'f_name.required' => 'Nama depan wajib diisi.',
+                'f_name.string' => 'Nama depan harus berupa teks.',
+                'f_name.max' => 'Nama depan tidak boleh lebih dari 255 karakter.',
+
+                'email.required' => 'Email wajib diisi.',
+                'email.email' => 'Format email tidak valid.',
+                'email.max' => 'Email tidak boleh lebih dari 255 karakter.',
+                'email.unique' => 'Email ini sudah terdaftar.',
+
+                'currentPassword.nullable' => 'Password saat ini opsional.',
+                'currentPassword.min' => 'Password saat ini harus terdiri dari minimal 6 karakter.',
+
+                'newPassword.nullable' => 'Password baru opsional.',
+                'newPassword.min' => 'Password baru harus terdiri dari minimal 6 karakter.',
+                'newPassword.confirmed' => 'Konfirmasi password baru tidak sesuai.',
+
+                'img.nullable' => 'Gambar profil opsional.',
+                'img.image' => 'File yang diunggah harus berupa gambar.',
+                'img.mimes' => 'Gambar harus memiliki format PNG, JPG, GIF, atau JPEG.',
+                'img.max' => 'Ukuran gambar tidak boleh lebih dari 2MB.',
+            ]
+        );
 
         try {
             // Update nama dan email
