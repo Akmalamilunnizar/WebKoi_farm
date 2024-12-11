@@ -61,9 +61,9 @@ class AdminProfileController extends Controller
 
     // Mengupdate profil admin
     public function StoreProfile(Request $request)
-    {
-        $id = Auth::user()->id;
-        $profile = User::find($id);
+{
+    $id = Auth::user()->id;
+    $profile = User::find($id);
 
         $request->validate(
             [
@@ -97,41 +97,41 @@ class AdminProfileController extends Controller
             ]
         );
 
-        try {
-            // Update nama dan email
-            $profile->f_name = $request->input('f_name');
-            $profile->email = $request->input('email');
+    try {
+        // Update nama dan email
+        $profile->f_name = $request->input('f_name');
+        $profile->email = $request->input('email');
 
-            // Verifikasi dan update password jika ada
-            if ($request->filled('newPassword')) {
-                if (!Hash::check($request->input('currentPassword'), $profile->password)) {
-                    return redirect()->back()->withErrors(['currentPassword' => 'Password saat ini tidak valid.']);
-                }
-
-                $profile->password = bcrypt($request->input('newPassword'));
+        // Verifikasi dan update password jika ada
+        if ($request->filled('newPassword')) {
+            if (!Hash::check($request->input('currentPassword'), $profile->password)) {
+                return redirect()->back()->withErrors(['currentPassword' => 'Password saat ini tidak valid.']);
             }
 
-            // Update gambar profil jika ada
-            if ($request->hasFile('img')) {
-                $del = public_path('uploads/users/' . $profile->img);
-                if (File::exists($del)) {
-                    File::delete($del);
-                }
-
-                $file = $request->file('img');
-                $filename = '_profile_' . time() . '.' . $file->getClientOriginalExtension();
-                $file->move(public_path('uploads/users/'), $filename);
-                $profile->img = $filename;
-            }
-
-            $profile->save();
-
-            return redirect()->route('profile')->with('success', 'Profil berhasil diperbarui.');
-        } catch (\Exception $e) {
-            Log::error('Error updating profile: ' . $e->getMessage());
-            return redirect()->back()->withErrors(['error' => 'Terjadi kesalahan saat memperbarui profil.']);
+            $profile->password = bcrypt($request->input('newPassword'));
         }
+
+        // Update gambar profil jika ada
+        if ($request->hasFile('img')) {
+            $del = public_path('uploads/users/' . $profile->img);
+            if (File::exists($del)) {
+                File::delete($del);
+            }
+
+            $file = $request->file('img');
+            $filename = '_profile_' . time() . '.' . $file->getClientOriginalExtension();
+            $file->move(public_path('uploads/users/'), $filename);
+            $profile->img = $filename;
+        }
+
+        $profile->save();
+
+        return redirect()->route('profile')->with('success', 'Profil berhasil diperbarui.');
+    } catch (\Exception $e) {
+        Log::error('Error updating profile: ' . $e->getMessage());
+        return redirect()->back()->withErrors(['error' => 'Terjadi kesalahan saat memperbarui profil.']);
     }
+}
 
     // Menghapus profil
     public function destroy($id)

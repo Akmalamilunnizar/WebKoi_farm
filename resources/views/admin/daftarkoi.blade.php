@@ -1,20 +1,22 @@
 @extends('admin.layouts.template')
+
 @section('page_title')
 SANKE | Halaman Daftar Ikan Koi
 @endsection
+
 @section('search')
 <div class="navbar-nav align-items-center">
     <div class="nav-item d-flex align-items-center">
         <i class="bx bx-search fs-4 lh-0"></i>
-        <form method="GET" action={{ route('searchusers') }}>
+        <form method="GET" action="{{ route('searchusers') }}">
             <input type="text" name="search" class="form-control border-0 shadow-none ps-1 ps-sm-2"
                 placeholder="Pencarian Id atau nama..." value="{{ isset($search) ? $search : '' }}"
                 aria-label="Pencarian..." />
         </form>
     </div>
 </div>
-
 @endsection
+
 @section('content')
 <div class="container mt-4">
     <a href="{{ route('adddaftarkoi') }}" class="btn btn-success ms-auto"
@@ -53,10 +55,26 @@ SANKE | Halaman Daftar Ikan Koi
                         <td>{{ $fish->name }}</td>
                         <td>{{ $fish->jenisKoi ? $fish->jenisKoi->name : 'Jenis tidak tersedia' }}</td>
                         <td>{{ $fish->tanggal_lahir }}</td>
-                        <td>{{ $fish->ponds->first()?->name }}</td>
-                        <td>{{ $fish->umur }} tahun</td>
+                        <td>
+                            @if ($fish->ponds && $fish->ponds->count() > 0)
+                                @foreach ($fish->ponds as $pond)
+                                    <span class="badge bg-primary">{{ $pond->name }}</span>
+                                @endforeach
+                            @else
+                                <span class="badge bg-secondary">Tidak ada kolam</span>
+                            @endif
+                        </td>
+                        <td>{{ $fish->umur ?? 'Tidak diketahui' }} tahun</td>
                         <td>{{ $fish->created_at }}</td>
-                        <td>{{ $fish->penyakit ? $fish->penyakit->nama_penyakit : 'Penyakit tidak tersedia' }}</td>
+                        <td>
+                            @if ($fish->penyakit && $fish->penyakit->count() > 0)
+                                @foreach ($fish->penyakit as $penyakit)
+                                    <span class="badge bg-danger">{{ $penyakit->nama_penyakit }}</span>
+                                @endforeach
+                            @else
+                                <span class="badge bg-success">Tidak Ada Penyakit</span>
+                            @endif
+                        </td>
                         <td>
                             <div class="dropdown">
                                 <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
@@ -68,7 +86,7 @@ SANKE | Halaman Daftar Ikan Koi
                                     <a class="dropdown-item" href="{{ route('koi.edit', $fish->id) }}"><i
                                             class="bx bx-edit-alt me-1"></i> Edit</a>
                                     <form action="{{ route('koi.delete', $fish->id) }}" method="POST"
-                                        onsubmit="return confirm('Are you sure you want to delete this item?');"
+                                        onsubmit="return confirm('Apakah Anda yakin ingin menghapus data ini?');"
                                         style="display:inline;">
                                         @csrf
                                         @method('DELETE')
@@ -86,5 +104,4 @@ SANKE | Halaman Daftar Ikan Koi
         </table>
     </div>
 </div>
-
 @endsection

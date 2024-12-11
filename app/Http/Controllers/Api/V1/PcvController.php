@@ -9,9 +9,11 @@ use Illuminate\Support\Facades\File;
 use App\Models\User;
 use App\Models\DiagnosaPenyakit;
 use App\Models\KoiFish;
+use App\Models\KoiFish;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Http;
+use Carbon\Carbon;
 use Carbon\Carbon;
 
 
@@ -29,10 +31,24 @@ class PcvController extends Controller
     {
         $koi = KoiFish::whereDoesntHave('diagnosaPenyakit')->latest()->get();
 
+        $koi = KoiFish::whereDoesntHave('diagnosaPenyakit')->latest()->get();
+
         // Validate the uploaded file
         $request->validate([
             'koi_id' => 'required|unique:diagnosa_penyakit,id_koi',
+            'koi_id' => 'required|unique:diagnosa_penyakit,id_koi',
             'imagefile' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ], [
+            'koi_id.required' => 'Silakan pilih ikan koi.',
+            'koi_id.unique' => 'Ikan koi yang dipilih sudah didiagnosa sebelumnya.',
+            'imagefile.required' => 'Silakan unggah gambar.',
+            'imagefile.image' => 'File yang diunggah harus berupa gambar.',
+            'imagefile.mimes' => 'Gambar harus dalam format jpeg, png, jpg, atau gif.',
+            'imagefile.max' => 'Ukuran gambar tidak boleh lebih dari 2MB.',
+        ]);
+
+        // Get the koi_id from the form
+        $koi_id = $request->input('koi_id');  // This will contain the selected koi_id
         ], [
             'koi_id.required' => 'Silakan pilih ikan koi.',
             'koi_id.unique' => 'Ikan koi yang dipilih sudah didiagnosa sebelumnya.',
@@ -48,10 +64,10 @@ class PcvController extends Controller
         // Get the uploaded file
         $file = $request->file('imagefile');
 
-        // Validate the file's existence and upload status
-        if (!$file->isValid()) {
-            return back()->withErrors(['error' => 'Invalid file upload.']);
-        }
+    // Validate the file's existence and upload status
+    if (!$file->isValid()) {
+        return back()->withErrors(['error' => 'Invalid file upload.']);
+    }
 
         // Mapping function to convert disease names to numerical values
         function mapDiseaseToNumber($disease)
@@ -77,7 +93,20 @@ class PcvController extends Controller
             $prediction = $data['prediction'];
             $probabilities = $data['probabilities'];
             $imageUrl = $data['image_url'];
+        if ($response->successful()) {
+            $data = $response->json();
+            $prediction = $data['prediction'];
+            $probabilities = $data['probabilities'];
+            $imageUrl = $data['image_url'];
 
+            // Optionally, you can save the diagnosis to the database
+            DiagnosaPenyakit::create([
+                'id_koi' => $koi_id, // Store the selected koi_id
+                'id_penyakit' => mapDiseaseToNumber($prediction),
+                'gambar_koi' => $imageUrl,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
             // Optionally, you can save the diagnosis to the database
             DiagnosaPenyakit::create([
                 'id_koi' => $koi_id, // Store the selected koi_id
@@ -97,6 +126,10 @@ class PcvController extends Controller
             return response()->json(['error' => 'Failed to predict'], $response->status());
         }
     }
+
+
+
+
 
 
 

@@ -12,6 +12,7 @@ class DiagnosaController extends Controller
     // Menampilkan semua diagnosa penyakit
     public function index()
     {
+        $diagnoses_d = DiagnosaPenyakit::with(['koiFish', 'penyakit'])->get();
         $diagnoses_d = DiagnosaPenyakit::with(['koiFish.jenisKoi', 'penyakit'])->get();
         $diagnosas = DiagnosaPenyakit::all();
 

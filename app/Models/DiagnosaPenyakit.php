@@ -55,4 +55,33 @@ class DiagnosaPenyakit extends Model
     {
         return $this->penyakit->name;
     }
+
+    public function koiFish()
+    {
+        return $this->belongsTo(KoiFish::class, 'id_koi', 'id');
+    }
+
+    // Relationship with Penyakit (for id_penyakit)
+    public function penyakit()
+    {
+        return $this->belongsTo(Penyakit::class, 'id_penyakit', 'id');
+    }
+
+    // Accessor to retrieve 'jenis_koi' from the related 'KoiFish'
+    public function getJenisKoiAttribute()
+    {
+        return $this->koiFish->jenis_koi;
+    }
+
+    // Accessor to get 'koi_name' from related KoiFish
+    public function getKoiNameAttribute()
+    {
+        return $this->koiFish->name;
+    }
+
+    // Accessor to get 'penyakit_name' from related Penyakit
+    public function getPenyakitNameAttribute()
+    {
+        return $this->penyakit->name;
+    }
 }

@@ -22,7 +22,7 @@ class DashboardController extends Controller
         ->orderBy('bulan')
         ->pluck('nilai');
 
-    $dataSensorTemperature = Sensor::selectRaw('MONTH(created_at) as bulan, temperature as nilai')
+    $dataSensorSuhu = Sensor::selectRaw('MONTH(created_at) as bulan, temperature as nilai')
         ->whereIn('id_sensor', function ($query) {
             $query->select(DB::raw('MAX(id_sensor)'))
                 ->from('sensor')
@@ -52,16 +52,16 @@ class DashboardController extends Controller
     // Nilai terbaru dari setiap sensor
     $latestSensorData = Sensor::latest()->first();
     $phValue = $latestSensorData->ph ?? 0; // Default ke 0 jika tidak ada data
-    $temperatureValue = $latestSensorData->temperature ?? 0;
+    $suhuValue = $latestSensorData->temperature ?? 0;
     $tdsValue = $latestSensorData->tds ?? 0;
 
     return view('admin.dashboard', compact(
         'dataBulan',
         'dataSensorPH',
-        'dataSensorTemperature',
+        'dataSensorSuhu',
         'dataSensorTDS',
         'phValue',
-        'temperatureValue',
+        'suhuValue',
         'tdsValue'
     ));
 }
@@ -97,3 +97,4 @@ class DashboardController extends Controller
         return $bulanArray[$bulanAngka + 0];
     }
 }
+

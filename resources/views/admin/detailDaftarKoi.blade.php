@@ -33,16 +33,18 @@ Detail Koi
                     </div>
 
                 </div>
-                <div class="row">
-                    <div class="col-sm-6">
-                        <strong>Umur Koi:</strong>
-                        <p>{{ $koi->umur }}</p>
-                    </div>
-                    <div class="col-sm-6">
+                <div class="col-sm-6">
                         <strong>Penyakit:</strong>
-                        <p> {{ $koi->penyakit ? $koi->penyakit->nama_penyakit : 'Penyakit tidak tersedia' }}</p>
+                        <p>
+                            @if ($koi->penyakit && $koi->penyakit->count() > 0)
+                                @foreach ($koi->penyakit as $penyakit)
+                                    <span class="badge bg-danger">{{ $penyakit->nama_penyakit }}</span>
+                                @endforeach
+                            @else
+                                <span class="badge bg-success">Tidak Ada Penyakit</span>
+                            @endif
+                        </p>
                     </div>
-
                 </div>
                 <div class="row">
                     <div class="col-sm-12">

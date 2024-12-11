@@ -107,6 +107,10 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
         Route::delete('/admin/daftar-koi/koi/{id}', 'destroy')->name('koi.delete');
 
         Route::post('/add-penyakit', [DaftarKoiController::class, 'addPenyakit'])->name('addPenyakit');
+
+        Route::post('/add-jenis-koi', [DaftarKoiController::class, 'addJenisKoi'])->name('addJenisKoi');
+        Route::delete('/delete-jenis-koi/{id}', [DaftarKoiController::class, 'deleteJenisKoi'])->name('deleteJenisKoi');
+
     });
 
 
@@ -172,6 +176,8 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
         Route::get('/admin/view-order/{id}', 'ViewOrder')->name('vieworder');
         Route::get('/admin/update-order/{id}', 'UpdateOrder')->name('updateorder');
         Route::get('/admin/delete-order/{id}', 'DeleteOrder')->name('deleteorder');
+        Route::post('/admin/profile', [AdminProfileController::class, 'StoreProfile'])->name('storeprofile');
+
     });
 
     Route::controller(PcvController::class)->group(function () {
