@@ -203,8 +203,7 @@
                                 <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);"
                                     data-bs-toggle="dropdown">
                                     <div class="avatar avatar-online">
-                                        <img src="{{ asset('dashboard2/assets/img/avatars/admin2.png') }}" alt
-                                            class="w-px-40 h-auto rounded-circle" />
+                                    <img src="{{ asset('uploads/users/' . Auth::user()->img) }}" alt="user-avatar" class="d-block rounded" height="100" width="100" id="uploadedAvatar" />
                                     </div>
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end">
@@ -213,8 +212,7 @@
                                             <div class="d-flex">
                                                 <div class="flex-shrink-0 me-3">
                                                     <div class="avatar avatar-online">
-                                                        <img src="{{ asset('dashboard2/assets/img/avatars/admin2.png') }}"
-                                                            alt class="w-px-40 h-auto rounded-circle" />
+                                                    <img src="{{ asset('uploads/users/' . Auth::user()->img) }}" alt="user-avatar" class="d-block rounded" height="100" width="100" id="uploadedAvatar" />
                                                     </div>
                                                 </div>
                                                 <div class="flex-grow-1">

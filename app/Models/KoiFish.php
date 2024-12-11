@@ -9,58 +9,72 @@ class KoiFish extends Model
 {
     use HasFactory;
 
-    protected $table = 'koi_fish'; // Ganti dengan nama tabel yang sesuai
+    protected $table = 'koi_fish'; // Nama tabel
 
     protected $fillable = [
-        // 'id',
+        //'id',
         'name',
         'description',
         'jenis',
-        'id_penyakit',
         'img',
         'umur',
         'created_at',  // Tanggal dibuat (otomatis ditangani oleh Laravel)
         'updated_at',  // Tanggal diperbarui (otomatis ditangani oleh Laravel)
     ];
-    // Menentukan nama kolom primary key (opsional jika kamu menggunakan id sebagai default)
-    // protected $primaryKey = 'id'; // Kolom primary key
 
-    // kalo ga mau ingin menggunakan timestamps seperti 'created_at' dan 'updated_at',
-    // bisa setel property ini ke false.
-    public $timestamps = true; // Jika kamu menggunakan timestamps (defaultnya)
+    // Tentukan nilai default untuk kolom description jika kosong
+    protected $attributes = [
+        'description' => '',
+    ];
 
+    // Jika timestamps seperti 'created_at' dan 'updated_at' digunakan (default Laravel)
+    public $timestamps = true;
 
-    public function jenisKoi() // Relasi ke model JenisKoi()
+    /**
+     * Relasi ke model JenisKoi
+     */
+    public function jenisKoi()
     {
-        return $this->belongsTo(JenisKoi::class, 'jenis_koi');
-        return $this->belongsTo(JenisKoi::class, 'jenis', 'id');
+        return $this->belongsTo(JenisKoi::class, 'jenis_koi', 'id');
     }
 
-    // A Koi Fish belongs to a Pond
+    /**
+     * Relasi ke model Pond
+     * (Relasi langsung, jika kolam disimpan sebagai foreign key)
+     */
     public function pond()
     {
         return $this->belongsTo(Pond::class, 'pond_id');
     }
 
-    // public function penyakit() // Relasi ke model Penyakit()
-    // {
-    //     return $this->belongsTo(Penyakit::class, 'penyakit', 'id');
-    // }
-
-    // Relasi dengan Penyakit
-
-
-    public function penyakit()
-    {
-        return $this->belongsTo(Penyakit::class, 'id_penyakit');
-    }
-
+    /**
+     * Relasi ke model DiagnosaPenyakit (hasMany)   
+     */
     public function diagnosaPenyakit()
     {
         return $this->hasMany(DiagnosaPenyakit::class, 'id_koi', 'id');
     }
 
+    /**
+     * Relasi ke model Penyakit (hasManyThrough)
+     * Menghubungkan melalui DiagnosaPenyakit
+     */
+    public function penyakit()
+    {
+        return $this->hasManyThrough(
+            Penyakit::class,           // Model tujuan
+            DiagnosaPenyakit::class,   // Model perantara
+            'id_koi',                  // Foreign key di tabel diagnosa_penyakit
+            'id',                      // Foreign key di tabel penyakit
+            'id',                      // Primary key di tabel koi_fish
+            'id_penyakit'              // Local key di tabel diagnosa_penyakit
+        );
+    }
 
+    /**
+     * Relasi ke model Pond melalui tabel pivot 'detail_koi'
+     * (Relasi banyak ke banyak)
+     */
     public function ponds()
     {
         return $this->belongsToMany(Pond::class, 'detail_koi', 'fish_id', 'pond_id');

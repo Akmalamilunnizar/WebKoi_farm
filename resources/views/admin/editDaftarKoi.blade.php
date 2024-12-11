@@ -14,13 +14,13 @@ Edit Daftar Koi
             </div>
             <div class="card-body">
                 @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
                 @endif
 
                 <form action="{{ route('koi.update', $koi->id) }}" method="POST" enctype="multipart/form-data">
@@ -30,7 +30,8 @@ Edit Daftar Koi
                     <div class="row mb-3">
                         <label class="col-sm-2 col-form-label" for="name">Nama</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="name" name="name" value="{{ $koi->name }}" required>
+                            <input type="text" class="form-control" id="name" name="name" value="{{ $koi->name }}"
+                                required>
                         </div>
                     </div>
 
@@ -40,7 +41,9 @@ Edit Daftar Koi
                             <select class="form-control" id="jenis_koi" name="jenis_koi" required>
                                 <option value="">Pilih Jenis Koi</option>
                                 @foreach($jenisKoiOptions as $jenis)
-                                <option value="{{ $jenis->id }}" {{ $koi->jenis_koi == $jenis->id ? 'selected' : '' }}>{{ $jenis->name }}</option>
+                                    <option value="{{ $jenis->id }}" {{ $koi->jenis_koi == $jenis->id ? 'selected' : '' }}>
+                                        {{ $jenis->name }}
+                                    </option>
                                 @endforeach
                             </select>
                         </div>
@@ -49,7 +52,8 @@ Edit Daftar Koi
                     <div class="row mb-3">
                         <label class="col-sm-2 col-form-label" for="tanggal_lahir">Tanggal Lahir</label>
                         <div class="col-sm-10">
-                            <input type="date" class="form-control" id="tanggal_lahir" name="tanggal_lahir" value="{{ $koi->tanggal_lahir }}">
+                            <input type="date" class="form-control" id="tanggal_lahir" name="tanggal_lahir"
+                                value="{{ $koi->tanggal_lahir }}">
                         </div>
                     </div>
 
@@ -63,7 +67,8 @@ Edit Daftar Koi
                     <div class="row mb-3">
                         <label class="col-sm-2 col-form-label" for="created_at">Tanggal Daftar</label>
                         <div class="col-sm-10">
-                            <input type="date" class="form-control" id="created_at" name="created_at" value="{{ $koi->created_at }}" required readonly />
+                            <input type="date" class="form-control" id="created_at" name="created_at"
+                                value="{{ $koi->created_at }}" required readonly />
                         </div>
                     </div>
 
@@ -73,7 +78,8 @@ Edit Daftar Koi
                         <div class="col-sm-10">
                             <input type="file" class="form-control" id="img" name="img" />
                             @if($koi->img)
-                            <img src="{{ asset('storage/'.$koi->img) }}" alt="Gambar Koi" class="mt-2" style="max-width: 100px;">
+                                <img src="{{ asset('storage/' . $koi->img) }}" alt="Gambar Koi" class="mt-2"
+                                    style="max-width: 100px;">
                             @endif
                         </div>
                     </div>
@@ -81,14 +87,16 @@ Edit Daftar Koi
                     <div class="row mb-3">
                         <label class="col-sm-2 col-form-label" for="penyakit">Penyakit</label>
                         <div class="col-sm-10">
-                            <textarea class="form-control" id="penyakit" name="penyakit" rows="3"> {{ $koi->penyakit ? $koi->penyakit->nama_penyakit : 'Penyakit tidak tersedia' }}</textarea>
-                        </div>
-                    </div>
-
-                    <div class="row mb-3">
-                        <label class="col-sm-2 col-form-label" for="description">Keterangan</label>
-                        <div class="col-sm-10">
-                            <textarea class="form-control" id="description" name="description" rows="3">{{ $koi->description }}</textarea>
+                            <div class="input-group">
+                                <select class="form-control" id="penyakit" name="penyakit" required>
+                                    <option value="">Pilih Penyakit</option>
+                                    @foreach ($penyakitOptions as $penyakit)
+                                        <option value="{{ $penyakit->id }}" {{ $koi->penyakit->isNotEmpty() && $koi->penyakit->first()->id == $penyakit->id ? 'selected' : '' }}>
+                                            {{ $penyakit->nama_penyakit }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
                         </div>
                     </div>
 
