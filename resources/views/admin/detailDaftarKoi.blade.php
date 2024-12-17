@@ -46,12 +46,12 @@ Detail Koi
                         </p>
                     </div>
                 </div>
-                <div class="row">
+                {{-- <div class="row">
                     <div class="col-sm-12">
                         <strong>Deskripsi:</strong>
                         <p>{{ $koi->description }}</p>
                     </div>
-                </div>
+                </div> --}}
                 <div class="row">
                     <div class="row">
                         <div class="row">

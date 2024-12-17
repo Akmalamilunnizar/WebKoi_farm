@@ -9,46 +9,36 @@ use Illuminate\Support\Facades\File;
 use App\Models\User;
 use App\Models\DiagnosaPenyakit;
 use App\Models\KoiFish;
-use App\Models\KoiFish;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Http;
 use Carbon\Carbon;
-use Carbon\Carbon;
-
 
 class PcvController extends Controller
 {
-    // Menampilkan daftar profil pengguna
+    /**
+     * Display a list of koi fish profiles.
+     */
     public function Index()
     {
-        // $profile = Auth::user();
         $koi = KoiFish::latest()->get();
         return view('admin.pcv', compact('koi'));
     }
 
-    public function Result(Request $request)
-    {
-        $koi = KoiFish::whereDoesntHave('diagnosaPenyakit')->latest()->get();
 
+
+
+    /**
+     * Handle image analysis and save results to the database.
+     */
+    public function result(Request $request)
+    {
         $koi = KoiFish::whereDoesntHave('diagnosaPenyakit')->latest()->get();
 
         // Validate the uploaded file
         $request->validate([
             'koi_id' => 'required|unique:diagnosa_penyakit,id_koi',
-            'koi_id' => 'required|unique:diagnosa_penyakit,id_koi',
             'imagefile' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-        ], [
-            'koi_id.required' => 'Silakan pilih ikan koi.',
-            'koi_id.unique' => 'Ikan koi yang dipilih sudah didiagnosa sebelumnya.',
-            'imagefile.required' => 'Silakan unggah gambar.',
-            'imagefile.image' => 'File yang diunggah harus berupa gambar.',
-            'imagefile.mimes' => 'Gambar harus dalam format jpeg, png, jpg, atau gif.',
-            'imagefile.max' => 'Ukuran gambar tidak boleh lebih dari 2MB.',
-        ]);
-
-        // Get the koi_id from the form
-        $koi_id = $request->input('koi_id');  // This will contain the selected koi_id
         ], [
             'koi_id.required' => 'Silakan pilih ikan koi.',
             'koi_id.unique' => 'Ikan koi yang dipilih sudah didiagnosa sebelumnya.',
@@ -64,10 +54,10 @@ class PcvController extends Controller
         // Get the uploaded file
         $file = $request->file('imagefile');
 
-    // Validate the file's existence and upload status
-    if (!$file->isValid()) {
-        return back()->withErrors(['error' => 'Invalid file upload.']);
-    }
+        // Validate the file's existence and upload status
+        if (!$file->isValid()) {
+            return back()->withErrors(['error' => 'Invalid file upload.']);
+        }
 
         // Mapping function to convert disease names to numerical values
         function mapDiseaseToNumber($disease)
@@ -93,20 +83,7 @@ class PcvController extends Controller
             $prediction = $data['prediction'];
             $probabilities = $data['probabilities'];
             $imageUrl = $data['image_url'];
-        if ($response->successful()) {
-            $data = $response->json();
-            $prediction = $data['prediction'];
-            $probabilities = $data['probabilities'];
-            $imageUrl = $data['image_url'];
 
-            // Optionally, you can save the diagnosis to the database
-            DiagnosaPenyakit::create([
-                'id_koi' => $koi_id, // Store the selected koi_id
-                'id_penyakit' => mapDiseaseToNumber($prediction),
-                'gambar_koi' => $imageUrl,
-                'created_at' => now(),
-                'updated_at' => now(),
-            ]);
             // Optionally, you can save the diagnosis to the database
             DiagnosaPenyakit::create([
                 'id_koi' => $koi_id, // Store the selected koi_id
@@ -126,19 +103,10 @@ class PcvController extends Controller
             return response()->json(['error' => 'Failed to predict'], $response->status());
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-    // edit profile for web
-    public function StoreProfile(Request $request)
+    /**
+     * Store updated user profile.
+     */
+    public function storeProfile(Request $request)
     {
         $id = Auth::user()->id;
         $profile = User::find($id);
@@ -149,19 +117,15 @@ class PcvController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255|unique:users,email,' . $id,
             'email_verified_at' => 'date',
-            'currentPassword' => 'nullable|min:6', // Ensure current password is provided
-            'newPassword' => 'nullable|min:6|confirmed', // Ensure new password matches confirmation
+            'currentPassword' => 'nullable|min:6',
+            'newPassword' => 'nullable|min:6|confirmed',
         ]);
 
-        // $profile = User::findOrFail($id);
-        // Check if the user wants to change the password
         if ($request->filled('newPassword')) {
-            // Verify current password
             if (!Hash::check($request->input('currentPassword'), $profile->password)) {
                 return redirect()->back()->withErrors(['currentPassword' => 'Password saat ini tidak valid.']);
             }
 
-            // Update the password
             $profile->password = bcrypt($request->input('newPassword'));
         }
 
@@ -188,8 +152,9 @@ class PcvController extends Controller
         return redirect()->route('admin.profiles')->with('success', 'Profil berhasil diperbarui');
     }
 
-
-    // Menghapus profil
+    /**
+     * Delete user profile.
+     */
     public function destroy($id)
     {
         $profile = User::findOrFail($id);

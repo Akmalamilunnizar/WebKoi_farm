@@ -110,6 +110,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 
         Route::post('/add-jenis-koi', [DaftarKoiController::class, 'addJenisKoi'])->name('addJenisKoi');
         Route::delete('/delete-jenis-koi/{id}', [DaftarKoiController::class, 'deleteJenisKoi'])->name('deleteJenisKoi');
+        Route::post('/add-kolam', [PondController::class, 'addKolam'])->name('addKolam');
 
     });
 

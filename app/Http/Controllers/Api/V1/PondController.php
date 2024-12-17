@@ -14,15 +14,26 @@ use Encore\Admin\Layout\Content;
 class PondController extends Controller
 {
     public function Index()
-    {
-        // $jml_ikan
-        $jml_ikan = DB::table('detail_koi')
-            ->selectRaw('count(*) as jml_ikan, fish_id')
-            ->groupBy('fish_id')
-            ->get();
-        $ponds = Pond::latest()->get();
-        return view("admin.allponds", compact('ponds', 'jml_ikan'));
+{
+    // Ambil jumlah ikan per kolam berdasarkan pond_id
+    $jml_ikan = DB::table('detail_koi')
+        ->selectRaw('count(*) as jml_ikan, pond_id')
+        ->groupBy('pond_id')
+        ->get();
+
+    // Ambil data kolam
+    $ponds = Pond::all();
+
+    // Ambil sensor terbaru untuk setiap pond_id
+    foreach ($ponds as $pond) {
+        $latestSensor = $pond->sensors()->latest()->first(); // Ambil sensor terbaru
+        $pond->latestSensor = $latestSensor;
     }
+
+    // Kirim data ke view
+    return view("admin.allponds", compact('ponds', 'jml_ikan'));
+}
+
 
     public function ManagePonds()
     {
@@ -147,6 +158,31 @@ class PondController extends Controller
 
         return response()->json($pond, 200);
     }
+
+    public function updateRelayCondition(Request $request)
+    {
+        $request->validate([
+            'pond_id' => 'required|integer',
+            'relay_condition' => 'required|boolean',
+        ]);
+
+        $pond = Pond::find($request->pond_id);
+
+        if ($pond) {
+            $pond->relay_condition = $request->relay_condition;
+            $pond->save();
+
+            return response()->json([
+                'message' => 'Relay condition updated successfully.',
+                'pond' => $pond,
+            ], 200);
+        }
+
+        return response()->json([
+            'message' => 'Pond not found.',
+        ], 404);
+    }
+
 
 
     /**

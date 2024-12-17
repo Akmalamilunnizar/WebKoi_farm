@@ -15,7 +15,8 @@
     </div>
 @endsection
 @section('content')
-    {{-- <link rel="stylesheet" type="text/css" href="{{ asset('resources/css/app.css') }}"> --}}
+    {{--
+<link rel="stylesheet" type="text/css" href="{{ asset('resources/css/app.css') }}"> --}}
     @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/sass/style.scss'])
     <div class="layout-wrapper">
         <div class="container-xxl flex-grow-1 container-p-y">
@@ -38,48 +39,31 @@
                         <div class="card h-500 p-6 position-relative"> <!-- Make the card container relative -->
                             @foreach ($ponds as $pond)
                                 <div class="position-relative">
-
                                     <div class="box vintage">
-                                        <img class="card-img-top" src="/uploads/{{ $pond->img }}" alt="Card image cap"
-                                            alt="Postcards From Italy">
+                                        <img class="card-img-top" src="/uploads/{{ $pond->img }}" alt="Card image cap">
                                         <h2 class="mb-0 text-white" style="font-weight: 700">{{ $pond->name }}</h2>
-                                        <p> 28°C & Volume {{ $pond->volume }}</p>
+                                        <p>28°C & Volume {{ $pond->volume }}</p>
                                         <dd class="col-sm-3">Id Kolam = {{ $pond->id }}</dd>
                                         <dt class="col-sm-9">Volume Kolam = {{ $pond->volume }}</dt>
+                                        <!-- Menampilkan Jumlah Ikan -->
+                                        <dd class="col-sm-3">Jumlah Ikan =
+                                            {{ $jml_ikan->where('pond_id', $pond->id)->first()->jml_ikan ?? 'Data tidak tersedia' }}
+                                        </dd>
                                     </div>
-                                            <!-- Text positioned on top of the image -->
-                                            {{-- <div class="container">
-                                        <p class="header">Image Hover Effects</p>
-                                        <div class="content">
-                                            <div class="wrapper">
-                                                <div class="wrapper">
-                                                    <div class="box zoom-in">
-                                                        <img class="card-img-top" src="/uploads/{{ $pond->img }}"
-                                                            alt="Card image cap" alt="Postcards From Italy">
-                                                        <h2>Postcards From Italy</h2>
-                                                        <p>And I will love to see that day</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div> --}}
-
                                 </div>
                                 <div class="card-body">
                                     <p class="card-text">
                                     <dl class="row mt-2">
-                                        <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-                                            <input type="radio" class="btn-check" name="btnradio" id="btnradio1" checked
-                                                autocomplete="off" />
-                                            <label class="btn btn-outline-primary" for="btnradio1"><span
-                                                    class="tf-icons bx bx-power-off"></span>&nbsp; Keran Hidup</label>
-                                            <input type="radio" class="btn-check" name="btnradio" id="btnradio2"
-                                                autocomplete="off" />
-                                            <label class="btn btn-outline-primary" for="btnradio2"><span
-                                                    class="tf-icons bx bx-power-off"></span>&nbsp; Keran Mati</label>
-                                        </div>
-                                        {{-- <dt class="col-sm-3">Id Kolam = {{ $pond->id }}</dt>
-                                <dt class="col-sm-9">Volume Kolam = {{ $pond->volume }}</dt> --}}
+                                        {{-- <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                                        <input type="radio" class="btn-check" name="btnradio" id="btnradio1" checked
+                                            autocomplete="off" />
+                                        <label class="btn btn-outline-primary" for="btnradio1"><span
+                                                class="tf-icons bx bx-power-off"></span>&nbsp; Keran Hidup</label>
+                                        <input type="radio" class="btn-check" name="btnradio" id="btnradio2"
+                                            autocomplete="off" />
+                                        <label class="btn btn-outline-primary" for="btnradio2"><span
+                                                class="tf-icons bx bx-power-off"></span>&nbsp; Keran Mati</label>
+                                    </div> --}}
                                     </dl>
                                     </p>
                                     <div class="col-12 col-lg-12 col-md-12 col-sm-12 order-3 order-md-4">
@@ -90,6 +74,7 @@
                                                 Parameter Kolam
                                             </div>
                                             <br>
+                                            <!-- pH -->
                                             <div class="col-2 mb-4 card-body pb-0 px-0 px-md-4">
                                                 <div class="card">
                                                     <div class="card-body">
@@ -97,31 +82,31 @@
                                                             class="card-title d-flex align-items-start justify-content-between">
                                                             <div class="avatar flex-shrink-0">
                                                                 <img src="{{ asset('dashboard2/assets/img/icons/unicons/ph-balance.png') }}"
-                                                                    alt="Credit Card" class="rounded" />
-                                                            </div>
-                                                            <div class="dropdown">
-                                                                <button class="btn p-0" type="button" id="cardOpt4"
-                                                                    data-bs-toggle="dropdown" aria-haspopup="true"
-                                                                    aria-expanded="false">
-                                                                    <i class="bx bx-dots-vertical-rounded"></i>
-                                                                </button>
-                                                                <div class="dropdown-menu dropdown-menu-end"
-                                                                    aria-labelledby="cardOpt4">
-                                                                    <a class="dropdown-item" href="javascript:void(0);">View
-                                                                        More</a>
-                                                                    <a class="dropdown-item"
-                                                                        href="javascript:void(0);">Delete</a>
-                                                                </div>
+                                                                    alt="pH" class="rounded" />
                                                             </div>
                                                         </div>
                                                         <span class="d-block mb-1">pH</span>
-                                                        <h3 class="card-title text-nowrap mb-2"> 2 </h3>
-                                                        <small class="text-danger fw-semibold"><i
-                                                                class="bx bx-down-arrow-alt"></i>
-                                                        </small>
+                                                        <h3 class="card-title text-nowrap mb-2">
+                                                            {{ $phValue ?? 'Data tidak tersedia' }}
+                                                        </h3>
+
+                                                        @if ($previousPhValue == null)
+                                                            <small class="fw-semibold">
+                                                                @if ($phValue < $previousPhValue)
+                                                                    <i class="bx bx-down-arrow-alt"></i>
+                                                                    <!-- Down arrow for lower value -->
+                                                                @elseif($phValue > $previousPhValue)
+                                                                    <i class="bx bx-up-arrow-alt"></i>
+                                                                    <!-- Up arrow for higher value -->
+                                                                @endif
+                                                            </small>
+                                                        @endif
                                                     </div>
                                                 </div>
                                             </div>
+
+
+                                            <!-- Suhu (Temperature) -->
                                             <div class="col-2 mb-4 card-body pb-0 px-0 px-md-4">
                                                 <div class="card">
                                                     <div class="card-body">
@@ -129,32 +114,29 @@
                                                             class="card-title d-flex align-items-start justify-content-between">
                                                             <div class="avatar flex-shrink-0">
                                                                 <img src="{{ asset('dashboard2/assets/img/icons/unicons/thermometer.png') }}"
-                                                                    alt="Credit Card" class="rounded" />
-                                                            </div>
-                                                            <div class="dropdown">
-                                                                <button class="btn p-0" type="button" id="cardOpt1"
-                                                                    data-bs-toggle="dropdown" aria-haspopup="true"
-                                                                    aria-expanded="false">
-                                                                    <i class="bx bx-dots-vertical-rounded"></i>
-                                                                </button>
-                                                                <div class="dropdown-menu" aria-labelledby="cardOpt1">
-                                                                    <a class="dropdown-item"
-                                                                        href="javascript:void(0);">View More</a>
-                                                                    <a class="dropdown-item"
-                                                                        href="javascript:void(0);">Delete</a>
-                                                                </div>
+                                                                    alt="Temperature" class="rounded" />
                                                             </div>
                                                         </div>
-                                                        <span class="fw-semibold d-block mb-1">Suhu</span>
+                                                        <span class="fw-semibold d-block mb-1">Temperature</span>
                                                         <h3 class="card-title mb-2">
-                                                            {{-- {{ $totalFoods }} --}}3°C
+                                                            {{ $temperatureValue ?? 'Data tidak tersedia' }}°C
                                                         </h3>
-                                                        <small class="text-success fw-semibold"><i
-                                                                class="bx bx-up-arrow-alt"></i>
-                                                        </small>
+                                                        @if ($previousTemperatureValue !== null)
+                                                            <small class="fw-semibold">
+                                                                @if ($temperatureValue < $previousTemperatureValue)
+                                                                    <i class="bx bx-down-arrow-alt"></i>
+                                                                    <!-- Down arrow for lower value -->
+                                                                @elseif($temperatureValue > $previousTemperatureValue)
+                                                                    <i class="bx bx-up-arrow-alt"></i>
+                                                                    <!-- Up arrow for higher value -->
+                                                                @endif
+                                                            </small>
+                                                        @endif
                                                     </div>
                                                 </div>
                                             </div>
+
+                                            <!-- TDS -->
                                             <div class="col-2 mb-4 card-body pb-0 px-0 px-md-4">
                                                 <div class="card">
                                                     <div class="card-body">
@@ -162,58 +144,24 @@
                                                             class="card-title d-flex align-items-start justify-content-between">
                                                             <div class="avatar flex-shrink-0">
                                                                 <img src="{{ asset('dashboard2/assets/img/icons/unicons/dissolved-oxygen-monitor.png') }}"
-                                                                    alt="Credit Card" class="rounded" />
-                                                            </div>
-                                                            <div class="dropdown">
-                                                                <button class="btn p-0" type="button" id="cardOpt1"
-                                                                    data-bs-toggle="dropdown" aria-haspopup="true"
-                                                                    aria-expanded="false">
-                                                                    <i class="bx bx-dots-vertical-rounded"></i>
-                                                                </button>
-                                                                <div class="dropdown-menu" aria-labelledby="cardOpt1">
-                                                                    <a class="dropdown-item"
-                                                                        href="javascript:void(0);">View More</a>
-                                                                    <a class="dropdown-item"
-                                                                        href="javascript:void(0);">Delete</a>
-                                                                </div>
+                                                                    alt="TDS" class="rounded" />
                                                             </div>
                                                         </div>
                                                         <span class="fw-semibold d-block mb-1">TDS</span>
-                                                        <h3 class="card-title mb-2">4</h3>
-                                                        <small class="text-success fw-semibold"><i
-                                                                class="bx bx-up-arrow-alt"></i>
-                                                        </small>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-2 mb-4 card-body pb-0 px-0 px-md-4">
-                                                <div class="card">
-                                                    <div class="card-body">
-                                                        <div
-                                                            class="card-title d-flex align-items-start justify-content-between">
-                                                            <div class="avatar flex-shrink-0">
-                                                                <img src="{{ asset('dashboard2/assets/img/icons/unicons/turbidity.png') }}"
-                                                                    alt="Credit Card" class="rounded" />
-                                                            </div>
-                                                            <div class="dropdown">
-                                                                <button class="btn p-0" type="button" id="cardOpt1"
-                                                                    data-bs-toggle="dropdown" aria-haspopup="true"
-                                                                    aria-expanded="false">
-                                                                    <i class="bx bx-dots-vertical-rounded"></i>
-                                                                </button>
-                                                                <div class="dropdown-menu" aria-labelledby="cardOpt1">
-                                                                    <a class="dropdown-item"
-                                                                        href="javascript:void(0);">View More</a>
-                                                                    <a class="dropdown-item"
-                                                                        href="javascript:void(0);">Delete</a>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <span class="fw-semibold d-block mb-1">Keruh</span>
-                                                        <h3 class="card-title mb-2">5</h3>
-                                                        <small class="text-success fw-semibold"><i
-                                                                class="bx bx-up-arrow-alt"></i>
-                                                        </small>
+                                                        <h3 class="card-title mb-2">
+                                                            {{ $tdsValue ?? 'Data tidak tersedia' }}
+                                                        </h3>
+                                                        @if ($previousTdsValue !== null)
+                                                            <small class="fw-semibold">
+                                                                @if ($tdsValue < $previousTdsValue)
+                                                                    <i class="bx bx-down-arrow-alt"></i>
+                                                                    <!-- Down arrow for lower value -->
+                                                                @elseif($tdsValue > $previousTdsValue)
+                                                                    <i class="bx bx-up-arrow-alt"></i>
+                                                                    <!-- Up arrow for higher value -->
+                                                                @endif
+                                                            </small>
+                                                        @endif
                                                     </div>
                                                 </div>
                                             </div>
@@ -221,7 +169,6 @@
                                     </div>
                                 </div>
                             @endforeach
-
                         </div>
                     </div>
                 </div>

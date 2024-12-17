@@ -24,6 +24,13 @@ class Pond extends Model
         return $this->limit(5)->orderBy('id', 'DESC')->get();
     }
 
+    public function sensors()
+{
+    return $this->hasMany(Sensor::class, 'pond_id')->orderBy('created_at', 'DESC');
+}
+
+
+
     // Many-to-many relationship with koi_fish
     public function koiFish()
     {

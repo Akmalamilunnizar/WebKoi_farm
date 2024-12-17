@@ -17,19 +17,6 @@ use App\Http\Controllers\Api\V1\DaftarKoiController;
 |
 */
 
-// Route::post('/login', [CustomerAuthController::class, 'login']);
-
-// Route::group(['middleware' => ['auth:sanctum']], function(){
-//     Route::post('/user', [CustomerAuthController::class, 'show']);
-
-
-// });
-// Route::get('/popular', [ProductController::class, 'get_recommended_products']);
-
-// Route
-// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-//     return $request->user();
-// });
 
 // API MOBILE
 Route::group(['namespace' => 'Api\V1'], function () {
@@ -44,6 +31,9 @@ Route::group(['namespace' => 'Api\V1'], function () {
 
     Route::group(['prefix' => 'pond'], function () {
         Route::get('list', 'PondController@get_pond_list');
+        Route::get('sensor', 'DashboardController@get_sensor_list');
+        Route::get('all-sensor', 'DashboardController@get_sensor_list_all');
+        Route::post('update-relay', 'PondController@updateRelayCondition');
         Route::get('details', 'PondController@get_order_details');
         Route::post('place', 'PondController@place_order');
     });
@@ -57,9 +47,9 @@ Route::group(['namespace' => 'Api\V1'], function () {
 
 
     // registration and login
-    Route::group(['prefix' => 'auth', 'namespace' => 'Auth'], function () {
-        Route::post('register', 'CustomerAuthController@register');
-        Route::post('login', 'CustomerAuthController@login');
+    Route::group(['prefix' => 'auth'], function () {
+        Route::post('register', 'Auth\CustomerAuthController@register');
+        Route::post('login', 'Auth\CustomerAuthController@login');
     });
 
 
@@ -86,17 +76,12 @@ Route::group(['namespace' => 'Api\V1'], function () {
         });
 
     });
-
-    Route::group(['prefix' => 'config'], function () {
-        Route::get('/', 'ConfigController@configuration');
-        Route::get('/get-zone-id', 'ConfigController@get_zone');
-        Route::get('place-api-autocomplete', 'ConfigController@place_api_autocomplete');
-        Route::get('distance-api', 'ConfigController@distance_api');
-        Route::get('place-api-details', 'ConfigController@place_api_details');
-        Route::get('geocode-api', 'ConfigController@geocode_api');
-    });
-
-
-    // Route::get('/daftarkoi', [DaftarKoiController::class, 'getAllKoi']);
 });
 
+
+    // Route::group(['prefix' => 'config'], function () {
+    //     Route::get('/', 'ConfigController@configuration');
+    //     Route::get('/get-zone-id', 'ConfigController@get_zone');
+    //     Route::get('place-api-autocomplete', 'ConfigController@place_api_autocomplete');
+    //     Route::get('distance-api', 'ConfigController@distance_api');
+    //     Route::get('place-api

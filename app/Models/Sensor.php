@@ -35,12 +35,22 @@ class Sensor extends Model
         'updated_at' => 'datetime',
     ];
 
+    public function pond()
+    {
+        return $this->belongsTo(Pond::class);
+    }
+
     // Menambahkan accessor atau mutator jika diperlukan
 
-    public function getSuhuAttribute($value)
+    public function getTemperatureAttribute($value)
     {
         return round($value, 2); // Membulatkan suhu hingga 2 angka desimal
     }
+
+
+
+
+
 
     // Jika Anda ingin menambahkan relasi dengan model lain, Anda dapat menambahkan metode seperti:
     // public function user()

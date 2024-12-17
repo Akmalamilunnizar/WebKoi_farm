@@ -5,33 +5,30 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+
 class KoiFish extends Model
 {
     use HasFactory;
 
-    protected $table = 'koi_fish'; // Nama tabel
+    protected $table = 'koi_fish';
 
     protected $fillable = [
-        //'id',
         'name',
-        'description',
         'jenis',
         'img',
         'umur',
-        'created_at',  // Tanggal dibuat (otomatis ditangani oleh Laravel)
-        'updated_at',  // Tanggal diperbarui (otomatis ditangani oleh Laravel)
     ];
 
-    // Tentukan nilai default untuk kolom description jika kosong
-    protected $attributes = [
-        'description' => '',
-    ];
+    // protected $attributes = [
+    //      // Default value
+    // ];
 
-    // Jika timestamps seperti 'created_at' dan 'updated_at' digunakan (default Laravel)
-    public $timestamps = true;
+    protected $casts = [
+        'umur' => 'integer',
+    ];
 
     /**
-     * Relasi ke model JenisKoi
+     * Relation to the `JenisKoi` model (BelongsTo)
      */
     public function jenisKoi()
     {
@@ -39,50 +36,75 @@ class KoiFish extends Model
     }
 
     /**
-     * Relasi ke model Pond
-     * (Relasi langsung, jika kolam disimpan sebagai foreign key)
+     * Relation to the `Pond` model (BelongsTo)
      */
     public function pond()
     {
-        return $this->belongsTo(Pond::class, 'pond_id');
+        return $this->belongsTo(Pond::class, 'pond_id')->withDefault();
     }
 
     /**
-     * Relasi ke model DiagnosaPenyakit (hasMany)
-     */
-    public function diagnosaPenyakit()
-    {
-        return $this->hasMany(DiagnosaPenyakit::class, 'id_koi', 'id');
-    }
-
-    /**
-     * Relasi ke model Penyakit (hasManyThrough)
-     * Menghubungkan melalui DiagnosaPenyakit
+     * Relation to the `Penyakit` model through `DiagnosaPenyakit` (HasManyThrough)
      */
     public function penyakit()
     {
         return $this->hasManyThrough(
-            Penyakit::class,           // Model tujuan
-            DiagnosaPenyakit::class,   // Model perantara
-            'id_koi',                  // Foreign key di tabel diagnosa_penyakit
-            'id',                      // Foreign key di tabel penyakit
-            'id',                      // Primary key di tabel koi_fish
-            'id_penyakit'              // Local key di tabel diagnosa_penyakit
+            Penyakit::class,
+            DiagnosaPenyakit::class,
+            'id_koi',
+            'id',
+            'id',
+            'id_penyakit'
         );
     }
 
+    /**
+     * Relation to the `DiagnosaPenyakit` model (HasMany)
+     */
     public function diagnosaPenyakit()
     {
         return $this->hasMany(DiagnosaPenyakit::class, 'id_koi', 'id');
     }
 
-
     /**
-     * Relasi ke model Pond melalui tabel pivot 'detail_koi'
-     * (Relasi banyak ke banyak)
+     * Many-to-Many relation to the `Pond` model through `detail_koi`
      */
     public function ponds()
     {
-        return $this->belongsToMany(Pond::class, 'detail_koi', 'fish_id', 'pond_id');
+        return $this->belongsToMany(
+            Pond::class,
+            'detail_koi',
+            'fish_id',
+            'pond_id'
+        );
+    }
+
+    /**
+     * Get the image attribute with a default value if null.
+     */
+    public function getImgAttribute($value)
+    {
+        return $value ?: 'path/to/default/image.png';
+    }
+
+    /**
+     * Computed attribute for pond name.
+     */
+    public function getPondNameAttribute()
+    {
+        return $this->pond ? $this->pond->name : 'No Pond Assigned';
+    }
+
+    /**
+     * Scopes for filtering
+     */
+    public function scopeWithoutDiagnoses($query)
+    {
+        return $query->whereDoesntHave('diagnosaPenyakit');
+    }
+
+    public function scopeByJenis($query, $jenis)
+    {
+        return $query->where('jenis', $jenis);
     }
 }

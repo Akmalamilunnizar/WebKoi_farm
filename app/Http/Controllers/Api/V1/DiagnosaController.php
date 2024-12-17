@@ -13,7 +13,6 @@ class DiagnosaController extends Controller
     public function index()
     {
         $diagnoses_d = DiagnosaPenyakit::with(['koiFish', 'penyakit'])->get();
-        $diagnoses_d = DiagnosaPenyakit::with(['koiFish.jenisKoi', 'penyakit'])->get();
         $diagnosas = DiagnosaPenyakit::all();
 
         return view("admin.allDiagnosaPenyakit", compact('diagnosas', 'diagnoses_d'));

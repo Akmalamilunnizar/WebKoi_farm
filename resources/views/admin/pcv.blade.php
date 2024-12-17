@@ -24,13 +24,13 @@
         <style>
             /* Center the form and preview container */
             /* form.text-center {
-                            display: flex;
-                            flex-direction: column;
-                            align-items: center;
-                            justify-content: center;
-                            min-height: 50vh;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                min-height: 50vh;
 
-                        } */
+            } */
 
             #preview {
                 align-items: center;
@@ -54,11 +54,11 @@
             </div>
 
             <h1 class="text-center">Image Classifier</h1>
-            {{-- @if (session('success'))
+            @if (session('success'))
                 <div class="alert alert-success">
                     {{ session('success') }}
                 </div>
-            @endif --}}
+            @endif
             @if ($errors->any())
                 <div class="alert alert-danger">
                     <ul>
@@ -85,7 +85,6 @@
                     </div>
                 </div>
 
-
                 <input type="file" name="imagefile" accept="image/*" required onchange="previewImage(event)">
                 <img id="preview" alt="Image Preview">
                 <button type="submit">Predict Image</button>
@@ -101,7 +100,7 @@
                             <li>{{ $class_name }}: {{ $percentage }}%</li>
                         @endforeach
                     </ul>
-                    <img src="{{ asset($image_url) }}" alt="Uploaded Image" style="max-width: 300px; max-height: 300px;">
+                    <img src="{{ asset( $image_url) }}" alt="Uploaded Image" style="max-width: 300px; max-height: 300px;">
                 </div>
             @endif
 

@@ -64,7 +64,7 @@ SANKE | Halaman Daftar Ikan Koi
                                 <span class="badge bg-secondary">Tidak ada kolam</span>
                             @endif
                         </td>
-                        <td>{{ $fish->umur ?? 'Tidak diketahui' }} tahun</td>
+                        <td>{{ $fish->umur ?? 'Tidak diketahui' }}</td>
                         <td>{{ $fish->created_at }}</td>
                         <td>
                             @if ($fish->penyakit && $fish->penyakit->count() > 0)
