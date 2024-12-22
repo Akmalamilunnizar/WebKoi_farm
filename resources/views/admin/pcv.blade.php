@@ -93,7 +93,7 @@
             <!-- Display prediction results -->
             @if (isset($prediction))
                 <div class="text-center">
-                    <h2>Prediction: {{ $prediction }}</h2>
+                    <h2>Penentuan: {{ $prediction }}</h2>
                     <p>Probabilities:</p>
                     <ul>
                         @foreach ($classes_with_percentages as $class_name => $percentage)

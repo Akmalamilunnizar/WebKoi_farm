@@ -66,6 +66,7 @@ class PcvController extends Controller
                 'Bacterial Disease' => 1,
                 'Fungal Disease' => 2,
                 'Parasite Disease' => 4,
+                'Undetected Disease' => 5,
             ];
             return $mapping[$disease] ?? 0; // Default to 0 if not found
         }
