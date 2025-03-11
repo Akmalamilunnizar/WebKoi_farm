@@ -1,20 +1,48 @@
-node {
-    checkout scm
+pipeline {
+    agent any
 
-    // Build tahap install dependensi
-    stage("Build") {
-        docker.image('composer:2.8').inside('-u root') {
-            sh 'php --version'
-            sh 'composer --version'
-            sh 'rm -f composer.lock'
-            sh 'composer install --no-dev --prefer-dist'
+    stages {
+        stage('Checkout') {
+            steps {
+                script {
+                    echo 'Checking out repository...'
+                    git branch: 'main', url: 'https://github.com/Akmalamilunnizar/WebKoi_farm'
+                }
+            }
         }
-    }
 
-    // Testing Laravel (Pastikan Laravel ada di proyek)
-    stage("Test") {
-        docker.image('php:8.2-cli').inside('-u root') {
-            sh 'php artisan test'
+        stage('Build') {
+            steps {
+                script {
+                    echo 'Building application...'
+                    // Tambahkan perintah build jika diperlukan, misalnya:
+                    // sh './gradlew build'  (untuk Gradle)
+                    // sh 'mvn package'      (untuk Maven)
+                    // sh 'npm install'      (untuk Node.js)
+                }
+            }
+        }
+
+        stage('Test') {
+            steps {
+                script {
+                    echo 'Running tests...'
+                    // Tambahkan perintah untuk menjalankan unit test
+                    // sh 'npm test'
+                    // sh './gradlew test'
+                }
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                script {
+                    echo 'Deploying application...'
+                    // Tambahkan perintah untuk deploy ke server atau container
+                    // sh 'scp target/app.jar user@server:/path/to/deploy'
+                    // sh 'docker-compose up -d'
+                }
+            }
         }
     }
 }
