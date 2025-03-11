@@ -1,16 +1,20 @@
 node {
     checkout scm
-    // Deploy env dev
+
+    // Build tahap install dependensi
     stage("Build") {
-        docker.image('php:8.1-cli').inside('-u root') {
+        docker.image('composer:2.8').inside('-u root') {
+            sh 'php --version'
+            sh 'composer --version'
             sh 'rm -f composer.lock'
-            sh 'composer install'
+            sh 'composer install --no-dev --prefer-dist'
         }
     }
-    // Testing
+
+    // Testing Laravel (Pastikan Laravel ada di proyek)
     stage("Test") {
-        docker.image('ubuntu').inside('-u root') {
-            sh 'echo "Ini adalah test"'
+        docker.image('php:8.2-cli').inside('-u root') {
+            sh 'php artisan test'
         }
     }
 }
