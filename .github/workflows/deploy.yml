@@ -1,0 +1,33 @@
+name: Deploy Laravel ke VPS
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout kode
+        uses: actions/checkout@v3
+
+      - name: Setup SSH
+        uses: webfactory/ssh-agent@v0.5.3
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Deploy ke VPS
+        run: |
+          ssh -o StrictHostKeyChecking=no user@your-vps-ip <<EOF
+            cd /var/www/nama_project
+            git pull origin main
+            composer install --no-dev
+            php artisan migrate --force
+            php artisan cache:clear
+            php artisan config:clear
+            php artisan route:clear
+            php artisan queue:restart
+            exit
+          EOF
