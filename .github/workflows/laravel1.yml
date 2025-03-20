@@ -56,3 +56,12 @@ jobs:
         DB_CONNECTION: sqlite
         DB_DATABASE: database/koi_farm.sqlite
       run: php artisan test
+
+    # 🔥 Setup SSH untuk autentikasi sebelum operasi Git yang butuh akses SSH
+    - name: Setup SSH Key
+      uses: webfactory/ssh-agent@v0.5.3
+      with:
+        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+    - name: Verify SSH Connection
+      run: ssh -T git@github.com || true
